@@ -1,4 +1,6 @@
 ﻿using BusinessLogic;
+using BusinessLogic.PageParser;
+using Crawler.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,18 @@ namespace Crawler.ConsoleUI
         static void Main(string[] args)
         {
             Dawnloader dawnloader = new Dawnloader();
-            string text = dawnloader.Download(@"https://github.com/robots.txt");
-            Console.WriteLine(text);
+            string text = dawnloader.Download(@"http://oper.ru/");
+
+            Person person = new Person();
+            person.Keywords = new List<Keyword>();
+            person.Keywords.Add(new Keyword() { Name = "Путин" });
+            person.Keywords.Add(new Keyword() { Name = "Путином" });
+            foreach (string url in PageLinkFinder.FindPageUrls(text))
+            {
+                Console.WriteLine(url);
+            }
+            PersonRanker ranker = new PersonRanker(person);
+            Console.WriteLine(ranker.GetPersonPageRank(text));
             Console.ReadKey();
         }
     }
