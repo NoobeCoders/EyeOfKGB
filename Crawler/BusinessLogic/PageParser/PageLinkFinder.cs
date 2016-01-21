@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BusinessLogic.PageParser
@@ -24,6 +25,7 @@ namespace BusinessLogic.PageParser
                 if (atr != null)
                 {
                     string url = atr.Value;
+                    url = Regex.Replace(url, "^(http|https)://", "");
 
                     if (url != null) urls.Add(url);
                 }
