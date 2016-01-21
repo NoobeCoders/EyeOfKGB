@@ -21,7 +21,7 @@ namespace BusinessLogic
                 {
                     Byte[] pageData = client.DownloadData(url);
 
-                    answer = Encoding.ASCII.GetString(pageData);
+                    answer = Encoding.UTF8.GetString(pageData);
                 }
             }
             catch (Exception ex)
