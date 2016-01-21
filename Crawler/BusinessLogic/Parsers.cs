@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Models;
+﻿using BusinessLogic.Interfaces;
+using BusinessLogic.Models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,11 +10,11 @@ using System.Xml;
 
 namespace BusinessLogic
 {
-    public class Parsers
+    public class Parser : IParser
     {
-        public ICollection<SitemapPage> GetSiteMap(string sitemapXML)
+        public IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
         {
-            List<SitemapPage> pages = new List<SitemapPage>();
+            List<FoundPage> pages = new List<FoundPage>();
 
             XmlDocument sitemap = new XmlDocument();
             sitemap.LoadXml(sitemapXML);
@@ -25,14 +26,26 @@ namespace BusinessLogic
             {
                 var data = url.ChildNodes;
 
-                pages.Add(  new SitemapPage()
+                pages.Add(  new FoundPage()
                             {
                                 URL = data.Item(0).InnerText,
-                                Date = data.Item(1).InnerText
+                                LastModDate = data.Item(1).InnerText
                             });
             }
 
             return pages;
         }
+
+        public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> GetPagePhrases(string pageHTML)
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }
