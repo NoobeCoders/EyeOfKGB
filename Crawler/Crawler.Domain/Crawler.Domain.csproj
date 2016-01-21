@@ -45,6 +45,17 @@
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\PersonPageRank.cs" />
     <Compile Include="Entities\Site.cs" />
+    <Compile Include="Implementaions\EFKeywordRepository.cs" />
+    <Compile Include="Implementaions\EFPageRepository.cs" />
+    <Compile Include="Implementaions\EFPersonPageRankRepository.cs" />
+    <Compile Include="Implementaions\EFPersonRepository.cs" />
+    <Compile Include="Implementaions\EFSiteRepository.cs" />
+    <Compile Include="Interfaces\IKeywordRepository.cs" />
+    <Compile Include="Interfaces\IPageRepository.cs" />
+    <Compile Include="Interfaces\IPersonPageRankRepository.cs" />
+    <Compile Include="Interfaces\IPersonRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\ISiteRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

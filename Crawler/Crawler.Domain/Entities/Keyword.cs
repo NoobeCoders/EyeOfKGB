@@ -8,8 +8,10 @@ namespace Crawler.Domain.Entities
 {
     public class Keyword
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int PersonID { get; set; }
+
+        public virtual int PersonId { get; set; }
+        public virtual Person Person { get; set; }
     }
 }
