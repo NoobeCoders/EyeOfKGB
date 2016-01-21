@@ -14,5 +14,12 @@ namespace Crawler.Domain.Entities
 
         public int SiteId { get; set; }
         public virtual Site Site { get; set; }
+
+        public virtual ICollection<PersonPageRank> PersonPageRanks { get; set; }
+
+        public Page()
+        {
+            PersonPageRanks = new List<PersonPageRank>();
+        }
     }
 }
