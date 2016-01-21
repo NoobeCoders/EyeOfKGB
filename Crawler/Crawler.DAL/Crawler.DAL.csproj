@@ -59,6 +59,11 @@
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="DBInitializer.cs" />
+    <Compile Include="DBInitializers\DBInit.cs" />
+    <Compile Include="DBInitializers\InitializationDB.cs" />
+    <Compile Include="DBInitializers\InitPersons.cs" />
+    <Compile Include="DBInitializers\InitSites.cs" />
     <Compile Include="EntityConfigurations\KeywordMapper.cs" />
     <Compile Include="EntityConfigurations\PageMapper.cs" />
     <Compile Include="EntityConfigurations\PersonMapper.cs" />
