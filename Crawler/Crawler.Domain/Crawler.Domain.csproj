@@ -40,6 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Keyword.cs" />
+    <Compile Include="Entities\Page.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\PersonPageRank.cs" />
+    <Compile Include="Entities\Site.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
