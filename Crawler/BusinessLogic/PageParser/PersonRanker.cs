@@ -29,22 +29,30 @@ namespace BusinessLogic.PageParser
             
             if(bodyNode != null)
             {
-                string[] pageWords = bodyNode.InnerHtml.Split(new char[] { ' ', '.', ',', '!', '?', ':', ';', '<', '>' });
+                List<string> pagePhrases = new List<string>();
+
+                foreach (HtmlNode node in bodyNode.Descendants())
+                {
+                    pagePhrases.Add(node.InnerText);
+                }
 
                 foreach (Keyword keyword in person.Keywords)
                 {
-                    personPageRank += CountPageKeywordUsage(keyword, pageWords);
+                    personPageRank += CountPageKeywordUsage(keyword, pagePhrases);
                 }
             }
 
             return personPageRank;
         }
 
-        private int CountPageKeywordUsage(Keyword keyword, string[] pageWords)
+        private int CountPageKeywordUsage(Keyword keyword, IEnumerable<string> pagePhrases)
         {
             int keywordUsage = 0;
 
-            keywordUsage = pageWords.Count(w => w == keyword.Name);
+            foreach (string phrase in pagePhrases)
+            {
+                keywordUsage += Regex.Matches(phrase, keyword.Name).Count;
+            }
 
             return keywordUsage;
         }
