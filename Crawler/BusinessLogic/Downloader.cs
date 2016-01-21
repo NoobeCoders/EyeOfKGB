@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Dawnloader
+    public class Downloader
     {
-        public string Download(String url)
+        public async string Download(String url)
         {
             WebClient client;
             string answer;
@@ -19,7 +19,7 @@ namespace BusinessLogic
             {
                 using (client = new WebClient())
                 {
-                    Byte[] pageData = client.DownloadData(url);
+                    Byte[] pageData = await client.DownloadDataAsync(url);
 
                     answer = Encoding.ASCII.GetString(pageData);
                 }
