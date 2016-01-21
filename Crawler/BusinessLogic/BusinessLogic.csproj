@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dawnloader.cs" />
+    <Compile Include="PageParser\PageLinkFinder.cs" />
     <Compile Include="PageParser\PersonRanker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
