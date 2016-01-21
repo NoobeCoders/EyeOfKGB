@@ -14,6 +14,7 @@
 		8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8301482D1C50E4E500748011 /* LaunchScreen.storyboard */; };
 		8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */; };
 		8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */; };
+		8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9261C511CB1008EC517 /* MakeDictionary.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticViewController.m; sourceTree = "<group>"; };
 		8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticTableViewCell.h; sourceTree = "<group>"; };
 		8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticTableViewCell.m; sourceTree = "<group>"; };
+		8359B9251C511CB1008EC517 /* MakeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeDictionary.h; sourceTree = "<group>"; };
+		8359B9261C511CB1008EC517 /* MakeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeDictionary.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
 				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
 				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
+				8359B9251C511CB1008EC517 /* MakeDictionary.h */,
+				8359B9261C511CB1008EC517 /* MakeDictionary.m */,
 			);
 			path = "Eye Of KGB";
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
+				8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */,
 				830148211C50E4E500748011 /* main.m in Sources */,
 				8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */,
 				8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */,

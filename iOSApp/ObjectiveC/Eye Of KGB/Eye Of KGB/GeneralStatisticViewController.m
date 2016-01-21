@@ -8,8 +8,13 @@
 
 #import "GeneralStatisticViewController.h"
 #import "GeneralStatisticTableViewCell.h"
+#import "MakeDictionary.h"
 
 @interface GeneralStatisticViewController () <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (strong, nonatomic) MakeDictionary *data;
+@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+
 @end
 
 @implementation GeneralStatisticViewController
@@ -20,7 +25,11 @@
     self.sitePicker.delegate = self;
     self.sitePicker.dataSource = self;
     
-    self.sites = [[NSMutableArray alloc] initWithObjects: @"Lenta.ru", @"Gazeta.ru", @"RBC.ru", nil];
+    self.data = [[MakeDictionary alloc] init];
+    [self.data makeDictionary];
+    [self.data getSites];
+    [self.data getRates];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,12 +48,8 @@
     
     GeneralStatisticTableViewCell *cell = (GeneralStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NSArray *names = [[NSArray alloc] initWithObjects: @"Путин", @"Медведев", @"Навальный", nil];
-    
-    NSArray *counts = [[NSArray alloc] initWithObjects: @"10500", @"5000", @"1000", nil];
-    
-    cell.labelName.text = names[indexPath.row];
-    cell.labelCount.text = counts[indexPath.row];
+    cell.labelName.text = self.data.names[indexPath.row];
+    cell.labelCount.text = self.data.rates[indexPath.row];
     
     return cell;
     
@@ -59,12 +64,11 @@
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.sites.count;
+    return self.data.sites.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.sites objectAtIndex:row];
+    return [self.data.sites objectAtIndex:row];
 }
-
 
 @end
