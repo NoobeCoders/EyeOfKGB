@@ -1,4 +1,5 @@
 ﻿using Crawler.DAL.Implementaions;
+using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +10,20 @@ namespace Crawler.DAL
 {
     public class DataManager : IDisposable
     {
-        ApplicationDbContext dbContext = new ApplicationDbContext();
+        ApplicationDbContext dbContext;
 
-        EFKeywordRepository keyword;
-        EFPageRepository page;
-        EFPersonRepository person;
-        EFPersonPageRankRepository personPageRank;
-        EFSiteRepository site;
+        IKeywordRepository keyword;
+        IPageRepository page;
+        IPersonRepository person;
+        IPersonPageRankRepository personPageRank;
+        ISiteRepository site;
 
-        public EFKeywordRepository Keywords
+        public DataManager ()
+        {
+            dbContext = new ApplicationDbContext();
+        }
+
+        public IKeywordRepository Keywords
         {
             get
             {
@@ -27,7 +33,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPageRepository Pages
+        public IPageRepository Pages
         {
             get
             {
@@ -37,7 +43,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPersonRepository Persons
+        public IPersonRepository Persons
         {
             get
             {
@@ -47,7 +53,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPersonPageRankRepository PersonPageRanks
+        public IPersonPageRankRepository PersonPageRanks
         {
             get
             {
@@ -57,7 +63,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFSiteRepository Sites
+        public ISiteRepository Sites
         {
             get
             {
