@@ -9,7 +9,7 @@ namespace BusinessLogic.PageParser
 {
     public class PageLinkFinder
     {
-        public IEnumerable<string> FindPageUrls(string pageContent)
+        public static IEnumerable<string> FindPageUrls(string pageContent)
         {
             List<string> urls = new List<string>();
 
@@ -20,9 +20,13 @@ namespace BusinessLogic.PageParser
 
             foreach (HtmlNode aNode in aNodes)
             {
-                string url = aNode.Attributes.FirstOrDefault(a => a.Name == "href").Value;
+                HtmlAttribute atr = aNode.Attributes.FirstOrDefault(a => a.Name == "href");
+                if (atr != null)
+                {
+                    string url = atr.Value;
 
-                if (url != null) urls.Add(url);
+                    if (url != null) urls.Add(url);
+                }
             }
 
             return urls;
