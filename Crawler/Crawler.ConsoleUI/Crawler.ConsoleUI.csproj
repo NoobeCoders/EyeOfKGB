@@ -53,6 +53,10 @@
       <Project>{8cc4f60b-8139-4681-9fef-912a1c2dabae}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crawler.Domain\Crawler.Domain.csproj">
+      <Project>{e96a42b5-2a79-42d7-bb85-393387e418e4}</Project>
+      <Name>Crawler.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
