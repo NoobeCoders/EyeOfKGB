@@ -6,43 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 using DAL.Entities;
 
-namespace Crawler.Domain.Implementaions
+namespace Crawler.DAL.Implementaions
 {
-    public class EFPersonRepository : IPersonRepository
+    public class EFPageRepository : IPageRepository
     {
         ApplicationDbContext dbContext;
 
-        public EFPersonRepository(ApplicationDbContext dbContext)
+        public EFPageRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public Person GetPersonByName(string name)
+        public IEnumerable<Page> GetPagesByFounDateTime(DateTime date)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Person> GetAll()
+        public IEnumerable<Page> GetPagesByLastScanDate(DateTime date)
         {
             throw new NotImplementedException();
         }
 
-        public Person GetById(int id)
+        public IEnumerable<Page> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public void Add(Person item)
+        public Page GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Person item)
+        public void Add(Page item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Person item)
+        public void Update(Page item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Page item)
         {
             throw new NotImplementedException();
         }

@@ -1,4 +1,4 @@
-﻿using DAL.Entities;
+﻿using Crawler.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

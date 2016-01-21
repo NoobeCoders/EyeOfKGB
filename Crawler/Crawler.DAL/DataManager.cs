@@ -17,7 +17,7 @@ namespace Crawler.DAL
         EFPersonPageRankRepository personPageRank;
         EFSiteRepository site;
 
-        public EFKeywordRepository Keyword
+        public EFKeywordRepository Keywords
         {
             get
             {
@@ -27,7 +27,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPageRepository Page
+        public EFPageRepository Pages
         {
             get
             {
@@ -37,7 +37,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPersonRepository Person
+        public EFPersonRepository Persons
         {
             get
             {
@@ -47,7 +47,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFPersonPageRankRepository PersonPageRank
+        public EFPersonPageRankRepository PersonPageRanks
         {
             get
             {
@@ -57,7 +57,7 @@ namespace Crawler.DAL
             }
         }
 
-        public EFSiteRepository Site
+        public EFSiteRepository Sites
         {
             get
             {

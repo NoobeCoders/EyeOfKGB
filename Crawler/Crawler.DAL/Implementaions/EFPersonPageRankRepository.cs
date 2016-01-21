@@ -1,48 +1,47 @@
-﻿using DAL.Entities;
-using DAL.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAL.Entities;
 
-namespace Crawler.Domain.Implementaions
+namespace Crawler.DAL.Implementaions
 {
-    public class EFSiteRepository : ISiteRepository
+    public class EFPersonPageRankRepository : IPersonPageRankRepository
     {
         ApplicationDbContext dbContext;
 
-        public EFSiteRepository(ApplicationDbContext dbContext)
+        public EFPersonPageRankRepository(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }
 
-        public Site GetSiteByName(string name)
+        public PersonPageRank GetById(int personId, int pageId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Site> GetAll()
+        public IEnumerable<PersonPageRank> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Site GetById(int id)
+        public PersonPageRank GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Add(Site item)
+        public void Add(PersonPageRank item)
         {
             throw new NotImplementedException();
         }
 
-        public void Update(Site item)
+        public void Update(PersonPageRank item)
         {
             throw new NotImplementedException();
         }
-        
-        public void Delete(Site item)
+
+        public void Delete(PersonPageRank item)
         {
             throw new NotImplementedException();
         }

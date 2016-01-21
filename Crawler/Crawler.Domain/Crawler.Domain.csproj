@@ -45,11 +45,6 @@
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\PersonPageRank.cs" />
     <Compile Include="Entities\Site.cs" />
-    <Compile Include="Implementaions\EFKeywordRepository.cs" />
-    <Compile Include="Implementaions\EFPageRepository.cs" />
-    <Compile Include="Implementaions\EFPersonPageRankRepository.cs" />
-    <Compile Include="Implementaions\EFPersonRepository.cs" />
-    <Compile Include="Implementaions\EFSiteRepository.cs" />
     <Compile Include="Interfaces\IKeywordRepository.cs" />
     <Compile Include="Interfaces\IPageRepository.cs" />
     <Compile Include="Interfaces\IPersonPageRankRepository.cs" />

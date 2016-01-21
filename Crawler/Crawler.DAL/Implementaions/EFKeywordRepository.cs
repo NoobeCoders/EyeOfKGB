@@ -1,5 +1,4 @@
-﻿using DAL.Entities;
-using DAL.Interfaces;
+﻿using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -7,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crawler.Domain.Implementaions
+namespace Crawler.DAL.Implementaions
 {
     public class EFKeywordRepository : IKeywordRepository
     {
@@ -48,6 +47,6 @@ namespace Crawler.Domain.Implementaions
             Keyword keyword = GetById(item.Id);
             if (keyword != null)
                 dbContext.Keywords.Remove(keyword);
-        }
+        }        
     }
 }
