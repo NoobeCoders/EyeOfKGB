@@ -20,6 +20,7 @@ namespace Crawler.ConsoleUI
             person.Keywords = new List<Keyword>();
             person.Keywords.Add(new Keyword() { Name = "Путин" });
             person.Keywords.Add(new Keyword() { Name = "Путином" });
+            person.Keywords.Add(new Keyword() { Name = "Путина" });
             foreach (string url in PageLinkFinder.FindPageUrls(text))
             {
                 Console.WriteLine(url);
