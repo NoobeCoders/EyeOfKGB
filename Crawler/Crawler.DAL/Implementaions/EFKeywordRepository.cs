@@ -1,4 +1,5 @@
-﻿using Crawler.Domain.Interfaces;
+﻿using Crawler.Domain.Entities;
+using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

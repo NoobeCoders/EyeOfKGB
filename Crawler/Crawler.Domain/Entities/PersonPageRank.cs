@@ -11,9 +11,9 @@ namespace Crawler.Domain.Entities
         public int Rank { get; set; }
 
         public virtual int PageId { get; set; }
-        public virtual Page Pages { get; set; }
+        public virtual Page Page { get; set; }
 
         public virtual int PersonId { get; set; }
-        public virtual Person Persons { get; set; }
+        public virtual Person Person { get; set; }
     }
 }

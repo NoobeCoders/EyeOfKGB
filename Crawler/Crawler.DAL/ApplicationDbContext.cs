@@ -1,5 +1,4 @@
 ﻿using Crawler.Domain.Entities;
-using DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
