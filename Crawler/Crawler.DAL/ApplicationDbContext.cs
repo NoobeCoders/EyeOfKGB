@@ -1,4 +1,5 @@
-﻿using Crawler.Domain.Entities;
+﻿using Crawler.DAL.EntityConfigurations;
+using Crawler.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -18,7 +19,13 @@ namespace Crawler.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new KeywordMapper());
+            modelBuilder.Configurations.Add(new PageMapper());
+            modelBuilder.Configurations.Add(new PersonMapper());
+            modelBuilder.Configurations.Add(new PersonPageRankMapper());
+            modelBuilder.Configurations.Add(new SiteMapper());
 
+            base.OnModelCreating(modelBuilder);
         }
 
     }

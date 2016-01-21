@@ -15,20 +15,19 @@ namespace Crawler.DAL.EntityConfigurations
         {
             this.ToTable("Pages");
 
-            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.True);
+            this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();
 
             this.Property(c => c.URL).HasMaxLength(2048);
 
-            this.HasMany<KeywordMapper>(c => c.Keywords)
-                .WithRequired(c => c.Person)
-                .HasForeignKey(c => c.PersonId)
-                .WillCascadeOnDelete;
+            this.HasRequired<Site>(c => c.Site)
+                .WithMany(c => c.Pages)
+                .HasForeignKey(c => c.SiteId);
 
             this.HasMany<PersonPageRank>(c => c.PersonPageRanks)
                 .WithRequired(c => c.Page)
                 .HasForeignKey(c => c.PageId)
-                .WillCascadeOnDelete;
+                .WillCascadeOnDelete();
         }
         
     }
