@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Domain", "Crawler.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLogic", "BusinessLogic\BusinessLogic.csproj", "{8CC4F60B-8139-4681-9FEF-912A1C2DABAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.ConsoleUI", "Crawler.ConsoleUI\Crawler.ConsoleUI.csproj", "{0B874DCB-4248-4E49-8353-D2204472549C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{8CC4F60B-8139-4681-9FEF-912A1C2DABAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC4F60B-8139-4681-9FEF-912A1C2DABAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC4F60B-8139-4681-9FEF-912A1C2DABAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B874DCB-4248-4E49-8353-D2204472549C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B874DCB-4248-4E49-8353-D2204472549C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B874DCB-4248-4E49-8353-D2204472549C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B874DCB-4248-4E49-8353-D2204472549C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
