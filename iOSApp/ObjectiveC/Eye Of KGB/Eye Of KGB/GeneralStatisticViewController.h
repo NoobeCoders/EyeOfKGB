@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface GeneralStatisticViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+@property (strong, nonatomic) NSMutableArray *sites;
 @end

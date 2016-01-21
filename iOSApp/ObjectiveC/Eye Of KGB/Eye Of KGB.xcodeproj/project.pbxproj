@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		830148211C50E4E500748011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 830148201C50E4E500748011 /* main.m */; };
 		830148241C50E4E500748011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 830148231C50E4E500748011 /* AppDelegate.m */; };
-		830148271C50E4E500748011 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830148261C50E4E500748011 /* ViewController.m */; };
 		8301482A1C50E4E500748011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830148281C50E4E500748011 /* Main.storyboard */; };
 		8301482C1C50E4E500748011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8301482B1C50E4E500748011 /* Assets.xcassets */; };
 		8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8301482D1C50E4E500748011 /* LaunchScreen.storyboard */; };
+		8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */; };
+		8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,12 +21,14 @@
 		830148201C50E4E500748011 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		830148221C50E4E500748011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		830148231C50E4E500748011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		830148251C50E4E500748011 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		830148261C50E4E500748011 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		830148291C50E4E500748011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8301482B1C50E4E500748011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8301482E1C50E4E500748011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		830148301C50E4E500748011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		830148391C50F3CE00748011 /* GeneralStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticViewController.h; sourceTree = "<group>"; };
+		8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticViewController.m; sourceTree = "<group>"; };
+		8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticTableViewCell.h; sourceTree = "<group>"; };
+		8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,13 +63,15 @@
 			children = (
 				830148221C50E4E500748011 /* AppDelegate.h */,
 				830148231C50E4E500748011 /* AppDelegate.m */,
-				830148251C50E4E500748011 /* ViewController.h */,
-				830148261C50E4E500748011 /* ViewController.m */,
 				830148281C50E4E500748011 /* Main.storyboard */,
 				8301482B1C50E4E500748011 /* Assets.xcassets */,
 				8301482D1C50E4E500748011 /* LaunchScreen.storyboard */,
 				830148301C50E4E500748011 /* Info.plist */,
 				8301481F1C50E4E500748011 /* Supporting Files */,
+				830148391C50F3CE00748011 /* GeneralStatisticViewController.h */,
+				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
+				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
+				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
 			);
 			path = "Eye Of KGB";
 			sourceTree = "<group>";
@@ -149,9 +154,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				830148271C50E4E500748011 /* ViewController.m in Sources */,
 				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
 				830148211C50E4E500748011 /* main.m in Sources */,
+				8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */,
+				8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +304,7 @@
 				830148351C50E4E500748011 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
