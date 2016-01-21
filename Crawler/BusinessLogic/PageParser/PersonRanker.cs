@@ -1,4 +1,5 @@
 ﻿using Crawler.Domain.Entities;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,19 @@ namespace BusinessLogic.PageParser
         public int GetPersonPageRank(string pageContent)
         {
             int personPageRank = 0;
-            string[] pageWords = pageContent.Split(new char[] { ' ', '.', ',', '!', '?', ':', ';', '<', '>' });
+            HtmlDocument htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(pageContent);
+
+            HtmlNode bodyNode = htmlDocument.DocumentNode.SelectSingleNode("/html/body");
             
-            foreach (Keyword keyword in person.Keywords)
+            if(bodyNode != null)
             {
-                personPageRank += CountPageKeywordUsage(keyword, pageWords);
+                string[] pageWords = bodyNode.InnerHtml.Split(new char[] { ' ', '.', ',', '!', '?', ':', ';', '<', '>' });
+
+                foreach (Keyword keyword in person.Keywords)
+                {
+                    personPageRank += CountPageKeywordUsage(keyword, pageWords);
+                }
             }
 
             return personPageRank;
