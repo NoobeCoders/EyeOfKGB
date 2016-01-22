@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Crawler.ConsoleUI
@@ -18,6 +19,9 @@ namespace Crawler.ConsoleUI
             DataManager dataManager = new DataManager();
             Downloader downLoader = new Downloader();
             Parser parser = new Parser();
+
+            IEnumerable<Person> persons = dataManager.Persons.GetAll();
+            List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
 
             foreach (Site site in dataManager.Sites.GetAll())
             {
@@ -34,10 +38,64 @@ namespace Crawler.ConsoleUI
                 string sitemap = downLoader.Download(mainURL + "/sitemap.xml");
 
                 IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> pages = parser.GetFoundPages(sitemap);
+                IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
 
+                List<string> allowPageURLs = new List<string>();
 
-                pages.Where(x => !Regex.IsMatch(url, disallowPattern))
+                allowPageURLs = foundPages.Select(p => p.URL).ToList();
+
+                foreach (string disallowPattern in disallows)
+                {
+                    allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
+                }
+
+                foreach (string allowPageURL in allowPageURLs)
+                {
+                    if (pageURLs.FirstOrDefault(u => u == allowPageURL) == null)
+                    {
+                        dataManager.Pages.Add(new Page()
+                                                {
+                                                    URL = allowPageURL,
+                                                    Site = site
+                                                });
+                    }
+                }
+
+                dataManager.Save();
+
+                foreach (string allowPageURL in allowPageURLs)
+                {
+                    string pageHTML = downLoader.Download("http://" + allowPageURL);
+
+                    IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
+
+                    foreach (Person person in persons)
+                    {
+                        int personPageRankCounter = 0;
+
+                        foreach (Keyword keyword in person.Keywords)
+                        {
+                            personPageRankCounter += CountPageKeywordUsage(keyword, pagePhrases);
+                        }
+
+                        PersonPageRank personPageRank = personPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.URL == allowPageURL);
+
+                        if(personPageRank != null)
+                        {
+                            personPageRank.Rank = personPageRankCounter;
+                        }
+                        else
+                        {
+                            personPageRanks.Add(new PersonPageRank()
+                                                {
+                                                    Person = person,
+
+                                                });
+                        }
+                    }
+
+                }
+
 
             }
 
@@ -64,6 +122,18 @@ namespace Crawler.ConsoleUI
         static string GetMainURL(string url)
         {
             return url.Split('/').First();
+        }
+
+        static int CountPageKeywordUsage(Keyword keyword, IEnumerable<string> pagePhrases)
+        {
+            int keywordUsage = 0;
+
+            foreach (string phrase in pagePhrases)
+            {
+                keywordUsage += phrase.Split(' ', ',', '.', ':', ';').Count(s => s == keyword.Name);
+            }
+
+            return keywordUsage;
         }
     }
 }
