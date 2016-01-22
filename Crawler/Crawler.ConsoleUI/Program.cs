@@ -76,6 +76,7 @@ namespace Crawler.ConsoleUI
                         Page page = context.Pages.FirstOrDefault(p => p.URL == allowPageURL);
 
                         string pageHTML = downLoader.Download("http://" + allowPageURL);
+                        page.LastScanDate = DateTime.Now;
 
                         IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
 
