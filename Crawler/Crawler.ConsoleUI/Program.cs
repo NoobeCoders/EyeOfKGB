@@ -13,7 +13,7 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            Dawnloader dawnloader = new Dawnloader();
+            Downloader dawnloader = new Downloader();
             string text = dawnloader.Download(@"http://oper.ru/");
 
             Person person = new Person();
