@@ -11,5 +11,6 @@ namespace Crawler.Domain.Interfaces
     {
         IEnumerable<Page> GetPagesByFounDateTime(DateTime date);
         IEnumerable<Page> GetPagesByLastScanDate(DateTime date);
+        IEnumerable<Page> GetPagesBySiteId(int id);
     }
 }

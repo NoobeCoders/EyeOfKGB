@@ -51,5 +51,11 @@ namespace Crawler.DAL.Implementaions
         {
             throw new NotImplementedException();
         }
+
+
+        public IEnumerable<Page> GetPagesBySiteId(int id)
+        {
+            return dbContext.Pages.Where(p => p.SiteId == id);
+        }
     }
 }

@@ -53,6 +53,10 @@
       <Project>{8cc4f60b-8139-4681-9fef-912a1c2dabae}</Project>
       <Name>BusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crawler.DAL\Crawler.DAL.csproj">
+      <Project>{5a75e2f1-f04b-402a-b279-87587cbf2ce1}</Project>
+      <Name>Crawler.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Crawler.Domain\Crawler.Domain.csproj">
       <Project>{e96a42b5-2a79-42d7-bb85-393387e418e4}</Project>
       <Name>Crawler.Domain</Name>
