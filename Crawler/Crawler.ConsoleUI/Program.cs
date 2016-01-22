@@ -65,6 +65,8 @@ namespace Crawler.ConsoleUI
 
                 foreach (string allowPageURL in allowPageURLs)
                 {
+                    Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
+
                     string pageHTML = downLoader.Download("http://" + allowPageURL);
 
                     IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
@@ -78,7 +80,7 @@ namespace Crawler.ConsoleUI
                             personPageRankCounter += CountPageKeywordUsage(keyword, pagePhrases);
                         }
 
-                        PersonPageRank personPageRank = personPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.URL == allowPageURL);
+                        PersonPageRank personPageRank = personPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.Id == page.Id);
 
                         if(personPageRank != null)
                         {
@@ -89,14 +91,13 @@ namespace Crawler.ConsoleUI
                             personPageRanks.Add(new PersonPageRank()
                                                 {
                                                     Person = person,
-
+                                                    Page = page
                                                 });
                         }
                     }
-
                 }
 
-
+                dataManager.Save();
             }
 
 
