@@ -31,7 +31,7 @@ namespace BusinessLogic
                 pages.Add(  new FoundPage()
                             {
                                 URL = data.Item(0).InnerText,
-                                LastModDate = data.Item(1).InnerText
+                                LastModDate = DateTime.Parse(data.Item(1).InnerText)
                             });
             }
 

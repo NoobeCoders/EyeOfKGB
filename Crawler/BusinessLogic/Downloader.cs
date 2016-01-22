@@ -10,7 +10,7 @@ namespace BusinessLogic
 {
     public class Downloader
     {
-        public async string Download(String url)
+        public string Download(string url)
         {
             WebClient client;
             string answer;
@@ -19,7 +19,7 @@ namespace BusinessLogic
             {
                 using (client = new WebClient())
                 {
-                    Byte[] pageData = await client.DownloadDataAsync(url);
+                    Byte[] pageData = client.DownloadData(url);
 
                     answer = Encoding.UTF8.GetString(pageData);
                 }
