@@ -16,18 +16,24 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
+            ApplicationDbContext context = new ApplicationDbContext();
             DataManager dataManager = new DataManager();
             Downloader downLoader = new Downloader();
             Parser parser = new Parser();
 
-            IEnumerable<Person> persons = dataManager.Persons.GetAll();
-            List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
+            IEnumerable<Person> persons = context.Persons; //dataManager.Persons.GetAll();
+            List<PersonPageRank> personPageRanks = context.PersonPageRanks.ToList(); // dataManager.PersonPageRanks.GetAll().ToList();
+
+            foreach (Person person in persons)
+            {
+                Console.WriteLine(person.Name);
+            }
 
             foreach (Site site in dataManager.Sites.GetAll())
             {
                 List<string> pageURLs = new List<string>();
 
-                foreach(Page page in dataManager.Pages.GetPagesBySiteId(site.Id))
+                foreach (Page page in context.Pages.Where(p => p.SiteId == site.Id))//dataManager.Pages.GetPagesBySiteId(site.Id))
                 {
                     pageURLs.Add(page.URL);
                 }
@@ -54,10 +60,11 @@ namespace Crawler.ConsoleUI
                     if (pageURLs.FirstOrDefault(u => u == allowPageURL) == null)
                     {
                         dataManager.Pages.Add(new Page()
-                                                {
-                                                    URL = allowPageURL,
-                                                    Site = site
-                                                });
+                        {
+                            URL = allowPageURL,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        });
                     }
                 }
 
@@ -82,17 +89,17 @@ namespace Crawler.ConsoleUI
 
                         PersonPageRank personPageRank = personPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.Id == page.Id);
 
-                        if(personPageRank != null)
+                        if (personPageRank != null)
                         {
                             personPageRank.Rank = personPageRankCounter;
                         }
                         else
                         {
                             personPageRanks.Add(new PersonPageRank()
-                                                {
-                                                    Person = person,
-                                                    Page = page
-                                                });
+                            {
+                                Person = person,
+                                Page = page
+                            });
                         }
                     }
                 }
@@ -117,7 +124,9 @@ namespace Crawler.ConsoleUI
             //}
             //PersonRanker ranker = new PersonRanker(person);
             //Console.WriteLine(ranker.GetPersonPageRank(text));
-            //Console.ReadKey();
+            Console.ReadKey();
+
+            context.Dispose();
         }
 
         static string GetMainURL(string url)
