@@ -30,7 +30,7 @@ namespace BusinessLogic
 
                 pages.Add(  new FoundPage()
                             {
-                                URL = Regex.Replace(data.Item(0).InnerText, "^(http|https)://", String.Empty).TrimEnd(new char[] { '/'}),
+                                URL = Regex.Replace(data.Item(0).InnerText, "^(http|https)://", String.Empty),
                                 LastModDate = DateTime.Parse(data.Item(1).InnerText)
                             });
             }
@@ -76,7 +76,7 @@ namespace BusinessLogic
                 if (atr != null)
                 {
                     string url = atr.Value;
-                    url = Regex.Replace(url, "^(http|https)://", String.Empty).TrimEnd(new char[] { '/' });
+                    url = Regex.Replace(url, "^(http|https)://", String.Empty);
 
                     if (url != null) urls.Add(url);
                 }

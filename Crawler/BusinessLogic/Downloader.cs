@@ -10,7 +10,7 @@ namespace BusinessLogic
 {
     public class Downloader
     {
-        public string Download(String url)
+        public string Download(string url)
         {
             WebClient client;
             string answer;
