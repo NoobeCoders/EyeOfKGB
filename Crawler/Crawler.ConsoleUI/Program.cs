@@ -16,95 +16,103 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            ApplicationDbContext context = new ApplicationDbContext();
-            DataManager dataManager = new DataManager();
-            Downloader downLoader = new Downloader();
-            Parser parser = new Parser();
-
-            IEnumerable<Person> persons = context.Persons; //dataManager.Persons.GetAll();
-            List<PersonPageRank> personPageRanks = context.PersonPageRanks.ToList(); // dataManager.PersonPageRanks.GetAll().ToList();
-
-            foreach (Person person in persons)
+            //DataManager dataManager = new DataManager();
+            using (ApplicationDbContext context = new ApplicationDbContext())
             {
-                Console.WriteLine(person.Name);
-            }
+                Downloader downLoader = new Downloader();
+                Parser parser = new Parser();
 
-            foreach (Site site in dataManager.Sites.GetAll())
-            {
-                List<string> pageURLs = new List<string>();
+                IEnumerable<Person> persons = context.Persons.ToList(); //dataManager.Persons.GetAll();
+                List<PersonPageRank> personPageRanks = context.PersonPageRanks.ToList(); // dataManager.PersonPageRanks.GetAll().ToList();
 
-                foreach (Page page in context.Pages.Where(p => p.SiteId == site.Id))//dataManager.Pages.GetPagesBySiteId(site.Id))
+                foreach (Person person in persons)
                 {
-                    pageURLs.Add(page.URL);
+                    Console.WriteLine(person.Name);
                 }
 
-                string mainURL = GetMainURL(pageURLs[0]);
-
-                string robots = downLoader.Download(mainURL + "/robots.txt");
-                string sitemap = downLoader.Download(mainURL + "/sitemap.xml");
-
-                IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
-
-                List<string> allowPageURLs = new List<string>();
-
-                allowPageURLs = foundPages.Select(p => p.URL).ToList();
-
-                foreach (string disallowPattern in disallows)
+                foreach (Site site in context.Sites.ToList())// dataManager.Sites.GetAll())
                 {
-                    allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
-                }
+                    List<string> pageURLs = new List<string>();
 
-                foreach (string allowPageURL in allowPageURLs)
-                {
-                    if (pageURLs.FirstOrDefault(u => u == allowPageURL) == null)
+                    foreach (Page page in context.Pages.Where(p => p.SiteId == site.Id))//dataManager.Pages.GetPagesBySiteId(site.Id))
                     {
-                        dataManager.Pages.Add(new Page()
-                        {
-                            URL = allowPageURL,
-                            Site = site,
-                            FoundDateTime = DateTime.Now
-                        });
+                        pageURLs.Add(page.URL);
                     }
-                }
 
-                dataManager.Save();
+                    string mainURL = GetMainURL(pageURLs[0]);
 
-                foreach (string allowPageURL in allowPageURLs)
-                {
-                    Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
+                    string robots = downLoader.Download("http://" + mainURL + "/robots.txt");
+                    string sitemap = downLoader.Download("http://" + mainURL + "/sitemap.xml");
 
-                    string pageHTML = downLoader.Download("http://" + allowPageURL);
+                    IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
+                    IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
 
-                    IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
+                    List<string> allowPageURLs = new List<string>();
 
-                    foreach (Person person in persons)
+                    allowPageURLs = foundPages.Select(p => p.URL).ToList();
+
+                    foreach (string disallowPattern in disallows)
                     {
-                        int personPageRankCounter = 0;
+                        allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
+                    }
 
-                        foreach (Keyword keyword in person.Keywords)
+                    foreach (string allowPageURL in allowPageURLs)
+                    {
+                        if (pageURLs.FirstOrDefault(u => u == allowPageURL) == null)
                         {
-                            personPageRankCounter += CountPageKeywordUsage(keyword, pagePhrases);
-                        }
-
-                        PersonPageRank personPageRank = personPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.Id == page.Id);
-
-                        if (personPageRank != null)
-                        {
-                            personPageRank.Rank = personPageRankCounter;
-                        }
-                        else
-                        {
-                            personPageRanks.Add(new PersonPageRank()
+                            context.Pages.Add(new Page()
                             {
-                                Person = person,
-                                Page = page
+                                URL = allowPageURL,
+                                Site = site,
+                                FoundDateTime = DateTime.Now
                             });
                         }
                     }
+
+                    context.SaveChanges();
+
+                    foreach (string allowPageURL in allowPageURLs)
+                    {
+                        Page page = context.Pages.FirstOrDefault(p => p.URL == allowPageURL);
+
+                        string pageHTML = downLoader.Download("http://" + allowPageURL);
+
+                        IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
+
+                        foreach (Person person in persons)
+                        {
+                            int personPageRankCounter = 0;
+
+                            foreach (Keyword keyword in person.Keywords)
+                            {
+                                personPageRankCounter += CountPageKeywordUsage(keyword, pagePhrases);
+                            }
+
+                            PersonPageRank personPageRank = context.PersonPageRanks.FirstOrDefault(r => r.PersonId == person.Id && r.Page.Id == page.Id);
+
+                            if (personPageRank != null)
+                            {
+                                personPageRank.Rank = personPageRankCounter;
+                            }
+                            else
+                            {
+                                context.PersonPageRanks.Add(new PersonPageRank()
+                                {
+                                    Person = person,
+                                    Page = page,
+                                    Rank = personPageRankCounter
+                                });
+                            }
+                        }
+                    }
                 }
 
-                dataManager.Save();
+                context.SaveChanges();
+
+                foreach (var rank in context.PersonPageRanks)
+                {
+                    Console.WriteLine(rank.Person.Name + rank.Rank);
+                }
             }
 
 
@@ -125,8 +133,6 @@ namespace Crawler.ConsoleUI
             //PersonRanker ranker = new PersonRanker(person);
             //Console.WriteLine(ranker.GetPersonPageRank(text));
             Console.ReadKey();
-
-            context.Dispose();
         }
 
         static string GetMainURL(string url)
