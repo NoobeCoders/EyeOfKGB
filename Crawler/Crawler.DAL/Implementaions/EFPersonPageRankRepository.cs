@@ -2,6 +2,7 @@
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,12 @@ namespace Crawler.DAL.Implementaions
 
         public PersonPageRank GetById(int personId, int pageId)
         {
-            throw new NotImplementedException();
+            return dbContext.PersonPageRanks.FirstOrDefault(r => r.PersonId == personId && r.PageId == pageId);
         }
 
         public IEnumerable<PersonPageRank> GetAll()
         {
-            throw new NotImplementedException();
+            return dbContext.PersonPageRanks;
         }
 
         public PersonPageRank GetById(int id)
@@ -34,17 +35,19 @@ namespace Crawler.DAL.Implementaions
 
         public void Add(PersonPageRank item)
         {
-            throw new NotImplementedException();
+            dbContext.PersonPageRanks.Add(item);
         }
 
         public void Update(PersonPageRank item)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(PersonPageRank item)
         {
-            throw new NotImplementedException();
+            PersonPageRank rank = GetById(item.PersonId, item.PageId);
+            if (rank != null)
+                dbContext.PersonPageRanks.Remove(rank);
         }
     }
 }
