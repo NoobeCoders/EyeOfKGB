@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Crawler.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
-    public class Downloader
+    public class Downloader : IDownloader
     {
         public string Download(string url)
         {
