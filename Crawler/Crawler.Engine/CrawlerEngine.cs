@@ -231,19 +231,20 @@ namespace Crawler.Engine
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
+            IEnumerable<string> urls = parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
 
-            List<string> allowPageURLs = new List<string>();
+            AddPagesFromUrls(site, urls);
+        }
 
-            allowPageURLs = foundPages.Select(p => p.URL).ToList();
-
-            foreach (string allowPageURL in allowPageURLs)
+        private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
+        {
+            foreach (string url in urls)
             {
-                if (site.Pages.FirstOrDefault(p => p.URL == allowPageURL) == null)
+                if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
                 {
                     site.Pages.Add(new Page()
                     {
-                        URL = allowPageURL,
+                        URL = url,
                         Site = site,
                         FoundDateTime = DateTime.Now
                     });
@@ -264,18 +265,7 @@ namespace Crawler.Engine
                 allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
             }
 
-            foreach (string allowPageURL in allowPageURLs)
-            {
-                if (site.Pages.FirstOrDefault(p => p.URL == allowPageURL) == null)
-                {
-                    site.Pages.Add(new Page()
-                    {
-                        URL = allowPageURL,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    });
-                }
-            }
+            AddPagesFromUrls(site, allowPageURLs);
         }
 
         private void ProcessHtmlPage(Page page, IEnumerable<Person> persons)
