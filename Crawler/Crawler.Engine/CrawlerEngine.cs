@@ -338,6 +338,7 @@ namespace Crawler.Engine
                 if (disposing)
                 {
                     dataManager.Dispose();
+                    downloader.Dispose();
                 }
                 this.disposed = true;
             }
