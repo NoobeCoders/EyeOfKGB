@@ -15,6 +15,8 @@ namespace Crawler.DAL.EntityConfigurations
         {
             this.ToTable("PersonPageRanks");
 
+            this.HasKey(c => new { c.PersonId, c.PageId });
+
             this.HasRequired<Person>(c => c.Person)
                 .WithMany(c => c.PersonRangeRanks)
                 .HasForeignKey(c => c.PersonId);

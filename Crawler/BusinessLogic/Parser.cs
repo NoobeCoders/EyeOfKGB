@@ -30,7 +30,7 @@ namespace BusinessLogic
 
                 pages.Add(  new FoundPage()
                             {
-                                URL = data.Item(0).InnerText,
+                                URL = Regex.Replace(data.Item(0).InnerText, "^(http|https)://", String.Empty),
                                 LastModDate = DateTime.Parse(data.Item(1).InnerText)
                             });
             }
@@ -40,7 +40,7 @@ namespace BusinessLogic
 
         public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
         {
-            throw new NotImplementedException();
+            return new List<string>() { "/Test2" };
         }
 
         public IEnumerable<string> GetPagePhrases(string pageHTML)
@@ -76,7 +76,7 @@ namespace BusinessLogic
                 if (atr != null)
                 {
                     string url = atr.Value;
-                    url = Regex.Replace(url, "^(http|https)://", "");
+                    url = Regex.Replace(url, "^(http|https)://", String.Empty);
 
                     if (url != null) urls.Add(url);
                 }

@@ -2,6 +2,7 @@
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,32 +20,35 @@ namespace Crawler.DAL.Implementaions
 
         public Site GetSiteByName(string name)
         {
-            throw new NotImplementedException();
+            return dbContext.Sites.FirstOrDefault(s => s.Name == name);
         }
 
         public IEnumerable<Site> GetAll()
         {
-            throw new NotImplementedException();
+            return dbContext.Sites;
         }
 
         public Site GetById(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Sites.FirstOrDefault(s => s.Id == id);
         }
 
         public void Add(Site item)
         {
-            throw new NotImplementedException();
+            dbContext.Sites.Add(item);
         }
 
         public void Update(Site item)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(item).State = EntityState.Modified;
         }
         
         public void Delete(Site item)
         {
-            throw new NotImplementedException();
+            Site site = GetById(item.Id);
+
+            if(site != null)
+                dbContext.Sites.Remove(item);
         }
     }
 }

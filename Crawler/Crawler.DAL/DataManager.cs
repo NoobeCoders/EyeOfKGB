@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.DAL
 {
-    public class DataManager : IDisposable
+    public class DataManager : IDataManager, IDisposable
     {
         ApplicationDbContext dbContext;
 

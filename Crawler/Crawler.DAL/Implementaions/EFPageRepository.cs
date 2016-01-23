@@ -2,6 +2,7 @@
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,40 +20,41 @@ namespace Crawler.DAL.Implementaions
 
         public IEnumerable<Page> GetPagesByFounDateTime(DateTime date)
         {
-            throw new NotImplementedException();
+            return dbContext.Pages.Where(p => p.FoundDateTime == date);
         }
 
         public IEnumerable<Page> GetPagesByLastScanDate(DateTime date)
         {
-            throw new NotImplementedException();
+            return dbContext.Pages.Where(p => p.LastScanDate == date);
         }
 
         public IEnumerable<Page> GetAll()
         {
-            throw new NotImplementedException();
+            return dbContext.Pages;
         }
 
         public Page GetById(int id)
         {
-            throw new NotImplementedException();
+            return dbContext.Pages.FirstOrDefault(p => p.Id == id);
         }
 
         public void Add(Page item)
         {
-            throw new NotImplementedException();
+            dbContext.Pages.Add(item);
         }
 
         public void Update(Page item)
         {
-            throw new NotImplementedException();
+            dbContext.Entry(item).State = EntityState.Modified;
         }
 
         public void Delete(Page item)
         {
-            throw new NotImplementedException();
+            Page page = GetById(item.Id);
+            if (page != null)
+                dbContext.Pages.Remove(page);
         }
-
-
+        
         public IEnumerable<Page> GetPagesBySiteId(int id)
         {
             return dbContext.Pages.Where(p => p.SiteId == id);
