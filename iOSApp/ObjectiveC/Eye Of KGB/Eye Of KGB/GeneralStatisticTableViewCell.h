@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface GeneralStatisticTableViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UILabel *labelCount;
 
