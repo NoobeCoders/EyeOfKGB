@@ -15,6 +15,11 @@
 		8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */; };
 		8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */; };
 		8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9261C511CB1008EC517 /* MakeDictionary.m */; };
+		8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9521C53222A008EC517 /* UserAppViewController.m */; };
+		8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9551C53223B008EC517 /* AdminAppViewController.m */; };
+		8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */; };
+		8359B95F1C532F21008EC517 /* userTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B95E1C532F21008EC517 /* userTabBar@2x.png */; };
+		8359B9621C532F5E008EC517 /* adminTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B9611C532F5E008EC517 /* adminTabBar@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +37,14 @@
 		8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticTableViewCell.m; sourceTree = "<group>"; };
 		8359B9251C511CB1008EC517 /* MakeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeDictionary.h; sourceTree = "<group>"; };
 		8359B9261C511CB1008EC517 /* MakeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeDictionary.m; sourceTree = "<group>"; };
+		8359B9511C53222A008EC517 /* UserAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAppViewController.h; sourceTree = "<group>"; };
+		8359B9521C53222A008EC517 /* UserAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAppViewController.m; sourceTree = "<group>"; };
+		8359B9541C53223B008EC517 /* AdminAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminAppViewController.h; sourceTree = "<group>"; };
+		8359B9551C53223B008EC517 /* AdminAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminAppViewController.m; sourceTree = "<group>"; };
+		8359B9571C5326BB008EC517 /* DailyStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyStatisticViewController.h; sourceTree = "<group>"; };
+		8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyStatisticViewController.m; sourceTree = "<group>"; };
+		8359B95E1C532F21008EC517 /* userTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userTabBar@2x.png"; sourceTree = "<group>"; };
+		8359B9611C532F5E008EC517 /* adminTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adminTabBar@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,12 +84,6 @@
 				8301482D1C50E4E500748011 /* LaunchScreen.storyboard */,
 				830148301C50E4E500748011 /* Info.plist */,
 				8301481F1C50E4E500748011 /* Supporting Files */,
-				830148391C50F3CE00748011 /* GeneralStatisticViewController.h */,
-				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
-				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
-				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
-				8359B9251C511CB1008EC517 /* MakeDictionary.h */,
-				8359B9261C511CB1008EC517 /* MakeDictionary.m */,
 			);
 			path = "Eye Of KGB";
 			sourceTree = "<group>";
@@ -84,9 +91,63 @@
 		8301481F1C50E4E500748011 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8359B9601C532F34008EC517 /* Images */,
+				8359B95D1C532BB0008EC517 /* Admin App */,
+				8359B95A1C532B79008EC517 /* User App */,
 				830148201C50E4E500748011 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8359B95A1C532B79008EC517 /* User App */ = {
+			isa = PBXGroup;
+			children = (
+				8359B95C1C532BA2008EC517 /* DailyStatistic */,
+				8359B95B1C532B8F008EC517 /* GeneralStatistic */,
+				8359B9511C53222A008EC517 /* UserAppViewController.h */,
+				8359B9521C53222A008EC517 /* UserAppViewController.m */,
+			);
+			name = "User App";
+			sourceTree = "<group>";
+		};
+		8359B95B1C532B8F008EC517 /* GeneralStatistic */ = {
+			isa = PBXGroup;
+			children = (
+				830148391C50F3CE00748011 /* GeneralStatisticViewController.h */,
+				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
+				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
+				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
+				8359B9251C511CB1008EC517 /* MakeDictionary.h */,
+				8359B9261C511CB1008EC517 /* MakeDictionary.m */,
+			);
+			name = GeneralStatistic;
+			sourceTree = "<group>";
+		};
+		8359B95C1C532BA2008EC517 /* DailyStatistic */ = {
+			isa = PBXGroup;
+			children = (
+				8359B9571C5326BB008EC517 /* DailyStatisticViewController.h */,
+				8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */,
+			);
+			name = DailyStatistic;
+			sourceTree = "<group>";
+		};
+		8359B95D1C532BB0008EC517 /* Admin App */ = {
+			isa = PBXGroup;
+			children = (
+				8359B9541C53223B008EC517 /* AdminAppViewController.h */,
+				8359B9551C53223B008EC517 /* AdminAppViewController.m */,
+			);
+			name = "Admin App";
+			sourceTree = "<group>";
+		};
+		8359B9601C532F34008EC517 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8359B95E1C532F21008EC517 /* userTabBar@2x.png */,
+				8359B9611C532F5E008EC517 /* adminTabBar@2x.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,6 +210,8 @@
 				8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */,
 				8301482C1C50E4E500748011 /* Assets.xcassets in Resources */,
 				8301482A1C50E4E500748011 /* Main.storyboard in Resources */,
+				8359B95F1C532F21008EC517 /* userTabBar@2x.png in Resources */,
+				8359B9621C532F5E008EC517 /* adminTabBar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -161,7 +224,10 @@
 			files = (
 				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
 				8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */,
+				8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */,
+				8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */,
 				830148211C50E4E500748011 /* main.m in Sources */,
+				8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */,
 				8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */,
 				8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */,
 			);
