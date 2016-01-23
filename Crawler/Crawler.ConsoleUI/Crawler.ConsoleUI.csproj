@@ -71,6 +71,10 @@
       <Project>{e96a42b5-2a79-42d7-bb85-393387e418e4}</Project>
       <Name>Crawler.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Crawler.Engine\Crawler.Engine.csproj">
+      <Project>{a100949b-571e-4224-a7ce-8a4ab1eb1b71}</Project>
+      <Name>Crawler.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

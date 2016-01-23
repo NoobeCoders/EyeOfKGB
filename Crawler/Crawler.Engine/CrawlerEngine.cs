@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Engine
 {
-    public class CrawlerEngine
+    public class CrawlerEngine : IDisposable
     {
         IDataManager dataManager;
         IDownloader downloader;
@@ -26,7 +26,7 @@ namespace Crawler.Engine
         {
             Parser parser = new Parser();
 
-            IEnumerable<Person> persons = dataManager.Persons.GetAll();
+            IEnumerable<Person> persons = dataManager.Persons.GetAll().ToList();
             List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
 
             foreach (Person person in persons)
@@ -34,7 +34,7 @@ namespace Crawler.Engine
                 Console.WriteLine(person.Name);
             }
 
-            foreach (Site site in dataManager.Sites.GetAll())
+            foreach (Site site in dataManager.Sites.GetAll().ToList())
             {
                 List<string> pageURLs = new List<string>();
 
@@ -73,6 +73,8 @@ namespace Crawler.Engine
                     }
                 }
 
+                dataManager.Save();
+
                 foreach (string allowPageURL in allowPageURLs)
                 {
                     Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
@@ -96,6 +98,7 @@ namespace Crawler.Engine
                         if (personPageRank != null)
                         {
                             personPageRank.Rank = personPageRankCounter;
+                            dataManager.PersonPageRanks.Update(personPageRank);
                         }
                         else
                         {
@@ -109,6 +112,8 @@ namespace Crawler.Engine
                     }
                 }
             }
+
+            dataManager.Save();
         }
 
         private string GetMainURL(string url)
@@ -126,6 +131,26 @@ namespace Crawler.Engine
             }
 
             return keywordUsage;
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    dataManager.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
