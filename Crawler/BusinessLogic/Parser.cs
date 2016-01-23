@@ -43,6 +43,11 @@ namespace BusinessLogic
             return new List<string>() { "/Test2" };
         }
 
+        public string GetSitemapUrl(string robots)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<string> GetPagePhrases(string pageHTML)
         {
             List<string> pagePhrases = new List<string>();

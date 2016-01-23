@@ -23,7 +23,7 @@ namespace Crawler.DAL.Implementaions
             return dbContext.Pages.Where(p => p.FoundDateTime == date);
         }
 
-        public IEnumerable<Page> GetPagesByLastScanDate(DateTime date)
+        public IEnumerable<Page> GetPagesByLastScanDate(DateTime? date)
         {
             return dbContext.Pages.Where(p => p.LastScanDate == date);
         }
