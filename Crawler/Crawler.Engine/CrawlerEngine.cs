@@ -32,8 +32,9 @@ namespace Crawler.Engine
 
             AddRobotsPageForNewSites();
             ProcessNewPages(persons);
-            ProcessScannedPages(persons);
+            ProcessScannedSiteMapPages(persons);
             ProcessNewPages(persons);
+            ProcessScannedHtmlPages(persons);
         }
 
         public void OldStart()
@@ -155,7 +156,7 @@ namespace Crawler.Engine
             }
         }
 
-        private void ProcessScannedPages(IEnumerable<Person> persons)
+        private void ProcessScannedSiteMapPages(IEnumerable<Person> persons)
         {
             IEnumerable<Page> pages = dataManager.Pages
                                                     .GetAll()
@@ -167,6 +168,23 @@ namespace Crawler.Engine
             foreach (Page page in pages)
             {
                 ProcessSitemapPage(page);
+            }
+
+            dataManager.Save();
+        }
+
+        private void ProcessScannedHtmlPages(IEnumerable<Person> persons)
+        {
+            IEnumerable<Page> pages = dataManager.Pages
+                                                    .GetAll()
+                                                    .Where(p => !p.URL.Contains("sitemap.xml") && !p.URL.Contains("robots.text"))
+                                                    .Where(p => p.LastScanDate != null)
+                                                    .Where(p => p.LastScanDate.Value.Date != DateTime.Now.Date)
+                                                    .ToList();
+
+            foreach (Page page in pages)
+            {
+                ProcessHtmlPage(page, persons);
             }
 
             dataManager.Save();
@@ -201,9 +219,14 @@ namespace Crawler.Engine
 
             Site site = page.Site;
 
-            site.Pages.Add(GetSitemapPageFromRobots(robots));
+            Page sitemapPage = GetSitemapPageFromRobots(robots);
 
-            dataManager.Sites.Update(site);
+            if(site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
+            {
+                site.Pages.Add(sitemapPage);
+
+                dataManager.Sites.Update(site);
+            }
         }
 
         private void ProcessSitemapPage(Page page)
