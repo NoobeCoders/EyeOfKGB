@@ -149,14 +149,39 @@ namespace Crawler.Engine
             }
         }
 
+        private void ProcessScannedPages(IEnumerable<Person> persons)
+        {
+            IEnumerable<Page> pages = dataManager.Pages
+                                                    .GetAll()
+                                                    .Where(p => p.URL.Contains("sitemap.xml"))
+                                                    .Where(p => p.LastScanDate != null)
+                                                    .Where(p => p.LastScanDate.Value.Date != DateTime.Now.Date)
+                                                    .ToList();
+
+            foreach (Page page in pages)
+            {
+                ProcessSitemapPage(page);
+            }
+        }
+
         private void ProcessPage(Page page, IEnumerable<Person> persons)
         {
-            if (page.URL.Contains("robots.txt"))
+            if (isRobotsPage(page))
                 ProcessRobotsPage(page);
-            else if (page.URL.Contains("sitemap.xml"))
+            else if (isSitemapPage(page))
                 ProcessSitemapPage(page);
             else
                 ProcessHtmlPage(page, persons);
+        }
+
+        private bool isRobotsPage(Page page)
+        {
+            return page.URL.Contains("robots.txt");
+        }
+
+        private bool isSitemapPage(Page page)
+        {
+            return page.URL.Contains("sitemap.xml");
         }
 
         private void ProcessRobotsPage(Page page)
