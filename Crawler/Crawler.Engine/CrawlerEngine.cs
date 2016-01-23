@@ -32,11 +32,14 @@ namespace Crawler.Engine
 
             AddRobotsPageForNewSites();
             ProcessNewPages(persons);
+            ProcessScannedPages(persons);
+            ProcessNewPages(persons);
+        }
 
-            foreach (Person person in persons)
-            {
-                Console.WriteLine(person.Name);
-            }
+        public void OldStart()
+        {
+            IEnumerable<Person> persons = dataManager.Persons.GetAll().ToList();
+            List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
 
             foreach (Site site in dataManager.Sites.GetAll().ToList())
             {
@@ -116,8 +119,6 @@ namespace Crawler.Engine
                     }
                 }
             }
-
-            dataManager.Save();
         }
 
         private void AddRobotsPageForNewSites()
@@ -127,11 +128,14 @@ namespace Crawler.Engine
                 site.Pages.Add(new Page()
                                         {
                                             URL = site.Name + "/robots.txt",
+                                            FoundDateTime = DateTime.Now,
                                             LastScanDate = null
                                         });
 
                 dataManager.Sites.Update(site);
             }
+
+            dataManager.Save();
         }
 
         private void ProcessNewPages(IEnumerable<Person> persons)
@@ -140,10 +144,12 @@ namespace Crawler.Engine
 
             while (pages.Count() != 0)
             {
-                foreach (Page page in dataManager.Pages.GetPagesByLastScanDate(null).ToList())
+                foreach (Page page in pages)
                 {
                     ProcessPage(page, persons);
                 }
+
+                dataManager.Save();
 
                 pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
             }
@@ -162,6 +168,8 @@ namespace Crawler.Engine
             {
                 ProcessSitemapPage(page);
             }
+
+            dataManager.Save();
         }
 
         private void ProcessPage(Page page, IEnumerable<Person> persons)
@@ -172,6 +180,9 @@ namespace Crawler.Engine
                 ProcessSitemapPage(page);
             else
                 ProcessHtmlPage(page, persons);
+            
+            page.LastScanDate = DateTime.Now;
+            dataManager.Pages.Update(page);
         }
 
         private bool isRobotsPage(Page page)
@@ -213,8 +224,9 @@ namespace Crawler.Engine
             return new Page()
                         {
                             URL = sitemapUrl,
+                            FoundDateTime = DateTime.Now,
                             LastScanDate = null
-                        };
+            };
         }
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)

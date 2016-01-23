@@ -45,7 +45,7 @@ namespace BusinessLogic
 
         public string GetSitemapUrl(string robots)
         {
-            throw new NotImplementedException();
+            return "localhost:53432/sitemap.xml";
         }
 
         public IEnumerable<string> GetPagePhrases(string pageHTML)

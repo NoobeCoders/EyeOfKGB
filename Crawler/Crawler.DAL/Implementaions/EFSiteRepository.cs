@@ -23,7 +23,7 @@ namespace Crawler.DAL.Implementaions
             return dbContext.Sites.FirstOrDefault(s => s.Name == name);
         }
 
-        public IEnumerable<Site> GetSiteWithoutPages(string name)
+        public IEnumerable<Site> GetSitesWithoutPages()
         {
             return dbContext.Sites.Where(s => s.Pages.Count == 0);
         }
