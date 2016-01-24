@@ -40,7 +40,48 @@ namespace BusinessLogic
 
         public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
         {
-            return new List<string>() { "/Test2" };
+            List<string> dissalowPages = new List<string>();
+
+            List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
+
+            int i = 0;
+            string[] str = new string[2];
+
+            while (!stringsOfRobots[i].Contains("User-agent: " + agent) && !stringsOfRobots[i].Contains("User-agent: *"))
+            {
+                i++;
+            }
+
+            while (i < stringsOfRobots.Count)
+            {
+                for (int n = i; i < stringsOfRobots.Count; n++)
+                {
+                    if (stringsOfRobots[i] == "User-agent: " + agent || stringsOfRobots[i] == "User-agent: *")
+                    {
+                        i++;
+                        while (i < stringsOfRobots.Count() && !stringsOfRobots[i].Contains("User-agent:"))
+                        {
+                            if (stringsOfRobots[i].Contains("Allow"))
+                            {
+                                i++;
+                            }
+                            else {
+                                if (stringsOfRobots[i].Contains("Disallow"))
+                                {
+                                    str = stringsOfRobots[i].Split(':');
+                                    dissalowPages.Add(str[1]);
+                                    i++;
+                                }
+                                else
+                                {
+                                    i++;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return dissalowPages;
         }
 
         public IEnumerable<string> GetPagePhrases(string pageHTML)
