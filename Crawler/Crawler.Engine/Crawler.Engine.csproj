@@ -41,7 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CrawlerEngine.cs" />
+    <Compile Include="HtmlPageContentHandler.cs" />
+    <Compile Include="PageContentHandler.cs" />
+    <Compile Include="PageHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RobotsPageContentHandler.cs" />
+    <Compile Include="SitemapPageContentHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj">
