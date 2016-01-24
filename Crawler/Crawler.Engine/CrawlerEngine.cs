@@ -192,9 +192,9 @@ namespace Crawler.Engine
 
         private void ProcessPage(Page page, IEnumerable<Person> persons)
         {
-            if (isRobotsPage(page))
+            if (IsRobotsPage(page))
                 ProcessRobotsPage(page);
-            else if (isSitemapPage(page))
+            else if (IsSitemapPage(page))
                 ProcessSitemapPage(page);
             else
                 ProcessHtmlPage(page, persons);
@@ -203,19 +203,19 @@ namespace Crawler.Engine
             dataManager.Pages.Update(page);
         }
 
-        private bool isRobotsPage(Page page)
+        private bool IsRobotsPage(Page page)
         {
             return page.URL.Contains("robots.txt");
         }
 
-        private bool isSitemapPage(Page page)
+        private bool IsSitemapPage(Page page)
         {
             return page.URL.Contains("sitemap.xml");
         }
 
         private void ProcessRobotsPage(Page page)
         {
-            string robots = downloader.Download("http://" + page.URL);
+            string robots = DownloadPageContent(page);
 
             Site site = page.Site;
 
@@ -231,13 +231,18 @@ namespace Crawler.Engine
 
         private void ProcessSitemapPage(Page page)
         {
-            string sitemap = downloader.Download("http://" + page.URL);
+            string sitemap = DownloadPageContent(page);
 
             Site site = page.Site;
 
             AddNewPagesToSiteFromSitemap(site, sitemap);
 
             dataManager.Sites.Update(site);
+        }
+
+        private string DownloadPageContent(Page page)
+        {
+            return downloader.Download("http://" + page.URL);
         }
 
         private Page GetSitemapPageFromRobots(string robots)
@@ -293,34 +298,37 @@ namespace Crawler.Engine
 
         private void ProcessHtmlPage(Page page, IEnumerable<Person> persons)
         {
-            string pageHTML = downloader.Download("http://" + page.URL);
+            string pageHTML = DownloadPageContent(page);
             page.LastScanDate = DateTime.Now;
 
             IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
 
             foreach (Person person in persons)
             {
-                int personPageRankCounter = CountRank(person.Keywords, pagePhrases);
+                int rank = CountRank(person.Keywords, pagePhrases);
 
-                PersonPageRank personPageRank = dataManager.PersonPageRanks.GetById(person.Id, page.Id);
-
-                if (personPageRank != null)
-                {
-                    personPageRank.Rank = personPageRankCounter;
-                    dataManager.PersonPageRanks.Update(personPageRank);
-                }
-                else
-                {
-                    dataManager.PersonPageRanks.Add(new PersonPageRank()
-                    {
-                        Person = person,
-                        Page = page,
-                        Rank = personPageRankCounter
-                    });
-                }
+                SavePersonPageRank(person, page, rank);
             }
+        }
 
-            dataManager.Pages.Update(page);
+        private void SavePersonPageRank(Person person, Page page, int rank)
+        {
+            PersonPageRank personPageRank = dataManager.PersonPageRanks.GetById(person.Id, page.Id);
+
+            if (personPageRank != null)
+            {
+                personPageRank.Rank = rank;
+                dataManager.PersonPageRanks.Update(personPageRank);
+            }
+            else
+            {
+                dataManager.PersonPageRanks.Add(new PersonPageRank()
+                {
+                    Person = person,
+                    Page = page,
+                    Rank = rank
+                });
+            }
         }
 
         private string GetMainURL(string url)
