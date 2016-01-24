@@ -41,11 +41,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Infrastructure\IKeywordRepository.cs" />
+    <Compile Include="Infrastructure\IPageRepository.cs" />
+    <Compile Include="Infrastructure\IPersonPageRank.cs" />
+    <Compile Include="Infrastructure\IPersonRepository.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
+    <Compile Include="Infrastructure\ISiteRepository.cs" />
+    <Compile Include="Infrastructure\IStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rest-Service.CSharp.Domain\Rest-Service.CSharp.Domain.csproj">
+      <Project>{43a11bf3-922c-44ab-8920-c0f265a39334}</Project>
+      <Name>Rest-Service.CSharp.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
