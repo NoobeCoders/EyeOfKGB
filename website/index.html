@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Главная страница</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link 
+		rel="stylesheet"
+		href="css/style.css"
+		type="text/css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+	<!-- Main menu -->
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-4">
+				<header class="logo">
+					<figure>
+						<a href="index.html"><img src="images/logo.png" alt="logo"></a>				
+					</figure>
+				</header>
+			</div>
+			<div class="col-lg-8">
+				<nav class="nav-menu">
+					<ul class="menu">
+  						<li>
+  							<a href="index.html">Главная</a>
+  						</li>
+  						<li>
+  							<a href="index.html">О компании</a>
+  						</li>
+  						<li>
+  							<a href="index.html">Проекты</a>
+  						</li>
+  						<li>
+  							<a href="index.html">Компоненты</a>
+  						</li>
+ 						
+					</ul>
+				</nav>				
+			</div>
+		</div>
+	</div>
+	<!-- Content of main page -->
+	<main>
+		<div class="container-fluid">
+			<div class="row">
+				<div id="greetings"></div>
+				<button type="button" class="btn btn-default btn-lg" id="start-button">Поехали!</div>
+			</div>
+		</div>
+	
+
+		
+	</main>
+	<!-- footer -->
+	<footer>
+		<div class="container-fluid">
+			<div class="row text-center">
+					<div class="glyphicon glyphicon-copyright-mark">
+						<span>All rights reserved</span>
+            		</div>
+            		<p>
+            			<span>Developed by БыдлоКОдеры</span>
+            		</p>
+            </div>
+		</div>
+	</footer>
+<script src="main.js"></script>
+<script type="text/javascript">
+	setTimeout(function(){$('#start-button').fadeIn('fast')},3000);
+</script>
+</body>
+</html>
