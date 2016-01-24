@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Infrastructure\IKeywordRepository.cs" />
     <Compile Include="Infrastructure\IPageRepository.cs" />
     <Compile Include="Infrastructure\IPersonPageRank.cs" />
@@ -49,10 +48,9 @@
     <Compile Include="Infrastructure\ISiteRepository.cs" />
     <Compile Include="Infrastructure\IStatsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\StatsRepositoryFake.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Repositories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Rest-Service.CSharp.Domain\Rest-Service.CSharp.Domain.csproj">
       <Project>{43a11bf3-922c-44ab-8920-c0f265a39334}</Project>
