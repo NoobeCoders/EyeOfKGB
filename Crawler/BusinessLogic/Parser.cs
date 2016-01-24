@@ -84,6 +84,39 @@ namespace BusinessLogic
             return dissalowPages;
         }
 
+
+        public string GetSitemapUrl(string robots)
+        {
+            List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
+
+            string sitemap = "";
+            string[] spl = new string[2];
+
+            foreach (var str in stringsOfRobots)
+            {
+                if (str.Contains("Sitemap:"))
+                {
+                    spl = str.Split("Sitemap:".ToCharArray());
+                    sitemap += spl[1];
+                }
+            }
+
+            if (sitemap == "")
+            {
+                foreach (var str in stringsOfRobots)
+                {
+                    if (str.Contains("Host:"))
+                    {
+                        spl = str.Split(':');
+                        sitemap += spl[1];
+                        sitemap += "/sitemap.xml";
+                    }
+                }
+            }
+
+            return sitemap;
+        }
+
         public IEnumerable<string> GetPagePhrases(string pageHTML)
         {
             List<string> pagePhrases = new List<string>();
