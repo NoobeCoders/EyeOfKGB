@@ -11,11 +11,9 @@ namespace Crawler.Engine
     class PageHandler
     {
         IDownloader downloader;
-        IDataManager dataManager;
 
-        public PageHandler(IDataManager dataManager, IDownloader downloader)
+        public PageHandler(IDownloader downloader)
         {
-            this.dataManager = dataManager;
             this.downloader = downloader;
         }
 

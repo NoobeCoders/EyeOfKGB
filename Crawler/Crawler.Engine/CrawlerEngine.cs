@@ -26,7 +26,7 @@ namespace Crawler.Engine
             this.dataManager = dataManager;
             this.downloader = downloader;
 
-            pageHandler = new PageHandler(dataManager, downloader);
+            pageHandler = new PageHandler(downloader);
             
             parser = new Parser();
 
