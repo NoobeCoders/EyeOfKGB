@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crawler.Domain.Entities;
+using BusinessLogic.Models;
+using System.Text.RegularExpressions;
 
 namespace Crawler.Engine
 {
@@ -47,6 +49,21 @@ namespace Crawler.Engine
                     });
                 }
             }
+        }
+        private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
+        {
+            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
+
+            List<string> allowPageURLs = new List<string>();
+
+            allowPageURLs = foundPages.Select(p => p.URL).ToList();
+
+            foreach (string disallowPattern in disallowPattens)
+            {
+                allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
+            }
+
+            AddPagesFromUrls(site, allowPageURLs);
         }
     }
 }

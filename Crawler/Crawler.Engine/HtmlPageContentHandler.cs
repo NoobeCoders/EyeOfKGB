@@ -16,7 +16,7 @@ namespace Crawler.Engine
         public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
-            persons = dataManager.Persons.GetAll();
+            persons = dataManager.Persons.GetAll().ToList();
         }
 
         public override void HandleContent(Page page, string htmlContent)

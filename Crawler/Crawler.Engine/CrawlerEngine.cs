@@ -16,25 +16,32 @@ namespace Crawler.Engine
         IDataManager dataManager;
         IDownloader downloader;
         Parser parser;
+        PageHandler pageHandler;
+        HtmlPageContentHandler htmlPageContentHandler;
+        RobotsPageContentHandler robotsPageContentHandler;
+        SitemapPageContentHandler sitemapPageContentHandler;
 
         public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
         {
             this.dataManager = dataManager;
             this.downloader = downloader;
+
+            pageHandler = new PageHandler(dataManager, downloader);
             
             parser = new Parser();
+
+            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
+            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
+            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
         }
 
         public void Start()
         {
-            IEnumerable<Person> persons = dataManager.Persons.GetAll().ToList();
-            List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
-
             AddRobotsPageForNewSites();
-            ProcessNewPages(persons);
-            ProcessScannedSiteMapPages(persons);
-            ProcessNewPages(persons);
-            ProcessScannedHtmlPages(persons);
+            ProcessNewPages();
+            ProcessScannedSiteMapPages();
+            ProcessNewPages();
+            ProcessScannedHtmlPages();
         }
 
         public void OldStart()
@@ -139,7 +146,7 @@ namespace Crawler.Engine
             dataManager.Save();
         }
 
-        private void ProcessNewPages(IEnumerable<Person> persons)
+        private void ProcessNewPages()
         {
             IEnumerable<Page> pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
 
@@ -147,7 +154,7 @@ namespace Crawler.Engine
             {
                 foreach (Page page in pages)
                 {
-                    ProcessPage(page, persons);
+                    ProcessPage(page);
                 }
 
                 dataManager.Save();
@@ -156,7 +163,7 @@ namespace Crawler.Engine
             }
         }
 
-        private void ProcessScannedSiteMapPages(IEnumerable<Person> persons)
+        private void ProcessScannedSiteMapPages()
         {
             IEnumerable<Page> pages = dataManager.Pages
                                                     .GetAll()
@@ -167,13 +174,13 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                ProcessSitemapPage(page);
+                pageHandler.HandlePage(page, sitemapPageContentHandler);
             }
 
             dataManager.Save();
         }
 
-        private void ProcessScannedHtmlPages(IEnumerable<Person> persons)
+        private void ProcessScannedHtmlPages()
         {
             IEnumerable<Page> pages = dataManager.Pages
                                                     .GetAll()
@@ -184,20 +191,20 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                ProcessHtmlPage(page, persons);
+                pageHandler.HandlePage(page, htmlPageContentHandler);
             }
 
             dataManager.Save();
         }
 
-        private void ProcessPage(Page page, IEnumerable<Person> persons)
+        private void ProcessPage(Page page)
         {
             if (IsRobotsPage(page))
-                ProcessRobotsPage(page);
+                pageHandler.HandlePage(page, robotsPageContentHandler);
             else if (IsSitemapPage(page))
-                ProcessSitemapPage(page);
+                pageHandler.HandlePage(page, sitemapPageContentHandler);
             else
-                ProcessHtmlPage(page, persons);
+                pageHandler.HandlePage(page, htmlPageContentHandler);
             
             page.LastScanDate = DateTime.Now;
             dataManager.Pages.Update(page);
@@ -211,124 +218,6 @@ namespace Crawler.Engine
         private bool IsSitemapPage(Page page)
         {
             return page.URL.Contains("sitemap.xml");
-        }
-
-        private void ProcessRobotsPage(Page page)
-        {
-            string robots = DownloadPageContent(page);
-
-            Site site = page.Site;
-
-            Page sitemapPage = GetSitemapPageFromRobots(robots);
-
-            if(site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
-            {
-                site.Pages.Add(sitemapPage);
-
-                dataManager.Sites.Update(site);
-            }
-        }
-
-        private void ProcessSitemapPage(Page page)
-        {
-            string sitemap = DownloadPageContent(page);
-
-            Site site = page.Site;
-
-            AddNewPagesToSiteFromSitemap(site, sitemap);
-
-            dataManager.Sites.Update(site);
-        }
-
-        private string DownloadPageContent(Page page)
-        {
-            return downloader.Download("http://" + page.URL);
-        }
-
-        private Page GetSitemapPageFromRobots(string robots)
-        {
-            string sitemapUrl = parser.GetSitemapUrl(robots);
-
-            return new Page()
-                        {
-                            URL = sitemapUrl,
-                            FoundDateTime = DateTime.Now,
-                            LastScanDate = null
-            };
-        }
-
-        private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
-        {
-            IEnumerable<string> urls = parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
-
-            AddPagesFromUrls(site, urls);
-        }
-
-        private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
-        {
-            foreach (string url in urls)
-            {
-                if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
-                {
-                    site.Pages.Add(new Page()
-                    {
-                        URL = url,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    });
-                }
-            }
-        }
-
-        private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
-        {
-            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
-
-            List<string> allowPageURLs = new List<string>();
-
-            allowPageURLs = foundPages.Select(p => p.URL).ToList();
-
-            foreach (string disallowPattern in disallowPattens)
-            {
-                allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
-            }
-
-            AddPagesFromUrls(site, allowPageURLs);
-        }
-
-        private void ProcessHtmlPage(Page page, IEnumerable<Person> persons)
-        {
-            string pageHTML = DownloadPageContent(page);
-            page.LastScanDate = DateTime.Now;
-
-            IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
-
-            foreach (Person person in persons)
-            {
-                int rank = CountRank(person.Keywords, pagePhrases);
-
-                SavePersonPageRank(person, page, rank);
-            }
-        }
-
-        private void SavePersonPageRank(Person person, Page page, int rank)
-        {
-            PersonPageRank personPageRank = dataManager.PersonPageRanks.GetById(person.Id, page.Id);
-
-            if (personPageRank != null)
-            {
-                personPageRank.Rank = rank;
-                dataManager.PersonPageRanks.Update(personPageRank);
-            }
-            else
-            {
-                dataManager.PersonPageRanks.Add(new PersonPageRank()
-                {
-                    Person = person,
-                    Page = page,
-                    Rank = rank
-                });
-            }
         }
 
         private string GetMainURL(string url)
