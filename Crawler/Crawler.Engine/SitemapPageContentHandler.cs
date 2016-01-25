@@ -8,13 +8,14 @@ using System.Threading.Tasks;
 using Crawler.Domain.Entities;
 using BusinessLogic.Models;
 using System.Text.RegularExpressions;
+using BusinessLogic;
 
 namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        public SitemapPageContentHandler(IDataManager dataManager, IParser parser)
-            :base(dataManager, parser)
+        public SitemapPageContentHandler(IDataManager dataManager)
+            :base(dataManager)
         {
 
         }
@@ -30,7 +31,7 @@ namespace Crawler.Engine
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<string> urls = parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
+            IEnumerable<string> urls = Parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
 
             AddPagesFromUrls(site, urls);
         }
@@ -52,7 +53,7 @@ namespace Crawler.Engine
         }
         private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
         {
-            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
+            IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
 
             List<string> allowPageURLs = new List<string>();
 

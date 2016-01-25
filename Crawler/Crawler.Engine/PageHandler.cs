@@ -17,14 +17,14 @@ namespace Crawler.Engine
         RobotsPageContentHandler robotsPageContentHandler;
         SitemapPageContentHandler sitemapPageContentHandler;
 
-        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser)
+        public PageHandler(IDataManager dataManager, IDownloader downloader)
         {
             this.downloader = downloader;
             this.dataManager = dataManager;
 
-            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
-            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
-            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
+            htmlPageContentHandler = new HtmlPageContentHandler(dataManager);
+            robotsPageContentHandler = new RobotsPageContentHandler(dataManager);
+            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager);
         }
 
         public void HandlePage(Page page)

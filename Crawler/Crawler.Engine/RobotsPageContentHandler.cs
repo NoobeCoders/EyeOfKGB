@@ -6,13 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Crawler.Domain.Entities;
+using BusinessLogic;
 
 namespace Crawler.Engine
 {
     class RobotsPageContentHandler : PageContentHandler
     {
-        public RobotsPageContentHandler(IDataManager dataManager, IParser parser)
-            :base(dataManager, parser)
+        public RobotsPageContentHandler(IDataManager dataManager)
+            :base(dataManager)
         {
 
         }
@@ -33,7 +34,7 @@ namespace Crawler.Engine
 
         private Page GetSitemapPageFromRobots(string robots)
         {
-            string sitemapUrl = parser.GetSitemapUrl(robots);
+            string sitemapUrl = Parser.GetSitemapUrl(robots);
 
             return new Page()
             {

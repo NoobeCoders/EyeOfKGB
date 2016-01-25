@@ -12,9 +12,9 @@ using System.Xml;
 
 namespace BusinessLogic
 {
-    public class Parser : IParser
+    public static class Parser
     {
-        public IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
+        public static IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
         {
             List<FoundPage> pages = new List<FoundPage>();
 
@@ -38,17 +38,17 @@ namespace BusinessLogic
             return pages;
         }
 
-        public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
+        public static IEnumerable<string> GetDisallowPatterns(string robots, string agent)
         {
             return new List<string>() { "/Test2" };
         }
 
-        public string GetSitemapUrl(string robots)
+        public static string GetSitemapUrl(string robots)
         {
             return "localhost:53432/sitemap.xml";
         }
 
-        public IEnumerable<string> GetPagePhrases(string pageHTML)
+        public static IEnumerable<string> GetPagePhrases(string pageHTML)
         {
             List<string> pagePhrases = new List<string>();
 
@@ -66,7 +66,7 @@ namespace BusinessLogic
             return pagePhrases;
         }
 
-        public IEnumerable<string> GetPageUrls(string pageHTML)
+        public static IEnumerable<string> GetPageUrls(string pageHTML)
         {
             List<string> urls = new List<string>();
 
@@ -92,7 +92,7 @@ namespace BusinessLogic
 
         #region HTMLparser private methods
 
-        private IEnumerable<string> GetPageHeadPhrases(HtmlNode headNode)
+        private static IEnumerable<string> GetPageHeadPhrases(HtmlNode headNode)
         {
             List<string> headPhrases = new List<string>();
 
@@ -113,7 +113,7 @@ namespace BusinessLogic
             return headPhrases;
         }
 
-        private IEnumerable<string> GetPageBodyPhrases(HtmlNode bodyNode)
+        private static IEnumerable<string> GetPageBodyPhrases(HtmlNode bodyNode)
         {
             List<string> bodyPhrases = new List<string>();
 

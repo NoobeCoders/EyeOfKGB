@@ -15,7 +15,6 @@ namespace Crawler.Engine
     {
         IDataManager dataManager;
         IDownloader downloader;
-        Parser parser;
         PageHandler pageHandler;
 
         public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
@@ -23,9 +22,7 @@ namespace Crawler.Engine
             this.dataManager = dataManager;
             this.downloader = downloader;
 
-            parser = new Parser();
-
-            pageHandler = new PageHandler(dataManager, downloader, parser);
+            pageHandler = new PageHandler(dataManager, downloader);
             
         }
 

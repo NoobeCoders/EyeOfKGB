@@ -1,4 +1,5 @@
-﻿using BusinessLogic.Interfaces;
+﻿using BusinessLogic;
+using BusinessLogic.Interfaces;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
@@ -13,15 +14,15 @@ namespace Crawler.Engine
     {
         IEnumerable<Person> persons;
 
-        public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
-            :base(dataManager, parser)
+        public HtmlPageContentHandler(IDataManager dataManager)
+            :base(dataManager)
         {
             persons = dataManager.Persons.GetAll().ToList();
         }
 
         public override void HandleContent(Page page, string htmlContent)
         {
-            IEnumerable<string> pagePhrases = parser.GetPagePhrases(htmlContent);
+            IEnumerable<string> pagePhrases = Parser.GetPagePhrases(htmlContent);
 
             foreach (Person person in persons)
             {
