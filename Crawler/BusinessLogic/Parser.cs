@@ -47,9 +47,17 @@ namespace BusinessLogic
             int i = 0;
             string[] str = new string[2];
 
-            while (!stringsOfRobots[i].Contains("User-agent: " + agent) && !stringsOfRobots[i].Contains("User-agent: *"))
+            try
             {
-                i++;
+                while (!stringsOfRobots[i].Contains("User-agent: " + agent) && !stringsOfRobots[i].Contains("User-agent: *"))
+                {
+                    i++;
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+
+                Console.WriteLine("Disallowed страницы не найдены!");
             }
 
             while (i < stringsOfRobots.Count)
