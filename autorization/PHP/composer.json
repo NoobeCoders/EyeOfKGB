@@ -1,0 +1,17 @@
+{
+  "name": "PHP/autorization",
+  "description": "autorization for eyeofkgb",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Vinnetu",
+      "email": "email@example.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Classes\\":"classes/"
+    }
+  }
+}
