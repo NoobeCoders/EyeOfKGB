@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "108313511C56337F007F0CA8"
-               BuildableName = "AI.001.app"
-               BlueprintName = "AI.001"
-               ReferencedContainer = "container:AI.001.xcodeproj">
+               BlueprintIdentifier = "108313771C566AB4007F0CA8"
+               BuildableName = "AI.sites.app"
+               BlueprintName = "AI.sites"
+               ReferencedContainer = "container:AI.sites.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "108313511C56337F007F0CA8"
-            BuildableName = "AI.001.app"
-            BlueprintName = "AI.001"
-            ReferencedContainer = "container:AI.001.xcodeproj">
+            BlueprintIdentifier = "108313771C566AB4007F0CA8"
+            BuildableName = "AI.sites.app"
+            BlueprintName = "AI.sites"
+            ReferencedContainer = "container:AI.sites.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "108313511C56337F007F0CA8"
-            BuildableName = "AI.001.app"
-            BlueprintName = "AI.001"
-            ReferencedContainer = "container:AI.001.xcodeproj">
+            BlueprintIdentifier = "108313771C566AB4007F0CA8"
+            BuildableName = "AI.sites.app"
+            BlueprintName = "AI.sites"
+            ReferencedContainer = "container:AI.sites.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "108313511C56337F007F0CA8"
-            BuildableName = "AI.001.app"
-            BlueprintName = "AI.001"
-            ReferencedContainer = "container:AI.001.xcodeproj">
+            BlueprintIdentifier = "108313771C566AB4007F0CA8"
+            BuildableName = "AI.sites.app"
+            BlueprintName = "AI.sites"
+            ReferencedContainer = "container:AI.sites.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
