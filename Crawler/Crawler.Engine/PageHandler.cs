@@ -1,4 +1,5 @@
-﻿using Crawler.Domain.Entities;
+﻿using BusinessLogic.Interfaces;
+using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,22 +12,47 @@ namespace Crawler.Engine
     class PageHandler
     {
         IDownloader downloader;
+        IDataManager dataManager;
+        HtmlPageContentHandler htmlPageContentHandler;
+        RobotsPageContentHandler robotsPageContentHandler;
+        SitemapPageContentHandler sitemapPageContentHandler;
 
-        public PageHandler(IDownloader downloader)
+        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser)
         {
             this.downloader = downloader;
+            this.dataManager = dataManager;
+
+            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
+            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
+            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
         }
 
-        public void HandlePage(Page page, PageContentHandler contentHandler)
+        public void HandlePage(Page page)
         {
             string content = DownloadPageContent(page);
 
-            contentHandler.HandleContent(page, content);
+            if (IsRobotsPage(page))
+                robotsPageContentHandler.HandleContent(page, content);
+            else if (IsSitemapPage(page))
+                sitemapPageContentHandler.HandleContent(page, content);
+            else
+                htmlPageContentHandler.HandleContent(page, content);
+
+            page.LastScanDate = DateTime.Now;
         }
 
         private string DownloadPageContent(Page page)
         {
             return downloader.Download("http://" + page.URL);
+        }
+        private bool IsRobotsPage(Page page)
+        {
+            return page.URL.Contains("robots.txt");
+        }
+
+        private bool IsSitemapPage(Page page)
+        {
+            return page.URL.Contains("sitemap.xml");
         }
     }
 }

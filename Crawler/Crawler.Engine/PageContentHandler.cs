@@ -20,6 +20,6 @@ namespace Crawler.Engine
             this.parser = parser;
         }
 
-        public virtual void HandleContent(Page page, string content) { }
+        public abstract void HandleContent(Page page, string content);
     }
 }

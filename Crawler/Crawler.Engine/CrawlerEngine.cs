@@ -17,22 +17,16 @@ namespace Crawler.Engine
         IDownloader downloader;
         Parser parser;
         PageHandler pageHandler;
-        HtmlPageContentHandler htmlPageContentHandler;
-        RobotsPageContentHandler robotsPageContentHandler;
-        SitemapPageContentHandler sitemapPageContentHandler;
 
         public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
         {
             this.dataManager = dataManager;
             this.downloader = downloader;
 
-            pageHandler = new PageHandler(downloader);
-            
             parser = new Parser();
 
-            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
-            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
-            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
+            pageHandler = new PageHandler(dataManager, downloader, parser);
+            
         }
 
         public void Start()
@@ -154,7 +148,7 @@ namespace Crawler.Engine
             {
                 foreach (Page page in pages)
                 {
-                    ProcessPage(page);
+                    pageHandler.HandlePage(page);
                 }
 
                 dataManager.Save();
@@ -174,7 +168,7 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                pageHandler.HandlePage(page, sitemapPageContentHandler);
+                pageHandler.HandlePage(page);
             }
 
             dataManager.Save();
@@ -191,33 +185,10 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                pageHandler.HandlePage(page, htmlPageContentHandler);
+                pageHandler.HandlePage(page);
             }
 
             dataManager.Save();
-        }
-
-        private void ProcessPage(Page page)
-        {
-            if (IsRobotsPage(page))
-                pageHandler.HandlePage(page, robotsPageContentHandler);
-            else if (IsSitemapPage(page))
-                pageHandler.HandlePage(page, sitemapPageContentHandler);
-            else
-                pageHandler.HandlePage(page, htmlPageContentHandler);
-            
-            page.LastScanDate = DateTime.Now;
-            dataManager.Pages.Update(page);
-        }
-
-        private bool IsRobotsPage(Page page)
-        {
-            return page.URL.Contains("robots.txt");
-        }
-
-        private bool IsSitemapPage(Page page)
-        {
-            return page.URL.Contains("sitemap.xml");
         }
 
         private string GetMainURL(string url)
