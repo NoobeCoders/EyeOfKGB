@@ -27,6 +27,12 @@ body {
 
 /*main-menu */
 
+.top-fixed {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
 .logo {
 	margin-top: 10px;
 }
@@ -49,14 +55,41 @@ ul.menu li {
 
 /* Content*/
 
+#first-block {
+	height: 100%;
+}
+
+
+#second-block {
+	height: 100%;
+}
+
+
+#third-block {
+	height: 100%;
+}
+
+
+#forth-block {
+	height: 100%;
+}
+
 #greetings {
-	margin-top: 200px;
+	margin-top: 300px;
+	margin-bottom: 10px;
 	text-align: center;
 	font-size: 30px;
 }
 
 #start-button {
 	display: none;
+	width: 10%;
+	margin: 0 auto;
+
+}
+
+#start-button a {
+	
 }
 
 /* Footer */

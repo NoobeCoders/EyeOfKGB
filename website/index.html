@@ -15,7 +15,7 @@
 </head>
 <body>
 	<!-- Main menu -->
-	<div class="container-fluid">
+	<div class="container-fluid top-fixed">
 		<div class="row">
 			<div class="col-lg-4">
 				<header class="logo">
@@ -28,16 +28,16 @@
 				<nav class="nav-menu">
 					<ul class="menu">
   						<li>
-  							<a href="index.html">Главная</a>
+  							<a href="#first-block">Главная</a>
   						</li>
   						<li>
-  							<a href="index.html">О компании</a>
+  							<a href="#second-block">О компании</a>
   						</li>
   						<li>
-  							<a href="index.html">Проекты</a>
+  							<a href="#third-block">Проекты</a>
   						</li>
   						<li>
-  							<a href="index.html">Компоненты</a>
+  							<a href="#forth-block">Компоненты</a>
   						</li>
  						
 					</ul>
@@ -47,14 +47,30 @@
 	</div>
 	<!-- Content of main page -->
 	<main>
-		<div class="container-fluid">
+		<div class="container-fluid" id="first-block">
 			<div class="row">
 				<div id="greetings"></div>
-				<button type="button" class="btn btn-default btn-lg" id="start-button">Поехали!</div>
+				<div id="start-button">
+					<a class="btn btn-default btn-lg" role="button">Поехали!</a>
+				</div>
 			</div>
 		</div>
-	
-
+		<div class="container-fluid" id="second-block">
+			<div class="row">
+				<h2 class="text-center">Вашему вниманию представлен проект команды разработчиков, окончивших обучение на сайте GeekBrains</h2>
+				<h3 class="text-center">БыдлоКОдеры - это молодая развивающая компания, готовая к новым вершинам и вызовам</h3>
+			</div>
+		</div>
+		<div class="container-fluid" id="third-block">
+			<div class="row">
+				
+			</div>
+		</div>
+		<div class="container-fluid" id="forth-block">
+			<div class="row">
+				
+			</div>
+		</div>
 		
 	</main>
 	<!-- footer -->
