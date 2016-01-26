@@ -85,7 +85,7 @@ namespace BusinessLogic
         }
 
 
-        public string GetSitemapUrl(string robots)
+        public static string GetSitemapUrl(string robots)
         {
             List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
 
@@ -115,11 +115,6 @@ namespace BusinessLogic
             }
 
             return sitemap;
-        }
-
-        public static string GetSitemapUrl(string robots)
-        {
-            return "localhost:53432/sitemap.xml";
         }
 
         public static IEnumerable<string> GetPagePhrases(string pageHTML)
