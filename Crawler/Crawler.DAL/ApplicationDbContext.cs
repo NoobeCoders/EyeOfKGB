@@ -1,5 +1,6 @@
 ﻿using Crawler.DAL.EntityConfigurations;
 using Crawler.Domain.Entities;
+using MySql.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.DAL
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Keyword> Keywords { get; set; }
