@@ -19,6 +19,12 @@ namespace Crawler.DAL
         public DbSet<Site> Sites { get; set; }
         public DbSet<PersonPageRank> PersonPageRanks { get; set; }
 
+        public ApplicationDbContext(string connectionString)
+            : base(connectionString)
+        {
+
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new KeywordMapper());

@@ -15,5 +15,6 @@ namespace Crawler.Domain.Interfaces
         IPageRepository Pages { get; }
 
         void Save();
+        void Dispose();
     }
 }

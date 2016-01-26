@@ -18,9 +18,9 @@ namespace Crawler.DAL
         IPersonPageRankRepository personPageRank;
         ISiteRepository site;
 
-        public DataManager ()
+        public DataManager (string connectionString)
         {
-            dbContext = new ApplicationDbContext();
+            dbContext = new ApplicationDbContext(connectionString);
         }
 
         public IKeywordRepository Keywords

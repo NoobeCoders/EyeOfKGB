@@ -11,19 +11,22 @@ namespace BusinessLogic
 {
     public class Downloader : IDownloader
     {
+        WebClient client;
+
+        public Downloader()
+        {
+            client = new WebClient();
+        }
+
         public string Download(string url)
         {
-            WebClient client;
             string answer;
 
             try
             {
-                using (client = new WebClient())
-                {
-                    Byte[] pageData = client.DownloadData(url);
+                Byte[] pageData = client.DownloadData(url);
 
-                    answer = Encoding.UTF8.GetString(pageData);
-                }
+                answer = Encoding.UTF8.GetString(pageData);
             }
             catch (Exception ex)
             {
@@ -31,6 +34,26 @@ namespace BusinessLogic
             }
 
             return answer;
+        }
+
+        private bool disposed = false;
+
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    client.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

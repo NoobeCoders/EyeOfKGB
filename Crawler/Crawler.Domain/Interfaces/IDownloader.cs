@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Domain.Interfaces
 {
-    public interface IDownloader
+    public interface IDownloader : IDisposable
     {
         string Download(string url);
     }

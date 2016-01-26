@@ -10,5 +10,6 @@ namespace Crawler.Domain.Interfaces
     public interface ISiteRepository : IRepository<Site>
     {
         Site GetSiteByName(string name);
+        IEnumerable<Site> GetSitesWithoutPages();
     }
 }

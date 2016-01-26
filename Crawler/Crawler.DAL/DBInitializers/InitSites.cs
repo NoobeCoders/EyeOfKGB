@@ -33,9 +33,6 @@ namespace Crawler.DAL.DBInitializers
             {
                 Name = "localhost",
                 Pages = new List<Page>()
-                {
-                    new Page() { URL = "localhost:53432", FoundDateTime = DateTime.Now }
-                }
             };
 
             //context.Sites.Add(lentaRU);
