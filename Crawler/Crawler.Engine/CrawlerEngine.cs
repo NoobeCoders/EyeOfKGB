@@ -54,8 +54,8 @@ namespace Crawler.Engine
                 string robots = downloader.Download("http://" + mainURL + "/robots.txt");
                 string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml");
 
-                IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
+                IEnumerable<string> disallows = Parser.GetDisallowPatterns(robots, "Googlebot");
+                IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
 
                 List<string> allowPageURLs = new List<string>();
 
@@ -88,7 +88,7 @@ namespace Crawler.Engine
                     string pageHTML = downloader.Download("http://" + allowPageURL);
                     page.LastScanDate = DateTime.Now;
 
-                    IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
+                    IEnumerable<string> pagePhrases = Parser.GetPagePhrases(pageHTML);
 
                     foreach (Person person in persons)
                     {
