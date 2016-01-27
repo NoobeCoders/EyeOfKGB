@@ -25,6 +25,7 @@ namespace Crawler.ConsoleUI
             IDataManager dataManager = new DataManager("PrimaryConnection");
             IDownloader downloader = new Downloader();
 
+            // Для теста
             foreach (Person item in dataManager.Persons.GetAll().ToList())
             {
                 Console.WriteLine(item.Name);
