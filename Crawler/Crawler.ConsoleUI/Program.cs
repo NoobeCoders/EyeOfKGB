@@ -5,8 +5,10 @@ using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using Crawler.Engine;
+using MySql.Data.Entity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,12 +20,19 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDataManager dataManager = new DataManager("MSSQLConnection");
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
+
+            IDataManager dataManager = new DataManager("PrimaryConnection");
             IDownloader downloader = new Downloader();
+
+            foreach (Person item in dataManager.Persons.GetAll().ToList())
+            {
+                Console.WriteLine(item.Name);
+            }
 
             using (CrawlerEngine crawler = new CrawlerEngine(dataManager, downloader))
             {
-                crawler.Start();
+                //crawler.Start();
             }
             Console.ReadKey();
         }
