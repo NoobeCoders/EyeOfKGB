@@ -12,9 +12,15 @@ using System.Xml;
 
 namespace BusinessLogic
 {
-    public static class Parser
+    public class Parser : IParser
     {
-        public static IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
+        String robotAgent;
+
+        public Parser(String robotAgent)
+        {
+            this.robotAgent = robotAgent;
+        }
+        public IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
         {
             List<FoundPage> pages = new List<FoundPage>();
 
@@ -38,7 +44,12 @@ namespace BusinessLogic
             return pages;
         }
 
-        public static IEnumerable<string> GetDisallowPatterns(string robots, string agent)
+        public IEnumerable<string> GetDisallowPatterns(string robots)
+        {
+            return GetDisallowPatterns(robots, robotAgent);
+        }
+
+        public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
         {
             List<string> dissalowPages = new List<string>();
 
@@ -93,7 +104,7 @@ namespace BusinessLogic
         }
 
 
-        public static string GetSitemapUrl(string robots)
+        public string GetSitemapUrl(string robots)
         {
             List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
 
@@ -125,7 +136,7 @@ namespace BusinessLogic
             return sitemap;
         }
 
-        public static IEnumerable<string> GetPagePhrases(string pageHTML)
+        public IEnumerable<string> GetPagePhrases(string pageHTML)
         {
             List<string> pagePhrases = new List<string>();
 
@@ -143,7 +154,7 @@ namespace BusinessLogic
             return pagePhrases;
         }
 
-        public static IEnumerable<string> GetPageUrls(string pageHTML)
+        public IEnumerable<string> GetPageUrls(string pageHTML)
         {
             List<string> urls = new List<string>();
 
@@ -169,7 +180,7 @@ namespace BusinessLogic
 
         #region HTMLparser private methods
 
-        private static IEnumerable<string> GetPageHeadPhrases(HtmlNode headNode)
+        private IEnumerable<string> GetPageHeadPhrases(HtmlNode headNode)
         {
             List<string> headPhrases = new List<string>();
 
@@ -190,7 +201,7 @@ namespace BusinessLogic
             return headPhrases;
         }
 
-        private static IEnumerable<string> GetPageBodyPhrases(HtmlNode bodyNode)
+        private IEnumerable<string> GetPageBodyPhrases(HtmlNode bodyNode)
         {
             List<string> bodyPhrases = new List<string>();
 

@@ -17,14 +17,14 @@ namespace Crawler.Engine
         RobotsPageContentHandler robotsPageContentHandler;
         SitemapPageContentHandler sitemapPageContentHandler;
 
-        public PageHandler(IDataManager dataManager, IDownloader downloader)
+        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser)
         {
             this.downloader = downloader;
             this.dataManager = dataManager;
 
-            htmlPageContentHandler = new HtmlPageContentHandler(dataManager);
-            robotsPageContentHandler = new RobotsPageContentHandler(dataManager);
-            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager);
+            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
+            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
+            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
         }
 
         public void HandlePage(Page page)
@@ -32,7 +32,9 @@ namespace Crawler.Engine
             string content = DownloadPageContent(page);
 
             if (IsRobotsPage(page))
+            {
                 robotsPageContentHandler.HandleContent(page, content);
+            }
             else if (IsSitemapPage(page))
                 sitemapPageContentHandler.HandleContent(page, content);
             else

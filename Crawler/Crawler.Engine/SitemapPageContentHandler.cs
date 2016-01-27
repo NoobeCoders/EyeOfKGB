@@ -14,8 +14,8 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        public SitemapPageContentHandler(IDataManager dataManager)
-            :base(dataManager)
+        public SitemapPageContentHandler(IDataManager dataManager, IParser parser)
+            :base(dataManager, parser)
         {
 
         }
@@ -31,7 +31,7 @@ namespace Crawler.Engine
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<string> urls = Parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
+            IEnumerable<string> urls = parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
 
             AddPagesFromUrls(site, urls);
         }
@@ -53,7 +53,7 @@ namespace Crawler.Engine
         }
         private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
         {
-            IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
+            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
 
             List<string> allowPageURLs = new List<string>();
 

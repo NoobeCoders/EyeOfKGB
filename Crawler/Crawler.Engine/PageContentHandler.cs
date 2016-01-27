@@ -12,10 +12,12 @@ namespace Crawler.Engine
     abstract class PageContentHandler
     {
         protected IDataManager dataManager;
+        protected IParser parser;
 
-        public PageContentHandler(IDataManager dataManager)
+        public PageContentHandler(IDataManager dataManager, IParser parser)
         {
             this.dataManager = dataManager;
+            this.parser = parser;
         }
 
         public abstract void HandleContent(Page page, string content);

@@ -12,8 +12,8 @@ namespace Crawler.Engine
 {
     class RobotsPageContentHandler : PageContentHandler
     {
-        public RobotsPageContentHandler(IDataManager dataManager)
-            :base(dataManager)
+        public RobotsPageContentHandler(IDataManager dataManager, IParser parser)
+            :base(dataManager, parser)
         {
 
         }
@@ -30,11 +30,18 @@ namespace Crawler.Engine
 
                 dataManager.Sites.Update(site);
             }
+
+            UpdateDisallowPatterns(content);
+        }
+
+        private void UpdateDisallowPatterns(string content)
+        {
+            dataManager.DisallowPatterns.Set(parser.GetDisallowPatterns(content));
         }
 
         private Page GetSitemapPageFromRobots(string robots)
         {
-            string sitemapUrl = Parser.GetSitemapUrl(robots);
+            string sitemapUrl = parser.GetSitemapUrl(robots);
 
             return new Page()
             {

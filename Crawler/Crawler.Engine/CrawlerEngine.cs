@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
@@ -17,13 +18,17 @@ namespace Crawler.Engine
         IDownloader downloader;
         PageHandler pageHandler;
 
+        IParser parser;
+
         public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
         {
             this.dataManager = dataManager;
             this.downloader = downloader;
 
-            pageHandler = new PageHandler(dataManager, downloader);
-            
+            parser = new Parser("Googlebot");
+
+            pageHandler = new PageHandler(dataManager, downloader, parser);
+
         }
 
         public void Start()
@@ -54,8 +59,8 @@ namespace Crawler.Engine
                 string robots = downloader.Download("http://" + mainURL + "/robots.txt");
                 string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml");
 
-                IEnumerable<string> disallows = Parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
+                IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
+                IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
 
                 List<string> allowPageURLs = new List<string>();
 
@@ -88,7 +93,7 @@ namespace Crawler.Engine
                     string pageHTML = downloader.Download("http://" + allowPageURL);
                     page.LastScanDate = DateTime.Now;
 
-                    IEnumerable<string> pagePhrases = Parser.GetPagePhrases(pageHTML);
+                    IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
 
                     foreach (Person person in persons)
                     {

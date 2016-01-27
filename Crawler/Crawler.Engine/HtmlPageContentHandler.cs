@@ -15,8 +15,8 @@ namespace Crawler.Engine
     {
         IEnumerable<Person> persons;
 
-        public HtmlPageContentHandler(IDataManager dataManager)
-            :base(dataManager)
+        public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
+            :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
         }
@@ -29,7 +29,7 @@ namespace Crawler.Engine
 
         private void GetRank(Page page, string htmlContent)
         {
-            IEnumerable<string> pagePhrases = Parser.GetPagePhrases(htmlContent);
+            IEnumerable<string> pagePhrases = parser.GetPagePhrases(htmlContent);
 
             foreach (Person person in persons)
             {
@@ -41,7 +41,9 @@ namespace Crawler.Engine
 
         private void InsertNewPages(Page page, string htmlContent)
         {
-            IEnumerable<string> pageUrls = Parser.GetPageUrls(htmlContent);
+            IEnumerable<string> pageUrls = parser.GetPageUrls(htmlContent);
+
+            FilterUrls(pageUrls, dataManager.DisallowPatterns.GetAll());
 
             foreach (String url in pageUrls)
             {

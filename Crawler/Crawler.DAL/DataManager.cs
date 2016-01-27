@@ -17,6 +17,7 @@ namespace Crawler.DAL
         IPersonRepository person;
         IPersonPageRankRepository personPageRank;
         ISiteRepository site;
+        IDisallowPatternRepository disallowPatterns;
 
         public DataManager (string connectionString)
         {
@@ -70,6 +71,16 @@ namespace Crawler.DAL
                 if (site == null)
                     site = new EFSiteRepository(dbContext);
                 return site;
+            }
+        }
+
+        public IDisallowPatternRepository DisallowPatterns
+        {
+            get
+            {
+                if (disallowPatterns == null)
+                    disallowPatterns = new DisallowPatternRepository();
+                return disallowPatterns;
             }
         }
 
