@@ -6,8 +6,10 @@ using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Crawler.Engine
@@ -31,13 +33,14 @@ namespace Crawler.Engine
 
         }
 
-        public void Start()
+        public async Task Start()
         {
-            AddRobotsPageForNewSites();
-            ProcessNewPages();
-            ProcessScannedSiteMapPages();
-            ProcessNewPages();
-            ProcessScannedHtmlPages();
+            await AddRobotsPageForNewSites();
+            await ProcessSites();
+            //await ProcessNewPages();
+            //await ProcessScannedSiteMapPages();
+            //await ProcessNewPages();
+            //await ProcessScannedHtmlPages();
         }
 
         public void OldStart()
@@ -56,8 +59,8 @@ namespace Crawler.Engine
 
                 string mainURL = GetMainURL(pageURLs[0]);
 
-                string robots = downloader.Download("http://" + mainURL + "/robots.txt");
-                string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml");
+                string robots = downloader.Download("http://" + mainURL + "/robots.txt").Result;
+                string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml").Result;
 
                 IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
                 IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
@@ -90,7 +93,7 @@ namespace Crawler.Engine
                 {
                     Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
 
-                    string pageHTML = downloader.Download("http://" + allowPageURL);
+                    string pageHTML = downloader.Download("http://" + allowPageURL).Result;
                     page.LastScanDate = DateTime.Now;
 
                     IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
@@ -125,7 +128,7 @@ namespace Crawler.Engine
             }
         }
 
-        private void AddRobotsPageForNewSites()
+        private async Task AddRobotsPageForNewSites()
         {
             foreach (Site site in dataManager.Sites.GetSitesWithoutPages().ToList())
             {
@@ -139,10 +142,45 @@ namespace Crawler.Engine
                 dataManager.Sites.Update(site);
             }
 
-            dataManager.Save();
+            var sites = dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList();
+
+            await dataManager.Save();
         }
 
-        private void ProcessNewPages()
+        private async Task ProcessSites()
+        {
+            List<Task> siteTasks = new List<Task>();
+
+            foreach (Site site in dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList())
+            {
+                siteTasks.Add(ProcessSite(site));
+            }
+
+            await Task.WhenAll(siteTasks);
+
+            await dataManager.Save();
+        }
+
+        private async Task ProcessSite(Site site)
+        {
+            List<Task> pageTasks = new List<Task>();
+            int running = 0;
+
+            foreach (Page page in site.Pages.ToList())
+            {
+                while (running > 50)
+                {
+                    Task.WaitAny(pageTasks.ToArray());
+                    running--;
+                }
+                pageTasks.Add(pageHandler.HandlePage(page));
+                running++;
+                Thread.Sleep(50);
+            }
+            await Task.WhenAll(pageTasks);
+        }
+
+        private async Task ProcessNewPages()
         {
             IEnumerable<Page> pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
 
@@ -150,16 +188,16 @@ namespace Crawler.Engine
             {
                 foreach (Page page in pages)
                 {
-                    pageHandler.HandlePage(page);
+                    await pageHandler.HandlePage(page);
                 }
 
-                dataManager.Save();
+                await dataManager.Save();
 
                 pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
             }
         }
 
-        private void ProcessScannedSiteMapPages()
+        private async Task ProcessScannedSiteMapPages()
         {
             IEnumerable<Page> pages = dataManager.Pages
                                                     .GetAll()
@@ -170,13 +208,13 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                pageHandler.HandlePage(page);
+                await pageHandler.HandlePage(page);
             }
 
-            dataManager.Save();
+            await dataManager.Save();
         }
 
-        private void ProcessScannedHtmlPages()
+        private async Task ProcessScannedHtmlPages()
         {
             IEnumerable<Page> pages = dataManager.Pages
                                                     .GetAll()
@@ -187,10 +225,10 @@ namespace Crawler.Engine
 
             foreach (Page page in pages)
             {
-                pageHandler.HandlePage(page);
+                await pageHandler.HandlePage(page);
             }
 
-            dataManager.Save();
+            await dataManager.Save();
         }
 
         private string GetMainURL(string url)

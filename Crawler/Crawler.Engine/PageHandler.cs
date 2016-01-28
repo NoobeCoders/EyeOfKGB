@@ -27,14 +27,12 @@ namespace Crawler.Engine
             sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
         }
 
-        public void HandlePage(Page page)
+        public async Task HandlePage(Page page)
         {
-            string content = DownloadPageContent(page);
+            string content = await DownloadPageContent(page);
 
             if (IsRobotsPage(page))
-            {
                 robotsPageContentHandler.HandleContent(page, content);
-            }
             else if (IsSitemapPage(page))
                 sitemapPageContentHandler.HandleContent(page, content);
             else
@@ -43,9 +41,9 @@ namespace Crawler.Engine
             page.LastScanDate = DateTime.Now;
         }
 
-        private string DownloadPageContent(Page page)
+        private async Task<string> DownloadPageContent(Page page)
         {
-            return downloader.Download("http://" + page.URL);
+            return await downloader.Download("http://" + page.URL);
         }
         private bool IsRobotsPage(Page page)
         {
@@ -54,7 +52,7 @@ namespace Crawler.Engine
 
         private bool IsSitemapPage(Page page)
         {
-            return page.URL.Contains("sitemap.xml");
+            return page.URL.Contains("sitemap") && page.URL.Contains(".xml");
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Crawler.Domain.Interfaces
         IPageRepository Pages { get; }
         IDisallowPatternRepository DisallowPatterns { get; }
 
-        void Save();
+        Task Save();
         void Dispose();
     }
 }

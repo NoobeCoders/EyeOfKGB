@@ -1,6 +1,7 @@
 ﻿using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,27 +12,32 @@ namespace BusinessLogic
 {
     public class Downloader : IDownloader
     {
-        WebClient client;
 
         public Downloader()
         {
-            client = new WebClient();
         }
 
-        public string Download(string url)
+        public async Task<string> Download(string url)
         {
+
+            WebClient client = new WebClient();
             string answer;
 
             try
             {
-                Byte[] pageData = client.DownloadData(url);
+                Byte[] pageData = await client.DownloadDataTaskAsync(url);
 
                 answer = Encoding.UTF8.GetString(pageData);
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.InnerException);
+                Debug.WriteLine(url);
                 answer = ex.Message;
             }
+
+            client.Dispose();
 
             return answer;
         }
@@ -44,7 +50,6 @@ namespace BusinessLogic
             {
                 if (disposing)
                 {
-                    client.Dispose();
                 }
                 this.disposed = true;
             }

@@ -84,9 +84,9 @@ namespace Crawler.DAL
             }
         }
 
-        public void Save()
+        public async Task Save()
         {
-            dbContext.SaveChanges();
+            await dbContext.SaveChangesAsync();
         }
 
         private bool disposed = false;

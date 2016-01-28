@@ -11,18 +11,30 @@ namespace Crawler.DAL.DBInitializers
     {
         override public void Initialization(ApplicationDbContext context)
         {
+            Person poly = new Person()
+            {
+                Name = "Полиморфизм",
+                Keywords = new List<Keyword>()
+                {
+                    new Keyword() { Name = "полиморфизм" },
+                    new Keyword() { Name = "полиморфизму" },
+                    new Keyword() { Name = "полиморфизма" }
+                }
+            };
+
             Person putin = new Person()
             {
-                Name = "Владимир Владимирович Путин",
+                Name = "Путин Владимир Владимирович",
                 Keywords = new List<Keyword>()
                 {
                     new Keyword() { Name = "Путин" },
-                    new Keyword() { Name = "Путином" },
+                    new Keyword() { Name = "Путину" },
                     new Keyword() { Name = "Путина" }
                 }
             };
 
             context.Persons.Add(putin);
+            context.Persons.Add(poly);
             context.SaveChanges();
         }
     }

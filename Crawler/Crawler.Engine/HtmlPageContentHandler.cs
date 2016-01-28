@@ -4,6 +4,7 @@ using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -14,17 +15,21 @@ namespace Crawler.Engine
     class HtmlPageContentHandler : PageContentHandler
     {
         IEnumerable<Person> persons;
+        IEnumerable<PersonPageRank> personPageRanks;
+        Object locker;
 
         public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
+            personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
+            locker = new Object();
         }
 
         public override void HandleContent(Page page, string htmlContent)
         {
             GetRank(page, htmlContent);
-            InsertNewPages(page, htmlContent);
+            //InsertNewPages(page, htmlContent);
         }
 
         private void GetRank(Page page, string htmlContent)
@@ -35,7 +40,15 @@ namespace Crawler.Engine
             {
                 int rank = CountRank(person.Keywords, pagePhrases);
 
-                InsertPersonPageRank(person, page, rank);
+                try
+                {
+                    InsertPersonPageRank(person, page, rank);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine(ex.InnerException);
+                }
             }
         }
 
@@ -68,21 +81,23 @@ namespace Crawler.Engine
 
         private void InsertPersonPageRank(Person person, Page page, int rank)
         {
-            PersonPageRank personPageRank = dataManager.PersonPageRanks.GetById(person.Id, page.Id);
+            lock (locker)
+            {
+                PersonPageRank personPageRank = personPageRanks.FirstOrDefault(p => p.PersonId == person.Id && p.PageId == page.Id);
 
-            if (personPageRank != null)
-            {
-                personPageRank.Rank = rank;
-                dataManager.PersonPageRanks.Update(personPageRank);
-            }
-            else
-            {
-                dataManager.PersonPageRanks.Add(new PersonPageRank()
+                if (personPageRank != null)
                 {
-                    Person = person,
-                    Page = page,
-                    Rank = rank
-                });
+                    personPageRank.Rank = rank;
+                }
+                else
+                {
+                    dataManager.PersonPageRanks.Add(new PersonPageRank()
+                    {
+                        Person = person,
+                        Page = page,
+                        Rank = rank
+                    });
+                }
             }
         }
 

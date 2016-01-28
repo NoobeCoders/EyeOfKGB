@@ -4,6 +4,7 @@ using HtmlAgilityPack;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,20 +25,28 @@ namespace BusinessLogic
         {
             List<FoundPage> pages = new List<FoundPage>();
 
+            sitemapXML = new string(sitemapXML.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
+
             XmlDocument sitemap = new XmlDocument();
-            sitemap.LoadXml(sitemapXML);
+            try
+            {
+                sitemap.LoadXml(sitemapXML);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                Debug.WriteLine(ex.InnerException);
+                return pages;
+            }
 
             XmlElement root = sitemap.DocumentElement;
 
-            XmlNodeList urls = root.GetElementsByTagName("url");
+            XmlNodeList urls = root.GetElementsByTagName("loc");
             foreach (XmlNode url in urls)
             {
-                var data = url.ChildNodes;
-
                 pages.Add(  new FoundPage()
                             {
-                                URL = Regex.Replace(data.Item(0).InnerText, "^(http|https)://", String.Empty),
-                                LastModDate = DateTime.Parse(data.Item(1).InnerText)
+                                URL = Regex.Replace(url.InnerText, "^(http|https)://", String.Empty)
                             });
             }
 
@@ -108,25 +117,25 @@ namespace BusinessLogic
         {
             List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
 
-            string sitemap = "";
+            string sitemap = String.Empty;
             string[] spl = new string[2];
 
             foreach (var str in stringsOfRobots)
             {
                 if (str.Contains("Sitemap:"))
                 {
-                    spl = str.Split("Sitemap:".ToCharArray());
-                    sitemap += spl[1];
+                    sitemap = str.Replace("Sitemap: ", String.Empty).Replace(".gz", String.Empty);
+                    sitemap = Regex.Replace(sitemap, "^(http|https)://", String.Empty);
                 }
             }
 
-            if (sitemap == "")
+            if (sitemap == String.Empty)
             {
                 foreach (var str in stringsOfRobots)
                 {
                     if (str.Contains("Host:"))
                     {
-                        spl = str.Split(':');
+                        spl = str.Split(':');   
                         sitemap += spl[1];
                         sitemap += "/sitemap.xml";
                     }

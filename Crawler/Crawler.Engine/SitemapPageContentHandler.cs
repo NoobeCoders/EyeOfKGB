@@ -14,10 +14,11 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
+        Object locker;
         public SitemapPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
-
+            locker = new Object();
         }
 
         public override void HandleContent(Page page, string content)
@@ -25,8 +26,6 @@ namespace Crawler.Engine
             Site site = page.Site;
 
             AddNewPagesToSiteFromSitemap(site, content);
-
-            dataManager.Sites.Update(site);
         }
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
@@ -40,14 +39,17 @@ namespace Crawler.Engine
         {
             foreach (string url in urls)
             {
-                if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
+                lock (locker)
                 {
-                    site.Pages.Add(new Page()
+                    if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
                     {
-                        URL = url,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    });
+                        site.Pages.Add(new Page()
+                        {
+                            URL = url,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        });
+                    }
                 }
             }
         }

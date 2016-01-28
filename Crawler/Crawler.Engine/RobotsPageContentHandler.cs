@@ -24,6 +24,11 @@ namespace Crawler.Engine
 
             Page sitemapPage = GetSitemapPageFromRobots(content);
 
+            if (sitemapPage.URL == String.Empty)
+            {
+                sitemapPage.URL = page.Site.Name + "/sitemap.xml";
+            }
+
             if (site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
             {
                 site.Pages.Add(sitemapPage);
@@ -31,7 +36,7 @@ namespace Crawler.Engine
                 dataManager.Sites.Update(site);
             }
 
-            UpdateDisallowPatterns(content);
+            //UpdateDisallowPatterns(content);
         }
 
         private void UpdateDisallowPatterns(string content)
