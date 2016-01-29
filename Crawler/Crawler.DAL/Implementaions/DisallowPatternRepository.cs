@@ -1,4 +1,5 @@
-﻿using Crawler.Domain.Interfaces;
+﻿using Crawler.Domain.Entities;
+using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,19 @@ namespace Crawler.DAL.Implementaions
 {
     class DisallowPatternRepository : IDisallowPatternRepository
     {
-        IEnumerable<String> disallowPatterns { get; set; }
+        List<DisallowPattern> disallowPatterns { get; set; }
 
-        public void Add(string item)
+        public void Add(DisallowPattern item)
+        {
+            disallowPatterns.Add(item);
+        }
+
+        public void Delete(DisallowPattern item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(string item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<string> GetAll()
+        public IEnumerable<DisallowPattern> GetAll()
         {
             return disallowPatterns;
         }
@@ -33,10 +34,15 @@ namespace Crawler.DAL.Implementaions
 
         public void Set(IEnumerable<string> disallowPatterns)
         {
-            this.disallowPatterns = disallowPatterns;
+            throw new NotImplementedException();
         }
 
-        public void Update(string item)
+        public void Update(DisallowPattern item)
+        {
+            throw new NotImplementedException();
+        }
+
+        DisallowPattern IRepository<DisallowPattern>.GetById(int id)
         {
             throw new NotImplementedException();
         }

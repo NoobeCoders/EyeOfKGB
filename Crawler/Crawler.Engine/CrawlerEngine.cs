@@ -142,8 +142,6 @@ namespace Crawler.Engine
                 dataManager.Sites.Update(site);
             }
 
-            var sites = dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList();
-
             await dataManager.Save();
         }
 
@@ -170,7 +168,7 @@ namespace Crawler.Engine
         {
             List<Task<int>> pageTasks = new List<Task<int>>();
 
-            foreach (Page page in site.Pages.ToList())
+            foreach (Page page in site.Pages.Where(p => (p.LastScanDate != null && p.LastScanDate.Value.Date != DateTime.Now.Date) || p.LastScanDate == null).ToList())
             {
                 pageTasks.Add(pageHandler.HandlePage(page));
 

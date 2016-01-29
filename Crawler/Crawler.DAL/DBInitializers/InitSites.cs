@@ -42,7 +42,7 @@ namespace Crawler.DAL.DBInitializers
             //    Pages = new List<Page>()
             //};
 
-            context.Sites.Add(metanit);
+            context.Sites.Add(lentaRu);
             //context.Sites.Add(geekbrains);
             //context.Sites.Add(metanit);
             //context.Sites.Add(professorWeb);

@@ -17,12 +17,14 @@ namespace Crawler.Engine
     {
         IEnumerable<Person> persons;
         IEnumerable<PersonPageRank> personPageRanks;
+        List<Page> pages;
 
         public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
             personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
+            pages = dataManager.Pages.GetAll().ToList();
         }
 
         public override void HandleContent(Page page, string htmlContent)
@@ -46,7 +48,7 @@ namespace Crawler.Engine
         {
             IEnumerable<string> pageUrls = parser.GetPageUrls(htmlContent);
 
-            FilterUrls(pageUrls, dataManager.DisallowPatterns.GetAll());
+            FilterUrls(pageUrls, dataManager.DisallowPatterns.GetAll().Select(d => d.Pattern).ToList());
 
             foreach (String url in pageUrls)
             {
@@ -56,16 +58,23 @@ namespace Crawler.Engine
 
         private void InsertUrl(Site site, String url)
         {
-            Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == url);
-
-            if (page == null)
+            lock (dataManager)
             {
-                dataManager.Pages.Add(new Page()
+                Page page = pages.FirstOrDefault(p => p.URL == url);
+
+                if (page == null)
                 {
-                    URL = url,
-                    Site = site,
-                    FoundDateTime = DateTime.Now
-                });
+                    page = new Page()
+                    {
+                        URL = url,
+                        Site = site,
+                        FoundDateTime = DateTime.Now
+                    };
+
+                    dataManager.Pages.Add(page);
+
+                    pages.Add(page);
+                }
             }
         }
 
