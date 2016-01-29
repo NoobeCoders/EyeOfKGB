@@ -1,14 +1,33 @@
-# -*- coding: utf-8 -*-
+#-*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import Keyword
-from .models import Page
-from .models import Person
-from .models import PersonPageRank
-from .models import Site
+from rest.models import Persons, Keywords, Sites, Pages, PersonPageRank
 
-admin.site.register(Keyword)
-admin.site.register(Page)
-admin.site.register(Person)
-admin.site.register(PersonPageRank)
-admin.site.register(Site)
+class KeywordsAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {"fields": ['person_keywords', 'keywords']})
+    ]
+    list_display = ['person_keywords', 'keywords']
+    ordering = ['person_keywords']
+    
+class PersonPageRankAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {"fields": ['sites','persons','rank']})
+        ]
+    list_display = ['persons', 'sites', 'rank']
+    ordering = ['persons']
+    
+class PagesAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {"fields":['sites', 'url', 'founddatetime', 'lastdatetime']})
+        ]
+    list_display = ['sites', 'url', 'founddatetime', 'lastdatetime']
+    ordering = ['sites']
+
+
+admin.site.register(Persons)
+admin.site.register(Keywords, KeywordsAdmin)
+admin.site.register(Sites)
+admin.site.register(Pages, PagesAdmin)
+admin.site.register(PersonPageRank, PersonPageRankAdmin )
+
 # Register your models here.

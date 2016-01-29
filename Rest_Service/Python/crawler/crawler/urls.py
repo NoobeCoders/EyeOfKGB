@@ -1,23 +1,36 @@
-# -*- coding: utf-8 -*-
-"""crawler URL Configuration
+#-*- coding: utf-8 -*-
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/1.8/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
-Including another URLconf
-    1. Add an import:  from blog import urls as blog_urls
-    2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
-"""
-from django.conf.urls import include, url
+from django.conf.urls import include, url, patterns
 from django.contrib import admin
+from rest_framework import routers
+from rest import views
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
+router.register(r'/persons', views.PersonsViewSet)
+router.register(r'/sites', views.SitesViewSet)
+router.register(r'/PersonPageRank', views.PersonPageRankViewSet)
+
 
 urlpatterns = [
-    url(r'^api/v1/', include('rest.urls')),
+    url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', include('index.urls', namespace='index')),
+    url(r'^api/v1', include(router.urls)),
+    # url(r'^api/v1/PersonPageRank/', include('rest.urls')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+
+# ckeditor
+from django.conf.urls.static import static
+from django.conf import settings
+
+urlpatterns += patterns('',
+                        url(r'^ckeditor', include('ckeditor.urls'))
+       ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+       
+# end ckeditor
+
+# rest_framework

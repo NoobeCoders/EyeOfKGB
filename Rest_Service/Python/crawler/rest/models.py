@@ -1,63 +1,69 @@
-# -*- coding: utf-8 -*-
-from unidecode import unidecode
+#-*- coding: utf-8 -*-
 from django.db import models
 
 
-class Person(models.Model):
-    name = models.CharField(max_length=100)
-
+class Persons(models.Model):
     class Meta:
-        db_table = 'Person'
-
+        db_table = 'db_Persons_model'
+    """
+    Таблица Личностей!
+    
+    """
+    persons = models.CharField(max_length=50, verbose_name=u'Личность', unique=True)
+    data_join = models.DateTimeField(verbose_name='Дата внесения в базу')
+    
     def __unicode__(self):
-        return unidecode(self.name)
-
-
-class Site(models.Model):
-    name = models.CharField(max_length=100)
-
+        return self.persons
+    
+class Keywords(models.Model):
     class Meta:
-        db_table = 'Site'
-
+        db_table = 'db_Keywords_Persons_model'
+    """
+    Таблица ключевых слов привязанных к личностям.
+    """
+    person_keywords = models.ForeignKey(Persons)
+    keywords = models.CharField(max_length=50, verbose_name='Ключевое слово')
+    data_join = models.DateTimeField(verbose_name='Дата внесения в базу')
+    
     def __unicode__(self):
-        return self.name
-
-
-class Keyword(models.Model):
-    name = models.CharField(max_length=200)
-    person = models.ForeignKey(Person)
-
+        return self.keywords
+    
+class Sites(models.Model):
     class Meta:
-        db_table = 'Keyword'
-
+        db_table = 'db_sites_model'
+    """
+    Таблица сайтов.
+    """
+    sites = models.CharField(max_length=50, verbose_name=u'Сайт', unique=True)
+    data_join = models.DateTimeField(verbose_name='Дата внесения в базу')
+     
     def __unicode__(self):
-        return self.name
+        return self.sites
+        
 
-
-class Page(models.Model):
-    url = models.CharField(max_length=100)
-    found_date_time = models.DateTimeField(auto_now_add=True)
-    last_scan_date_time = models.DateTimeField(auto_now=True)
-    site = models.ForeignKey(Site)
-
+class Pages(models.Model):
     class Meta:
-        db_table = 'Page'
-        ordering = ('found_date_time', )
-
+        db_table = 'db_pages_model'
+    """
+    Таблица соответствия названия сайтов и url
+    """
+    sites = models.ForeignKey(Sites)
+    url = models.CharField(max_length=100, verbose_name=u'url - сайта')
+    founddatetime = models.CharField(max_length=50, verbose_name='время создания', blank=True)
+    lastdatetime = models.CharField(max_length=50, verbose_name='время последнего сканирования', blank=True)
+    
     def __unicode__(self):
         return self.url
-
-
+        
+        
 class PersonPageRank(models.Model):
-    person = models.ForeignKey(Person)
-    page = models.ForeignKey(Page)
-    rank = models.IntegerField()
-
     class Meta:
-        db_table = 'PersonPageRank'
-        unique_together = (('person', 'page'), )
-
-    def __unicode__(self):
-        page_name = str(self.page)
-        page = page_name + '...' if len(page_name) > 17 else page_name[:20]
-        return str(self.person) + '-' + page + '-' + str(self.rank)
+        db_table = 'db_personrank_model'
+    """
+    Рейтинг результатов поисков!
+    """
+    
+    sites = models.ForeignKey(Sites)
+    persons = models.ForeignKey(Persons)
+    rank = models.IntegerField(default=0)
+        
