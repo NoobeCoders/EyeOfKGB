@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Crawler.Engine
@@ -16,14 +17,12 @@ namespace Crawler.Engine
     {
         IEnumerable<Person> persons;
         IEnumerable<PersonPageRank> personPageRanks;
-        Object locker;
 
         public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
             personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
-            locker = new Object();
         }
 
         public override void HandleContent(Page page, string htmlContent)
@@ -39,16 +38,7 @@ namespace Crawler.Engine
             foreach (Person person in persons)
             {
                 int rank = CountRank(person.Keywords, pagePhrases);
-
-                try
-                {
-                    InsertPersonPageRank(person, page, rank);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                    Debug.WriteLine(ex.InnerException);
-                }
+                if(rank != 0) InsertPersonPageRank(person, page, rank);
             }
         }
 
@@ -81,15 +71,15 @@ namespace Crawler.Engine
 
         private void InsertPersonPageRank(Person person, Page page, int rank)
         {
-            lock (locker)
-            {
-                PersonPageRank personPageRank = personPageRanks.FirstOrDefault(p => p.PersonId == person.Id && p.PageId == page.Id);
+            PersonPageRank personPageRank = personPageRanks.FirstOrDefault(p => p.PersonId == person.Id && p.PageId == page.Id);
 
-                if (personPageRank != null)
-                {
-                    personPageRank.Rank = rank;
-                }
-                else
+            if (personPageRank != null)
+            {
+                personPageRank.Rank = rank;
+            }
+            else
+            {
+                lock (dataManager)
                 {
                     dataManager.PersonPageRanks.Add(new PersonPageRank()
                     {

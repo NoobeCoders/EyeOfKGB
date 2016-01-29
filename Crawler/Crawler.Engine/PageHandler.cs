@@ -3,8 +3,10 @@ using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Crawler.Engine
@@ -27,7 +29,7 @@ namespace Crawler.Engine
             sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
         }
 
-        public async Task HandlePage(Page page)
+        public async Task<int> HandlePage(Page page)
         {
             string content = await DownloadPageContent(page);
 
@@ -39,11 +41,13 @@ namespace Crawler.Engine
                 htmlPageContentHandler.HandleContent(page, content);
 
             page.LastScanDate = DateTime.Now;
+
+            return page.Id;
         }
 
         private async Task<string> DownloadPageContent(Page page)
         {
-            return await downloader.Download("http://" + page.URL);
+            return await downloader.Download(page.URL);
         }
         private bool IsRobotsPage(Page page)
         {

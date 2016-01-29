@@ -12,10 +12,11 @@ namespace Crawler.Engine
 {
     class RobotsPageContentHandler : PageContentHandler
     {
+        Object locker;
         public RobotsPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
-
+            locker = new Object();
         }
 
         public override void HandleContent(Page page, string content)
@@ -26,14 +27,17 @@ namespace Crawler.Engine
 
             if (sitemapPage.URL == String.Empty)
             {
-                sitemapPage.URL = page.Site.Name + "/sitemap.xml";
+                sitemapPage.URL = "http://" + page.Site.Name + "/sitemap.xml";
             }
 
-            if (site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
+            lock (locker)
             {
-                site.Pages.Add(sitemapPage);
+                if (site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
+                {
+                    site.Pages.Add(sitemapPage);
 
-                dataManager.Sites.Update(site);
+                    lock(dataManager) { dataManager.Sites.Update(site); }
+                }
             }
 
             //UpdateDisallowPatterns(content);
@@ -41,7 +45,7 @@ namespace Crawler.Engine
 
         private void UpdateDisallowPatterns(string content)
         {
-            dataManager.DisallowPatterns.Set(parser.GetDisallowPatterns(content));
+            lock(dataManager) { dataManager.DisallowPatterns.Set(parser.GetDisallowPatterns(content)); }
         }
 
         private Page GetSitemapPageFromRobots(string robots)

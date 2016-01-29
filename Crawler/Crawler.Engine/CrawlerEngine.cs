@@ -5,6 +5,7 @@ using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -16,6 +17,9 @@ namespace Crawler.Engine
 {
     public class CrawlerEngine : IDisposable
     {
+        private static readonly int SITE_TASK_AMOUNT = 20;
+        private static readonly int PAGE_TASK_AMOUNT = 50;
+
         IDataManager dataManager;
         IDownloader downloader;
         PageHandler pageHandler;
@@ -63,11 +67,7 @@ namespace Crawler.Engine
                 string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml").Result;
 
                 IEnumerable<string> disallows = parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
-
-                List<string> allowPageURLs = new List<string>();
-
-                allowPageURLs = foundPages.Select(p => p.URL).ToList();
+                List<string> allowPageURLs = parser.GetFoundPages(sitemap).ToList();
 
                 foreach (string disallowPattern in disallows)
                 {
@@ -93,7 +93,7 @@ namespace Crawler.Engine
                 {
                     Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
 
-                    string pageHTML = downloader.Download("http://" + allowPageURL).Result;
+                    string pageHTML = downloader.Download(allowPageURL).Result;
                     page.LastScanDate = DateTime.Now;
 
                     IEnumerable<string> pagePhrases = parser.GetPagePhrases(pageHTML);
@@ -134,7 +134,7 @@ namespace Crawler.Engine
             {
                 site.Pages.Add(new Page()
                                         {
-                                            URL = site.Name + "/robots.txt",
+                                            URL = "http://" + site.Name + "/robots.txt",
                                             FoundDateTime = DateTime.Now,
                                             LastScanDate = null
                                         });
@@ -154,6 +154,11 @@ namespace Crawler.Engine
             foreach (Site site in dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList())
             {
                 siteTasks.Add(ProcessSite(site));
+
+                if (siteTasks.Count >= SITE_TASK_AMOUNT)
+                {
+                    await Task.WhenAny(siteTasks);
+                }
             }
 
             await Task.WhenAll(siteTasks);
@@ -163,19 +168,18 @@ namespace Crawler.Engine
 
         private async Task ProcessSite(Site site)
         {
-            List<Task> pageTasks = new List<Task>();
-            int running = 0;
+            List<Task<int>> pageTasks = new List<Task<int>>();
 
             foreach (Page page in site.Pages.ToList())
             {
-                while (running > 50)
-                {
-                    Task.WaitAny(pageTasks.ToArray());
-                    running--;
-                }
                 pageTasks.Add(pageHandler.HandlePage(page));
-                running++;
-                Thread.Sleep(50);
+
+                Thread.Sleep(25);
+
+                if (pageTasks.Count >= PAGE_TASK_AMOUNT)
+                {
+                    await Task.WhenAny(pageTasks);
+                }
             }
             await Task.WhenAll(pageTasks);
         }

@@ -21,13 +21,14 @@ namespace BusinessLogic
         {
             this.robotAgent = robotAgent;
         }
-        public IEnumerable<FoundPage> GetFoundPages(string sitemapXML)
+        public IEnumerable<string> GetFoundPages(string sitemapXML)
         {
             List<FoundPage> pages = new List<FoundPage>();
 
             sitemapXML = new string(sitemapXML.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
 
             XmlDocument sitemap = new XmlDocument();
+
             try
             {
                 sitemap.LoadXml(sitemapXML);
@@ -36,21 +37,20 @@ namespace BusinessLogic
             {
                 Debug.WriteLine(ex.Message);
                 Debug.WriteLine(ex.InnerException);
-                return pages;
             }
 
-            XmlElement root = sitemap.DocumentElement;
+            //XmlElement root = sitemap.DocumentElement;
 
-            XmlNodeList urls = root.GetElementsByTagName("loc");
-            foreach (XmlNode url in urls)
-            {
-                pages.Add(  new FoundPage()
-                            {
-                                URL = Regex.Replace(url.InnerText, "^(http|https)://", String.Empty)
-                            });
-            }
+            //XmlNodeList urls = root.GetElementsByTagName("loc");
+            //foreach (XmlNode url in urls)
+            //{
+            //    pages.Add(  new FoundPage()
+            //                {
+            //                    URL = url.InnerText
+            //    });
+            //}
 
-            return pages;
+            return Regex.Matches(sitemapXML, @"<loc>(.*?)<\/loc>").Cast<Match>().Select(m => m.Groups[1].Value);
         }
 
         public IEnumerable<string> GetDisallowPatterns(string robots)
@@ -125,7 +125,6 @@ namespace BusinessLogic
                 if (str.Contains("Sitemap:"))
                 {
                     sitemap = str.Replace("Sitemap: ", String.Empty).Replace(".gz", String.Empty);
-                    sitemap = Regex.Replace(sitemap, "^(http|https)://", String.Empty);
                 }
             }
 
@@ -178,7 +177,6 @@ namespace BusinessLogic
                 if (atr != null)
                 {
                     string url = atr.Value;
-                    url = Regex.Replace(url, "^(http|https)://", String.Empty);
 
                     if (url != null) urls.Add(url);
                 }

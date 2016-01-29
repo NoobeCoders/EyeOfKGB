@@ -11,19 +11,24 @@ namespace Crawler.DAL.DBInitializers
     {
         override public void Initialization(ApplicationDbContext context)
         {
-            Site metanit = new Site()
+            Site geekbrains = new Site()
             {
-                Name = "metanit.com"
+                Name = "geekbrains.ru"
             };
 
-            Site professorWeb = new Site()
+            Site professorweb = new Site()
             {
                 Name = "professorweb.ru"
             };
 
-            Site geekBrains = new Site()
+            Site lentaRu = new Site()
             {
-                Name = "geekbrains.ru"
+                Name = "lenta.ru"
+            };
+
+            Site metanit = new Site()
+            {
+                Name = "metanit.com"
             };
 
             Site oper = new Site()
@@ -37,7 +42,8 @@ namespace Crawler.DAL.DBInitializers
             //    Pages = new List<Page>()
             //};
 
-            context.Sites.Add(oper);
+            context.Sites.Add(metanit);
+            //context.Sites.Add(geekbrains);
             //context.Sites.Add(metanit);
             //context.Sites.Add(professorWeb);
             //context.Sites.Add(geekBrains);

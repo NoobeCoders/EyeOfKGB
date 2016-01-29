@@ -14,11 +14,10 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        Object locker;
         public SitemapPageContentHandler(IDataManager dataManager, IParser parser)
             :base(dataManager, parser)
         {
-            locker = new Object();
+
         }
 
         public override void HandleContent(Page page, string content)
@@ -30,7 +29,7 @@ namespace Crawler.Engine
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<string> urls = parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
+            IEnumerable<string> urls = parser.GetFoundPages(sitemap).ToList();
 
             AddPagesFromUrls(site, urls);
         }
@@ -39,7 +38,7 @@ namespace Crawler.Engine
         {
             foreach (string url in urls)
             {
-                lock (locker)
+                lock (dataManager)
                 {
                     if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
                     {
@@ -55,11 +54,7 @@ namespace Crawler.Engine
         }
         private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
         {
-            IEnumerable<FoundPage> foundPages = parser.GetFoundPages(sitemap);
-
-            List<string> allowPageURLs = new List<string>();
-
-            allowPageURLs = foundPages.Select(p => p.URL).ToList();
+            List<string> allowPageURLs = parser.GetFoundPages(sitemap).ToList();
 
             foreach (string disallowPattern in disallowPattens)
             {
