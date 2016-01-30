@@ -10,7 +10,7 @@ html {
 	min-height: 100%;
 }
 
-body, .main {height: 100%;}
+body {height: 100%;}
 
 body { 
 	margin: 0 0 70px 0;
@@ -49,21 +49,51 @@ ul.menu li {
 	margin-right: 5px;
 	padding: 3px;
 }
-.menu a {
+
+.menu a, #second-block a {
 	color: #cfcfcf;
 }
 
+.menu a:hover, #second-block a:hover {
+	text-decoration: none;
+	text-shadow: 1px 1px 0 yellowgreen,
+                 1px -1px 0 yellowgreen,
+                 -1px 1px 0 yellowgreen,
+                -1px -1px 0 yellowgreen;
+    color: #cfcfcf;	
+}
+
+
 /* Content*/
 
+#first-block, #second-block, #third-block, #forth-block {
+	padding: 5%;
+}
+
 #first-block {
-	height: 100%;
+	display: block;
+	height: 100vh;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #cfcfcf;
+}
+
+.btn-default.btn-outline {
+    color: $btn-primary-bg;
+    $:hover {
+      background-color: $btn-primary-bg;
+          border-color: $btn-primary-border;
+    }
 }
 
 
 #second-block {
+	display: block;
 	height: 100%;
+	font-size: 18px;
 }
-
 
 #third-block {
 	height: 100%;
