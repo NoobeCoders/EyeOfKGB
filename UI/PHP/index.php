@@ -1,37 +1,35 @@
 <?php
-require_once "core/Controller.php";
-require_once "core/SQL.php";
 
 
+require "config.php";
+require "core/Controller.php";
+require "core/GetInstance.php";
+require "core/SQL.php";
 function __autoload($classname)
 {
-    require_once "inc/$classname.php";
-}
-$arr = [];
-if(isset($_GET['q']))
-    $arr = explode('/', $_GET['q']);
+    require "inc/$classname.php";
 
-$params = [];
-
-foreach ($arr as $value)
-{
-    if($value != '')
-        $params[] = $value;
 }
+
+
+require 'models/M_Total.php';
+
+
+
 
 $action = "action_";
-$action .= isset($params[1]) ? $params[1] : "index";
+$action .= isset($_GET['act'])?$_GET['act']:"index";
 
-$c = "page";
+$c = "total";
 
-if(isset($params[0]))
-    $c = $params[0];
+if(isset($_GET['c']))
+    $c = $_GET['c'];
 
 switch ($c)
 {
-    case 'page': $controller = new C_Page();
+    case "total": $controller = new C_Total();
         break;
-    default: $controller = new C_Page();
+    default: $controller = new C_Total();
 }
 
 $controller->request($action);
