@@ -50,11 +50,11 @@ ul.menu li {
 	padding: 3px;
 }
 
-.menu a, #second-block a {
+a#login_pop, .menu a, #second-block a {
 	color: #cfcfcf;
 }
 
-.menu a:hover, #second-block a:hover {
+a#login_pop:hover, .menu a:hover, #second-block a:hover {
 	text-decoration: none;
 	text-shadow: 1px 1px 0 yellowgreen,
                  1px -1px 0 yellowgreen,
@@ -63,6 +63,9 @@ ul.menu li {
     color: #cfcfcf;	
 }
 
+button, html input[type=button], input[type=reset], input[type=submit] {
+	color: #000000;
+}
 
 /* Content*/
 
