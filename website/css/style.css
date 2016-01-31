@@ -1,0 +1,138 @@
+/* general styles */ 
+*, *:before, *:after {
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {height: 100%;}
+
+body { 
+	margin: 0 0 70px 0;
+    background-color: rgba(255,255,255);
+    font: 16px/1.42857 Ubuntu,Helvetica,Arial,sans-serif;
+    color: #cfcfcf;
+    height: auto;
+	background: url(../images/back.jpeg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment:  fixed;
+	background-size: cover;
+}
+
+/*main-menu */
+
+.top-fixed {
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.logo {
+	margin-top: 10px;
+}
+
+ul.menu  {
+	margin: 20px 0px;
+	padding: 4px;
+	font-size: 24px;
+
+}
+
+ul.menu li {
+	display: inline;
+	margin-right: 5px;
+	padding: 3px;
+}
+
+.menu a, #second-block a {
+	color: #cfcfcf;
+}
+
+.menu a:hover, #second-block a:hover {
+	text-decoration: none;
+	text-shadow: 1px 1px 0 yellowgreen,
+                 1px -1px 0 yellowgreen,
+                 -1px 1px 0 yellowgreen,
+                -1px -1px 0 yellowgreen;
+    color: #cfcfcf;	
+}
+
+
+/* Content*/
+
+#first-block, #second-block, #third-block, #forth-block {
+	padding: 5%;
+}
+
+#first-block {
+	display: block;
+	height: 100vh;
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #cfcfcf;
+}
+
+.btn-default.btn-outline {
+    color: $btn-primary-bg;
+    $:hover {
+      background-color: $btn-primary-bg;
+          border-color: $btn-primary-border;
+    }
+}
+
+
+#second-block {
+	display: block;
+	height: 100%;
+	font-size: 18px;
+}
+
+#third-block {
+	height: 100%;
+}
+
+
+#forth-block {
+	height: 100%;
+}
+
+#greetings {
+	margin-top: 300px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 30px;
+}
+
+#start-button {
+	display: none;
+	width: 10%;
+	margin: 0 auto;
+
+}
+
+#start-button a {
+	
+}
+
+/* Footer */
+
+footer {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 60px;	
+}
+
+footer span {
+	font-size: 20px;
+}
+
