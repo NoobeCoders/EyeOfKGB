@@ -40,7 +40,7 @@ body {
 ul.menu  {
 	margin: 20px 0px;
 	padding: 4px;
-	font-size: 24px;
+	font-size: 20px;
 
 }
 
@@ -50,11 +50,11 @@ ul.menu li {
 	padding: 3px;
 }
 
-.menu a, #second-block a {
+a#login_pop, a#restore_pop, .menu a, #second-block a {
 	color: #cfcfcf;
 }
 
-.menu a:hover, #second-block a:hover {
+a#login_pop:hover, a#restore_pop:hover, .menu a:hover, #second-block a:hover {
 	text-decoration: none;
 	text-shadow: 1px 1px 0 yellowgreen,
                  1px -1px 0 yellowgreen,
@@ -63,10 +63,13 @@ ul.menu li {
     color: #cfcfcf;	
 }
 
+button, html input[type=button], input[type=reset], input[type=submit] {
+	color: #000000;
+}
 
 /* Content*/
 
-#first-block, #second-block, #third-block, #forth-block {
+#first-block, #second-block, #third-block, #forth-block, #fifth-block {
 	padding: 5%;
 }
 
@@ -95,6 +98,27 @@ ul.menu li {
 	font-size: 18px;
 }
 
+.panel-default>.panel-heading {
+	background-color: #0d8800;
+}
+
+.panel-title {
+	padding-top:10px; 
+	font-size: 24px;
+}
+
+.panel-title a {
+	text-decoration: none;
+}
+
+.panel-body {
+	color: black;
+}
+
+.panel-body div.row {
+	margin-bottom: 10px;
+}
+
 #third-block {
 	height: 100%;
 }
@@ -116,10 +140,6 @@ ul.menu li {
 	width: 10%;
 	margin: 0 auto;
 
-}
-
-#start-button a {
-	
 }
 
 /* Footer */
