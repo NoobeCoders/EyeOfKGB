@@ -50,11 +50,11 @@ ul.menu li {
 	padding: 3px;
 }
 
-a#login_pop, .menu a, #second-block a {
+a#login_pop, a#restore_pop, .menu a, #second-block a {
 	color: #cfcfcf;
 }
 
-a#login_pop:hover, .menu a:hover, #second-block a:hover {
+a#login_pop:hover, a#restore_pop:hover, .menu a:hover, #second-block a:hover {
 	text-decoration: none;
 	text-shadow: 1px 1px 0 yellowgreen,
                  1px -1px 0 yellowgreen,

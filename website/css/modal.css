@@ -1,10 +1,10 @@
 
-.panel {
+.panell {
     background-color: transparent;
     height: 34px;
     padding: 15px;
 }
-.panel a#login_pop, .panel a#join_pop {
+.panell a#login_pop, .panell a#join_pop {
     border: 2px solid #aaa;
     color: #fff;
     display: block;
@@ -22,7 +22,7 @@
 }
 
 
-a#login_pop:hover, a#join_pop:hover {
+a#login_pop:hover, a#join_pop:hover a#restore_pop:hover {
     border-color: #eee;
 }
 .overlay {

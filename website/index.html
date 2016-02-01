@@ -5,11 +5,13 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet"	href="css/style.css" type="text/css">
 	<link href="css/modal.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 	<!-- Main menu -->
@@ -45,54 +47,67 @@
 			</div>
 			<div class="col-lg-3">
 				<div class="main">
-           			<div class="panel">
+           			<div class="panell">
                 		<a href="#login_form" id="login_pop">Войти</a>
                 		<a href="#join_form" id="join_pop">Регистрация</a>
            			</div>
         		</div>
         		<!-- popup form #1 -->
-        <a href="#x" class="overlay" id="login_form"></a>
-        <div class="popup">
-            <h2>Добро пожаловать!</h2>
-            <p>Введите имя пользователя и пароль</p>
-            <div>
-                <label for="login">Логин</label>
-                <input type="text" id="login" value="" required/>
-            </div>
-            <div>
-                <label for="password">Пароль</label>
-                <input type="password" id="password" value="" required/>
-            </div>
-            <input type="button" value="Войти" />
-
-            <a class="close" href="#close"></a>
-        </div>
+        		<a href="#x" class="overlay" id="login_form"></a>
+        		<div class="popup">
+            		<h2>Добро пожаловать!</h2>
+            		<p>Введите имя пользователя и пароль</p>
+            		<div>
+                		<label for="login">Логин</label>
+                		<input type="text" id="login" value="" required/>
+            		</div>
+            		<div>
+                	<label for="password">Пароль</label>
+                	<input type="password" id="password" value="" required/>
+            		</div>
+            		<input type="checkbox" name="remember">Запомнить меня <br>
+            		<input type="button" value="Войти"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#restore_form" id="restore_pop">Забыли пароль?</a>
+            		<a class="close" href="#close"></a>
+        		</div>
 
         <!-- popup form #2 -->
-        <a href="#x" class="overlay" id="join_form"></a>
-        <div class="popup">
-            <h2>Регистрация</h2>
-            <p>Введите свои данные</p>
-            <div>
-                <label for="email">Логин (Email)</label>
-                <input type="text" id="email" value="" required />
-            </div>
-            <div>
-                <label for="pass">Пароль</label>
-                <input type="password" id="pass" value="" required/>
-            </div>
-            <div>
-                <label for="firstname">Имя</label>
-                <input type="text" id="firstname" value="" required/>
-            </div>
-            <div>
-                <label for="lastname">Фамилия</label>
-                <input type="text" id="lastname" value="" />
-            </div>
-            <input type="button" value="Регистрация" />&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;<a href="#login_form" id="login_pop">Войти</a>
-
-            <a class="close" href="#close"></a>
-        </div>
+        		<a href="#x" class="overlay" id="join_form"></a>
+        		<div class="popup">
+            		<h2>Регистрация</h2>
+            		<p>Введите свои данные</p>
+            		<div>	
+                		<label for="email">Логин (Email)</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<div>
+                		<label for="pass">Пароль</label>
+                		<input type="password" id="pass" value="" required/>
+            		</div>
+            		<div>
+                		<label for="firstname">Имя</label>
+                		<input type="text" id="firstname" value="" required/>
+            		</div>
+            		<div>
+                		<label for="lastname">Фамилия</label>
+                		<input type="text" id="lastname" value="" />
+            		</div>
+            		<input type="button" value="Регистрация" />&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;<a href="#login_form" id="login_pop">Войти</a>
+            		<a class="close" href="#close"></a>
+        		</div>
+        		<!-- popup form #3 -->
+        		<a href="#x" class="overlay" id="restore_form"></a>
+        		<div class="popup">
+            		<h2>Забыли пароль?</h2>
+            		<p>Введите адрес электронной почты</p>
+            		<div>	
+                		<label for="email">Email</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<input type="button" value="Отправить" 
+            		<br>
+            		<p>Временный пароль будет выслан вам на почту</p>
+            		<a class="close" href="#close"></a>
+        		</div>
 			</div>
 		</div>
 	</div>
@@ -111,8 +126,52 @@
 				<h2 class="text-center">Вашему вниманию представлен проект команды разработчиков, окончивших обучение на сайте <a href="http://geekbrains.ru/" target="_blank">GeekBrains</a></h2>
 				<h3 class="text-center">БыдлоКОдеры - это молодая развивающая компания, готовая к новым вершинам и вызовам</h3>
 				<article>
-					<p class="text-center">У нас в штате есть разработчики для реализации практически любых решений. Это верстка сайтов и веб-приложений на Python/Django и PHP, создание мобильный приложений для iOS и Android, создание десктопных приложений на C#.</p>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
 				</article>
+				
 			</div>
 		</div>
 		<div class="container-fluid" id="third-block">
@@ -138,6 +197,7 @@
             </div>
 		</div>
 	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="main.js"></script>
 <script type="text/javascript">
 	setTimeout(function(){$('#start-button').fadeIn('fast')},3000);
