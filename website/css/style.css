@@ -69,7 +69,7 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 
 /* Content*/
 
-#first-block, #second-block, #third-block, #forth-block {
+#first-block, #second-block, #third-block, #forth-block, #fifth-block {
 	padding: 5%;
 }
 
@@ -98,6 +98,27 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	font-size: 18px;
 }
 
+.panel-default>.panel-heading {
+	background-color: #0d8800;
+}
+
+.panel-title {
+	padding-top:10px; 
+	font-size: 24px;
+}
+
+.panel-title a {
+	text-decoration: none;
+}
+
+.panel-body {
+	color: black;
+}
+
+.panel-body div.row {
+	margin-bottom: 10px;
+}
+
 #third-block {
 	height: 100%;
 }
@@ -119,10 +140,6 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	width: 10%;
 	margin: 0 auto;
 
-}
-
-#start-button a {
-	
 }
 
 /* Footer */
