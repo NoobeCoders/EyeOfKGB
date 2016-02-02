@@ -42,10 +42,10 @@ namespace Crawler.DAL.DBInitializers
             //    Pages = new List<Page>()
             //};
 
-            context.Sites.Add(oper);
-            //context.Sites.Add(geekbrains);
-            //context.Sites.Add(metanit);
-            //context.Sites.Add(professorWeb);
+            //context.Sites.Add(oper);
+            context.Sites.Add(geekbrains);
+            context.Sites.Add(metanit);
+            context.Sites.Add(professorweb);
             //context.Sites.Add(geekBrains);
 
             //context.Sites.Add(localhost);

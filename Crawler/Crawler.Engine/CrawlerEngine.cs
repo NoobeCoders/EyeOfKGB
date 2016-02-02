@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
+using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
@@ -43,7 +44,7 @@ namespace Crawler.Engine
         public async Task Start()
         {
             await AddRobotsPageForNewSites();
-            await ProcessSites();
+            await ProcessSites(dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList());
             //await ProcessNewPages();
             //await ProcessScannedSiteMapPages();
             //await ProcessNewPages();
@@ -148,14 +149,17 @@ namespace Crawler.Engine
             await dataManager.Save();
         }
 
-        private async Task ProcessSites()
+        private async Task ProcessSites(IEnumerable<Site> sites)
         {
             List<Task> siteTasks = new List<Task>();
 
-            foreach (Site site in dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList())
+            foreach (Site site in sites)
             {
-                siteTasks.Add(ProcessSite(site));
 
+                IDataManager dataManager = new DataManager("MSSQLConnection");
+                PageHandler pageHandler = new PageHandler(dataManager, downloader, parser);
+                siteTasks.Add(ProcessSite(site, dataManager, pageHandler));
+                
                 if (siteTasks.Count >= SITE_TASK_AMOUNT)
                 {
                     await Task.WhenAny(siteTasks);
@@ -169,7 +173,7 @@ namespace Crawler.Engine
             
         }
 
-        private async Task ProcessSite(Site site)
+        private async Task ProcessSite(Site site, IDataManager dataManager, PageHandler pageHandler)
         {
             List<Task<int>> pageTasks = new List<Task<int>>();
 
@@ -188,6 +192,7 @@ namespace Crawler.Engine
                 }
             }
             await Task.WhenAll(pageTasks);
+            await dataManager.Save();
         }
 
         private async Task ProcessNewPages()

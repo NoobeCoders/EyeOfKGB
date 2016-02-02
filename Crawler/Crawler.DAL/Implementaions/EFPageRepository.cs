@@ -64,49 +64,49 @@ namespace Crawler.DAL.Implementaions
 
         public async Task<IEnumerable<Page>> GetPagesBySiteId(int id, int pageAmount)
         {
-            IEnumerable<Page> pages;
+            IEnumerable<Page> pages = null;
 
-            using (DbContextTransaction transaction = dbContext.Database.BeginTransaction(IsolationLevel.RepeatableRead))
+            bool success = false;
+
+            do
             {
-                bool success = false;
-                
-                do
+                try
                 {
-                    pages = await dbContext.Pages
+                    using (DbContextTransaction transaction = dbContext.Database.BeginTransaction(IsolationLevel.RepeatableRead))
+                    {
+                        pages = await dbContext.Pages.Where(p => p.SiteId == id)
                         .Where(p => (p.LastScanDate != null && DbFunctions.DiffDays(p.LastScanDate, DateTime.Now) != 0) || p.LastScanDate == null)
-                        .Where(p => p.LastProcessDate == null || (p.LastProcessDate != null 
-                                                                    && ((p.LastScanDate == null 
-                                                                            && DbFunctions.DiffHours(DateTime.Now, p.LastProcessDate) > 3) 
-                                                                        || (p.LastScanDate != null 
+                        .Where(p => p.LastProcessDate == null || (p.LastProcessDate != null
+                                                                    && ((p.LastScanDate == null
+                                                                            && DbFunctions.DiffHours(p.LastProcessDate, DateTime.Now) > 3)
+                                                                        || (p.LastScanDate != null
                                                                             && (DbFunctions.DiffMicroseconds(p.LastScanDate, p.LastProcessDate) > 0
-                                                                                    || DbFunctions.DiffHours(DateTime.Now, p.LastProcessDate) > 3
+                                                                                    || DbFunctions.DiffHours(p.LastProcessDate, DateTime.Now) > 3
                                                                                 )
                                                                             )
                                                                         )
-                                                                  ))
+                                                                    ))
                         .Take(pageAmount).ToListAsync<Page>();
 
-                    foreach (Page page in pages)
-                    {
-                        page.LastProcessDate = DateTime.Now;
-                    }
+                        foreach (Page page in pages)
+                        {
+                            page.LastProcessDate = DateTime.Now;
+                        }
 
-                    try
-                    {
+
                         await dbContext.SaveChangesAsync();
 
                         transaction.Commit();
 
                         success = true;
                     }
-                    catch (DbUpdateException ex)
-                    {
-                        transaction.Rollback();
-                        Console.WriteLine(ex.Message);
-                    }
                 }
-                while (!success);
+                catch (DbUpdateException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             }
+            while (!success);
 
             return pages;
         }
