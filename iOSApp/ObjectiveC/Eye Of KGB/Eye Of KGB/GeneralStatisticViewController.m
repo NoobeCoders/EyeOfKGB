@@ -14,6 +14,9 @@
 
 @property (strong, nonatomic) MakeDictionary *data;
 @property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+@property (strong, nonatomic) NSMutableArray *ratesPrev;
+@property (strong, nonatomic) NSMutableArray *rates;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -49,7 +52,7 @@
     GeneralStatisticTableViewCell *cell = (GeneralStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     cell.labelName.text = self.data.names[indexPath.row];
-    cell.labelCount.text = self.data.rates[indexPath.row];
+    cell.labelCount.text = self.rates[indexPath.row];
     
     return cell;
     
@@ -69,6 +72,49 @@
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [self.data.sites objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component __TVOS_PROHIBITED {
+
+    NSUInteger selectedRow = [self.sitePicker selectedRowInComponent:0];
+    
+//    NSMutableArray *test = [[NSMutableArray alloc] initWithObjects:self.data.allRates[1], nil];
+//    NSLog(@"allRates = %@",test);
+    
+    self.ratesPrev = [[NSMutableArray alloc] initWithObjects: self.data.allRates[selectedRow], nil];
+//    NSLog(@"rates = %@",self.ratesPrev);
+    NSString *ratesString = [[self.ratesPrev valueForKey:@"description"] componentsJoinedByString:@""];
+//    NSLog(@"ratesString = %@", ratesString);
+//    NSArray *ratesArrayPreviously = [ratesString componentsSeparatedByString:@" "];
+//    NSLog(@"%@",ratesArrayPreviously);
+    
+//    NSArray *ratesArrayPreviously = [ratesString componentsSeparatedByCharactersInSet:
+//                                    [NSCharacterSet characterSetWithCharactersInString:@"(,)\n"]];
+    
+    
+    NSString *ratesStringPreviously = [ratesString stringByReplacingOccurrencesOfString:@"[^0-9]" withString:@" " options:NSRegularExpressionSearch range:NSMakeRange(0, [ratesString length])];
+//    NSLog(@"ratesStringPreviously = %@",ratesStringPreviously);
+    NSArray *arrayOfStrings = [ratesStringPreviously componentsSeparatedByString:@" "];
+    //6, 12, 18
+//    NSLog(@"arrayOfStrings[6] = %@", arrayOfStrings[6]);
+    self.rates = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%@",arrayOfStrings[6]],[NSString stringWithFormat:@"%@",arrayOfStrings[12]], [NSString stringWithFormat:@"%@",arrayOfStrings[18]], nil];
+    
+//    NSLog(@"self.rates = %@",self.rates);
+
+
+
+    
+//
+//    NSArray *ratesArrayPreviously = [ratesStringPreviously componentsSeparatedByCharactersInSet:
+//                                        [NSCharacterSet characterSetWithCharactersInString:@","]];
+//    NSLog(@"%@",ratesArrayPreviously);
+
+
+    
+    
+//    self.rates = [[NSMutableArray alloc] initWithObjects: @"100",@"200",@"300",nil];
+//    [self.tableView reloadData];
+
 }
 
 @end

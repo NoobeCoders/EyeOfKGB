@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Главная страница</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+	<link 
+		rel="stylesheet"
+		href="css/style.css"
+		type="text/css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+	<!-- Main menu -->
+	<div class="container-fluid top-fixed">
+		<div class="row">
+			<div class="col-lg-4">
+				<header class="logo">
+					<figure>
+						<a href="index.html"><img src="images/logo.png" alt="logo"></a>				
+					</figure>
+				</header>
+			</div>
+			<div class="col-lg-8">
+				<nav class="nav-menu">
+					<ul class="menu">
+  						<li>
+  							<a href="#first-block">Главная</a>
+  						</li>
+  						<li>
+  							<a href="#second-block">О компании</a>
+  						</li>
+  						<li>
+  							<a href="#third-block">Проекты</a>
+  						</li>
+  						<li>
+  							<a href="#forth-block">Компоненты</a>
+  						</li>
+ 						
+					</ul>
+				</nav>				
+			</div>
+		</div>
+	</div>
+	<!-- Content of main page -->
+	<main>
+		<div class="container-fluid" id="first-block">
+			<div class="row">
+				<div id="greetings"></div>
+				<div id="start-button">
+					<a class="btn btn-default btn-lg btn-outline" href="#second-block" role="button">Let's go!</a>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid" id="second-block">
+			<div class="row">
+				<h2 class="text-center">Вашему вниманию представлен проект команды разработчиков, окончивших обучение на сайте <a href="http://geekbrains.ru/" target="_blank">GeekBrains</a></h2>
+				<h3 class="text-center">БыдлоКОдеры - это молодая развивающая компания, готовая к новым вершинам и вызовам</h3>
+				<article>
+					<p class="text-center">У нас в штате есть разработчики для реализации практически любых решений. Это верстка сайтов и веб-приложений на Python/Django и PHP, создание мобильный приложений для iOS и Android, создание десктопных приложений на C#.</p>
+				</article>
+			</div>
+		</div>
+		<div class="container-fluid" id="third-block">
+			<div class="row">
+			</div>
+		</div>
+		<div class="container-fluid" id="forth-block">
+			<div class="row">
+				
+			</div>
+		</div>
+	</main>	
+	<!-- footer -->
+	<footer>
+		<div class="container-fluid">
+			<div class="row text-center">
+					<div class="glyphicon glyphicon-copyright-mark">
+						<span>All rights reserved</span>
+            		</div>
+            		<p>
+            			<span>Developed by БыдлоКОдеры</span>
+            		</p>
+            </div>
+		</div>
+	</footer>
+<script src="main.js"></script>
+<script type="text/javascript">
+	setTimeout(function(){$('#start-button').fadeIn('fast')},3000);
+</script>
+</body>
+</html>

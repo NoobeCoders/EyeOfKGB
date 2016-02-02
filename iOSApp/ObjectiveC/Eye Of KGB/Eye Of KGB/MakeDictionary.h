@@ -12,7 +12,9 @@
 
 @property (strong, nonatomic) NSMutableArray *sites;
 @property (strong, nonatomic) NSMutableArray *names;
-@property (strong, nonatomic) NSMutableArray *rates;
+@property (strong, nonatomic) NSMutableArray *allRates;
+@property (strong, nonatomic) NSMutableArray *sitesID;
+
 - (void) makeDictionary;
 - (void) getSites;
 - (void) getRates;

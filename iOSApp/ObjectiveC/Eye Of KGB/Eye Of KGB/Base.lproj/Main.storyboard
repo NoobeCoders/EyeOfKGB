@@ -88,7 +88,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0a1-0V-Mfq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-259.73333333333335" y="-64.373333333333335"/>
+            <point key="canvasLocation" x="-260" y="-257"/>
         </scene>
         <!--Admin App View Controller-->
         <scene sceneID="y7w-rO-wL1">
@@ -216,6 +216,7 @@
                     </view>
                     <connections>
                         <outlet property="sitePicker" destination="ExR-Qp-nQh" id="QRM-CK-V10"/>
+                        <outlet property="tableView" destination="sCf-Mi-aWm" id="2sM-nB-Tfm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
