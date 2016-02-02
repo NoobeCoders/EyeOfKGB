@@ -19,6 +19,9 @@ namespace Crawler.Engine
     {
         private static readonly int SITE_TASK_AMOUNT = 20;
         private static readonly int PAGE_TASK_AMOUNT = 50;
+        
+        private static readonly int PAGE_AMOUNT = 1000;
+        private static readonly int PAGE_INTERVAL = 25;
 
         IDataManager dataManager;
         IDownloader downloader;
@@ -160,23 +163,28 @@ namespace Crawler.Engine
             }
 
             await Task.WhenAll(siteTasks);
-
-            await dataManager.Save();
+            try
+            { await dataManager.Save(); }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            
         }
 
         private async Task ProcessSite(Site site)
         {
             List<Task<int>> pageTasks = new List<Task<int>>();
 
-            foreach (Page page in site.Pages.Where(p => (p.LastScanDate != null && p.LastScanDate.Value.Date != DateTime.Now.Date) || p.LastScanDate == null).ToList())
+            IEnumerable<Page> pages = await dataManager.Pages.GetPagesBySiteId(site.Id, PAGE_AMOUNT);
+
+            foreach (Page page in pages)
             {
                 pageTasks.Add(pageHandler.HandlePage(page));
 
-                Thread.Sleep(25);
+                Thread.Sleep(PAGE_INTERVAL);
 
                 if (pageTasks.Count >= PAGE_TASK_AMOUNT)
                 {
-                    await Task.WhenAny(pageTasks);
+                    Task<int> finishedTask = await Task.WhenAny(pageTasks);
+                    pageTasks.Remove(finishedTask);
                 }
             }
             await Task.WhenAll(pageTasks);

@@ -11,6 +11,7 @@ namespace Crawler.Domain.Entities
         public string URL { get; set; }
         public DateTime FoundDateTime { get; set; }
         public DateTime? LastScanDate { get; set; }
+        public DateTime? LastProcessDate { get; set; }
 
         public int SiteId { get; set; }
         public virtual Site Site { get; set; }

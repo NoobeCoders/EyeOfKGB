@@ -90,12 +90,22 @@ namespace Crawler.Engine
             {
                 lock (dataManager)
                 {
-                    dataManager.PersonPageRanks.Add(new PersonPageRank()
+
+                    Console.WriteLine("Идентификатор персоны: " + person.Id + ";" + "Идентификатор страницы: " + page.Id);
+
+                    try
                     {
-                        Person = person,
-                        Page = page,
-                        Rank = rank
-                    });
+                        dataManager.PersonPageRanks.Add(new PersonPageRank()
+                        {
+                            Person = person,
+                            Page = page,
+                            Rank = rank
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("HtmlHandler" + ";" + ex.Message);
+                    }
                 }
             }
         }
