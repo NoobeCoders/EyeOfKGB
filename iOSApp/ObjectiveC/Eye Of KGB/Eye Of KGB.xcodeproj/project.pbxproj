@@ -14,7 +14,7 @@
 		8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8301482D1C50E4E500748011 /* LaunchScreen.storyboard */; };
 		8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */; };
 		8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */; };
-		8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9261C511CB1008EC517 /* MakeDictionary.m */; };
+		8359B9271C511CB1008EC517 /* GetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9261C511CB1008EC517 /* GetData.m */; };
 		8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9521C53222A008EC517 /* UserAppViewController.m */; };
 		8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9551C53223B008EC517 /* AdminAppViewController.m */; };
 		8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */; };
@@ -35,8 +35,8 @@
 		8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticViewController.m; sourceTree = "<group>"; };
 		8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticTableViewCell.h; sourceTree = "<group>"; };
 		8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticTableViewCell.m; sourceTree = "<group>"; };
-		8359B9251C511CB1008EC517 /* MakeDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MakeDictionary.h; sourceTree = "<group>"; };
-		8359B9261C511CB1008EC517 /* MakeDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MakeDictionary.m; sourceTree = "<group>"; };
+		8359B9251C511CB1008EC517 /* GetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetData.h; sourceTree = "<group>"; };
+		8359B9261C511CB1008EC517 /* GetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetData.m; sourceTree = "<group>"; };
 		8359B9511C53222A008EC517 /* UserAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAppViewController.h; sourceTree = "<group>"; };
 		8359B9521C53222A008EC517 /* UserAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAppViewController.m; sourceTree = "<group>"; };
 		8359B9541C53223B008EC517 /* AdminAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminAppViewController.h; sourceTree = "<group>"; };
@@ -117,8 +117,8 @@
 				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
 				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
 				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
-				8359B9251C511CB1008EC517 /* MakeDictionary.h */,
-				8359B9261C511CB1008EC517 /* MakeDictionary.m */,
+				8359B9251C511CB1008EC517 /* GetData.h */,
+				8359B9261C511CB1008EC517 /* GetData.m */,
 			);
 			name = GeneralStatistic;
 			sourceTree = "<group>";
@@ -223,7 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
-				8359B9271C511CB1008EC517 /* MakeDictionary.m in Sources */,
+				8359B9271C511CB1008EC517 /* GetData.m in Sources */,
 				8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */,
 				8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */,
 				830148211C50E4E500748011 /* main.m in Sources */,
