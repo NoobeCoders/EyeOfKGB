@@ -14,6 +14,9 @@
 
 @property (strong, nonatomic) MakeDictionary *data;
 @property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+@property (strong, nonatomic) NSMutableArray *ratesPreviouslyArray;
+@property (strong, nonatomic) NSMutableArray *rates;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -49,7 +52,7 @@
     GeneralStatisticTableViewCell *cell = (GeneralStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     cell.labelName.text = self.data.names[indexPath.row];
-    cell.labelCount.text = self.data.rates[indexPath.row];
+    cell.labelCount.text = self.rates[indexPath.row];
     
     return cell;
     
@@ -69,6 +72,27 @@
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [self.data.sites objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component __TVOS_PROHIBITED {
+
+    NSUInteger selectedRow = [self.sitePicker selectedRowInComponent:0];
+    
+    //Get rates here
+    
+    NSString *generalRankURL = @"http://crawler.firstexperience.ru/api/v1/personrank/";
+    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@", generalRankURL, self.data.sitesID[selectedRow]];
+    NSArray *data = [[NSArray alloc] init];
+    NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:rankWithIdURL]];
+    NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
+    NSMutableArray *ratesJSON = [NSMutableArray array];
+    data = jsonResult;
+    for (id item in jsonResult)
+        [ratesJSON addObject:[NSString stringWithFormat:@"%@", item[@"rank"]]];
+    self.rates = ratesJSON;
+    
+    [self.tableView reloadData];
+
 }
 
 @end
