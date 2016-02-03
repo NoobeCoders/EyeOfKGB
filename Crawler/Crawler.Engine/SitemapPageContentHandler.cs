@@ -38,9 +38,30 @@ namespace Crawler.Engine
 
         private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
         {
-            lock (dataManager)
+            foreach (string url in urls)
             {
-                foreach (string url in urls)
+                lock (dataManager)
+                {
+                    if (pages.FirstOrDefault(p => p.URL == url) == null)
+                    {
+                        Page page = new Page()
+                        {
+                            URL = url,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        };
+
+                        site.Pages.Add(page);
+                        pages.Add(page);
+                    }
+                }
+            }
+
+            if (urls.Count() == 0)
+            {
+                string url = "http://" + site.Name;
+
+                if (pages.FirstOrDefault(p => p.URL == url) == null)
                 {
                     Page page = new Page()
                     {
@@ -50,31 +71,9 @@ namespace Crawler.Engine
                     };
 
                     site.Pages.Add(page);
-                    //pages.Add(page);
-                    //if (pages.FirstOrDefault(p => p.URL == url) == null)
-                    //{
-                        
-                    //}
+                    pages.Add(page);
                 }
             }
-
-            //if (urls.Count() == 0)
-            //{
-            //    string url = "http://" + site.Name;
-
-            //    if (pages.FirstOrDefault(p => p.URL == url) == null)
-            //    {
-            //        Page page = new Page()
-            //        {
-            //            URL = url,
-            //            Site = site,
-            //            FoundDateTime = DateTime.Now
-            //        };
-
-            //        site.Pages.Add(page);
-            //        pages.Add(page);
-            //    }
-            //}
         }
     }
 }

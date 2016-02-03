@@ -18,7 +18,7 @@ namespace Crawler.DAL.EntityConfigurations
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();
 
-            this.Property(c => c.Name).HasMaxLength(256);
+            this.Property(c => c.Name).HasColumnType("varchar").HasMaxLength(256);
 
             this.HasMany<Page>(c => c.Pages)
                 .WithRequired(c => c.Site)
