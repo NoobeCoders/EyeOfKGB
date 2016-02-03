@@ -24,6 +24,11 @@ namespace Crawler.DAL.EntityConfigurations
                 .WithRequired(c => c.Site)
                 .HasForeignKey(c => c.SiteId)
                 .WillCascadeOnDelete();
+
+            this.HasMany<DisallowPattern>(s => s.DisallowPatterns)
+                .WithRequired(d => d.Site)
+                .HasForeignKey(d => d.SiteId)
+                .WillCascadeOnDelete();
         }
     }
 }

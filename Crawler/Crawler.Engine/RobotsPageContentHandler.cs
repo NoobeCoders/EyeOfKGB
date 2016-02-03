@@ -44,7 +44,9 @@ namespace Crawler.Engine
 
         private void UpdateDisallowPatterns(Site site, string content)
         {
-            foreach (string disallowPatternString in parser.GetDisallowPatterns(content))
+            IEnumerable<string> disallowPatternStrings = parser.GetDisallowPatterns(content);
+
+            foreach (string disallowPatternString in disallowPatternStrings)
             {
                 lock (dataManager)
                 {

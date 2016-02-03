@@ -18,6 +18,7 @@ namespace Crawler.DAL
         public DbSet<Person> Persons { get; set; }
         public DbSet<Site> Sites { get; set; }
         public DbSet<PersonPageRank> PersonPageRanks { get; set; }
+        public DbSet<DisallowPattern> DisallowPatters { get; set; }
 
         //public ApplicationDbContext()
         //    : base()

@@ -20,7 +20,7 @@ namespace Crawler.Domain.Entities
 
         public Page()
         {
-            PersonPageRanks = new List<PersonPageRank>();
+            PersonPageRanks = new HashSet<PersonPageRank>();
         }
     }
 }

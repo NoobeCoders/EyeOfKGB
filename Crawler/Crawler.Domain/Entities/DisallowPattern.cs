@@ -11,6 +11,8 @@ namespace Crawler.Domain.Entities
         public int Id { get; set; }
         public string Pattern { get; set; }
         public string Agent { get; set; }
+
+        public int SiteId { get; set; }
         public Site Site { get; set; }
     }
 }
