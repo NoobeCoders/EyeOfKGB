@@ -8,13 +8,12 @@
 
 #import "GeneralStatisticViewController.h"
 #import "GeneralStatisticTableViewCell.h"
-#import "MakeDictionary.h"
+#import "GetData.h"
 
 @interface GeneralStatisticViewController () <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 
-@property (strong, nonatomic) MakeDictionary *data;
+@property (strong, nonatomic) GetData *data;
 @property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
-@property (strong, nonatomic) NSMutableArray *ratesPreviouslyArray;
 @property (strong, nonatomic) NSMutableArray *rates;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -28,11 +27,11 @@
     self.sitePicker.delegate = self;
     self.sitePicker.dataSource = self;
     
-    self.data = [[MakeDictionary alloc] init];
-    [self.data makeDictionary];
+    self.data = [[GetData alloc] init];
+    [self.data getNames];
     [self.data getSites];
-    [self.data getRates];
-    
+    [self getRates];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,13 +74,20 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component __TVOS_PROHIBITED {
-
-    NSUInteger selectedRow = [self.sitePicker selectedRowInComponent:0];
     
-    //Get rates here
+    self.selectedRow = [self.sitePicker selectedRowInComponent:0];
+    
+    [self getRates];
+        
+    [self.tableView reloadData];
+
+}
+
+//Dont know how do it in GetData?
+- (void) getRates {
     
     NSString *generalRankURL = @"http://crawler.firstexperience.ru/api/v1/personrank/";
-    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@", generalRankURL, self.data.sitesID[selectedRow]];
+    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@", generalRankURL, self.data.sitesID[self.selectedRow]];
     NSArray *data = [[NSArray alloc] init];
     NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:rankWithIdURL]];
     NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
@@ -90,9 +96,6 @@
     for (id item in jsonResult)
         [ratesJSON addObject:[NSString stringWithFormat:@"%@", item[@"rank"]]];
     self.rates = ratesJSON;
-    
-    [self.tableView reloadData];
-
 }
 
 @end

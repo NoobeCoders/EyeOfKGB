@@ -8,15 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MakeDictionary : NSObject
+@interface GetData : NSObject
 
 @property (strong, nonatomic) NSMutableArray *sites;
 @property (strong, nonatomic) NSMutableArray *names;
-@property (strong, nonatomic) NSMutableArray *allRates;
 @property (strong, nonatomic) NSMutableArray *sitesID;
 
-- (void) makeDictionary;
+
+- (void) getNames;
 - (void) getSites;
-- (void) getRates;
 
 @end
