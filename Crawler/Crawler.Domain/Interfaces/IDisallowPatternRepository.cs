@@ -10,5 +10,6 @@ namespace Crawler.Domain.Interfaces
     public interface IDisallowPatternRepository : IRepository<DisallowPattern>
     {
         void Set(IEnumerable<string> disallowPatterns);
+        IEnumerable<DisallowPattern> GetBySiteId(int siteId);
     }
 }

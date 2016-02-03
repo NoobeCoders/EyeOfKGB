@@ -17,20 +17,22 @@ namespace Crawler.Engine
     {
         IEnumerable<Person> persons;
         IEnumerable<PersonPageRank> personPageRanks;
+        IEnumerable<string> disallowPatternStrings;
         List<Page> pages;
 
-        public HtmlPageContentHandler(IDataManager dataManager, IParser parser)
+        public HtmlPageContentHandler(IDataManager dataManager, IParser parser, Site site)
             :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
             personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
-            pages = dataManager.Pages.GetAll().ToList();
+            disallowPatternStrings = dataManager.DisallowPatterns.GetBySiteId(site.Id).Select(d => d.Pattern).ToList();
+            pages = dataManager.Pages.GetPagesBySiteId(site.Id).ToList();
         }
 
         public override void HandleContent(Page page, string htmlContent)
         {
             GetRank(page, htmlContent);
-            //InsertNewPages(page, htmlContent);
+            InsertNewPages(page, htmlContent);
         }
 
         private void GetRank(Page page, string htmlContent)
@@ -48,7 +50,9 @@ namespace Crawler.Engine
         {
             IEnumerable<string> pageUrls = parser.GetPageUrls(htmlContent);
 
-            FilterUrls(pageUrls, dataManager.DisallowPatterns.GetAll().Select(d => d.Pattern).ToList());
+            pageUrls = pageUrls.Where(u => u.Contains(page.Site.Name));
+
+            FilterUrls(pageUrls, disallowPatternStrings);
 
             foreach (String url in pageUrls)
             {

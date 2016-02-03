@@ -64,6 +64,7 @@
     <Compile Include="DBInitializers\InitializationDB.cs" />
     <Compile Include="DBInitializers\InitPersons.cs" />
     <Compile Include="DBInitializers\InitSites.cs" />
+    <Compile Include="EntityConfigurations\DisallowPatternMapper.cs" />
     <Compile Include="EntityConfigurations\KeywordMapper.cs" />
     <Compile Include="EntityConfigurations\PageMapper.cs" />
     <Compile Include="EntityConfigurations\PersonMapper.cs" />

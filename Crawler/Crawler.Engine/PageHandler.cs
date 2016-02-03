@@ -19,14 +19,14 @@ namespace Crawler.Engine
         RobotsPageContentHandler robotsPageContentHandler;
         SitemapPageContentHandler sitemapPageContentHandler;
 
-        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser)
+        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser, Site site)
         {
             this.downloader = downloader;
             this.dataManager = dataManager;
 
-            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser);
-            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser);
-            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser);
+            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser, site);
+            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser, site);
+            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser, site);
         }
 
         public async Task<int> HandlePage(Page page)

@@ -14,10 +14,12 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        public SitemapPageContentHandler(IDataManager dataManager, IParser parser)
+        List<Page> pages;
+
+        public SitemapPageContentHandler(IDataManager dataManager, IParser parser, Site site)
             :base(dataManager, parser)
         {
-
+            pages = site.Pages.ToList();
         }
 
         public override void HandleContent(Page page, string content)
@@ -29,39 +31,50 @@ namespace Crawler.Engine
 
         private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<string> urls = parser.GetFoundPages(sitemap).ToList();
+            IEnumerable<string> urls = parser.GetFoundPages(sitemap);
 
             AddPagesFromUrls(site, urls);
         }
 
         private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
         {
-            foreach (string url in urls)
+            lock (dataManager)
             {
-                lock (dataManager)
+                foreach (string url in urls)
                 {
-                    if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
+                    Page page = new Page()
                     {
-                        site.Pages.Add(new Page()
-                        {
-                            URL = url,
-                            Site = site,
-                            FoundDateTime = DateTime.Now
-                        });
-                    }
+                        URL = url,
+                        Site = site,
+                        FoundDateTime = DateTime.Now
+                    };
+
+                    site.Pages.Add(page);
+                    //pages.Add(page);
+                    //if (pages.FirstOrDefault(p => p.URL == url) == null)
+                    //{
+                        
+                    //}
                 }
             }
-        }
-        private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
-        {
-            List<string> allowPageURLs = parser.GetFoundPages(sitemap).ToList();
 
-            foreach (string disallowPattern in disallowPattens)
-            {
-                allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
-            }
+            //if (urls.Count() == 0)
+            //{
+            //    string url = "http://" + site.Name;
 
-            AddPagesFromUrls(site, allowPageURLs);
+            //    if (pages.FirstOrDefault(p => p.URL == url) == null)
+            //    {
+            //        Page page = new Page()
+            //        {
+            //            URL = url,
+            //            Site = site,
+            //            FoundDateTime = DateTime.Now
+            //        };
+
+            //        site.Pages.Add(page);
+            //        pages.Add(page);
+            //    }
+            //}
         }
     }
 }

@@ -23,7 +23,7 @@ namespace BusinessLogic
         }
         public IEnumerable<string> GetFoundPages(string sitemapXML)
         {
-            List<FoundPage> pages = new List<FoundPage>();
+            List<string> pages = new List<string>();
 
             sitemapXML = new string(sitemapXML.Where(ch => XmlConvert.IsXmlChar(ch)).ToArray());
 
@@ -39,18 +39,15 @@ namespace BusinessLogic
                 Debug.WriteLine(ex.InnerException);
             }
 
-            //XmlElement root = sitemap.DocumentElement;
+            XmlElement root = sitemap.DocumentElement;
 
-            //XmlNodeList urls = root.GetElementsByTagName("loc");
-            //foreach (XmlNode url in urls)
-            //{
-            //    pages.Add(  new FoundPage()
-            //                {
-            //                    URL = url.InnerText
-            //    });
-            //}
+            XmlNodeList urls = root.GetElementsByTagName("loc");
+            foreach (XmlNode url in urls)
+            {
+                pages.Add(url.InnerText.Replace(".gz", String.Empty));
+            }
 
-            return Regex.Matches(sitemapXML, @"<loc>(.*?)<\/loc>").Cast<Match>().Select(m => m.Groups[1].Value);
+            return pages; // Regex.Matches(sitemapXML, @"<loc>(.*?)<\/loc>").Cast<Match>().Select(m => m.Groups[1].Value.Replace(".gz", String.Empty));
         }
 
         public IEnumerable<string> GetDisallowPatterns(string robots)

@@ -22,7 +22,7 @@ namespace Crawler.Engine
         private static readonly int PAGE_TASK_AMOUNT = 50;
         
         private static readonly int PAGE_AMOUNT = 1000;
-        private static readonly int PAGE_INTERVAL = 25;
+        private static readonly int PAGE_INTERVAL = 100;
 
         IDataManager dataManager;
         IDownloader downloader;
@@ -37,7 +37,7 @@ namespace Crawler.Engine
 
             parser = new Parser("Googlebot");
 
-            pageHandler = new PageHandler(dataManager, downloader, parser);
+            pageHandler = null; //new PageHandler(dataManager, downloader, parser, null);
 
         }
 
@@ -157,7 +157,7 @@ namespace Crawler.Engine
             {
 
                 IDataManager dataManager = new DataManager("MSSQLConnection");
-                PageHandler pageHandler = new PageHandler(dataManager, downloader, parser);
+                PageHandler pageHandler = new PageHandler(dataManager, downloader, parser, site);
                 siteTasks.Add(ProcessSite(site, dataManager, pageHandler));
                 
                 if (siteTasks.Count >= SITE_TASK_AMOUNT)

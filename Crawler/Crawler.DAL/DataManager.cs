@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace Crawler.DAL
 {
@@ -80,14 +81,43 @@ namespace Crawler.DAL
             get
             {
                 if (disallowPatterns == null)
-                    disallowPatterns = new DisallowPatternRepository();
+                    disallowPatterns = new DisallowPatternRepository(dbContext);
                 return disallowPatterns;
             }
         }
 
         public async Task Save()
         {
-            await dbContext.SaveChangesAsync();
+            bool success = false;
+
+            do
+            {
+                try
+                {
+                    await dbContext.SaveChangesAsync();
+
+                    success = true;
+                }
+                catch (DbUpdateException ex)
+                {
+                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Modified))
+                    {
+                        entry.CurrentValues.SetValues(entry.OriginalValues);
+                        entry.State = EntityState.Unchanged;
+                    }
+
+                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Added))
+                    {
+                        entry.State = EntityState.Detached;
+                    }
+
+                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Deleted))
+                    {
+                        entry.State = EntityState.Unchanged;
+                    }
+                }
+
+            } while (!success);
         }
 
         private bool disposed = false;

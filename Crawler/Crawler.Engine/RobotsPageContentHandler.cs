@@ -12,10 +12,12 @@ namespace Crawler.Engine
 {
     class RobotsPageContentHandler : PageContentHandler
     {
-        public RobotsPageContentHandler(IDataManager dataManager, IParser parser)
+        List<DisallowPattern> disallowPatterns;
+
+        public RobotsPageContentHandler(IDataManager dataManager, IParser parser, Site site)
             :base(dataManager, parser)
         {
-
+            disallowPatterns = dataManager.DisallowPatterns.GetBySiteId(site.Id).ToList();
         }
 
         public override void HandleContent(Page page, string content)
@@ -39,7 +41,7 @@ namespace Crawler.Engine
                 }
             }
 
-            //UpdateDisallowPatterns(site, content);
+            UpdateDisallowPatterns(site, content);
         }
 
         private void UpdateDisallowPatterns(Site site, string content)
@@ -50,11 +52,13 @@ namespace Crawler.Engine
             {
                 lock (dataManager)
                 {
-                    DisallowPattern disallowPattern = dataManager.DisallowPatterns.GetAll().FirstOrDefault(d => d.Pattern == disallowPatternString && d.Site == site);
+                    DisallowPattern disallowPattern = disallowPatterns.FirstOrDefault(d => d.Pattern == disallowPatternString);
 
                     if (disallowPattern == null)
                     {
-                        dataManager.DisallowPatterns.Add(new DisallowPattern() { Pattern = disallowPatternString, Site = site });
+                        disallowPattern = new DisallowPattern() { Pattern = disallowPatternString, Site = site };
+                        dataManager.DisallowPatterns.Add(disallowPattern);
+                        disallowPatterns.Add(disallowPattern);
                     }
                 }
             }
