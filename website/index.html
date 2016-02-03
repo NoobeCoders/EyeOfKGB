@@ -3,28 +3,30 @@
 <head>
 	<title>Главная страница</title>
 	<meta charset="utf-8">
+	<meta name="Keywords" content="быдлокодеры, geekbrains, проект Eye of KGB">
+	<meta name="Description" content="Веб-сайт развивающейся команды разработчиков БыдлоКОдеры">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link 
-		rel="stylesheet"
-		href="css/style.css"
-		type="text/css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link rel="stylesheet"	href="css/style.css" type="text/css">
+	<link href="css/modal.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<!-- Main menu -->
 	<div class="container-fluid top-fixed">
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<header class="logo">
 					<figure>
 						<a href="index.html"><img src="images/logo.png" alt="logo"></a>				
 					</figure>
 				</header>
 			</div>
-			<div class="col-lg-8">
+			<div class="col-lg-6">
 				<nav class="nav-menu">
 					<ul class="menu">
   						<li>
@@ -39,9 +41,75 @@
   						<li>
   							<a href="#forth-block">Компоненты</a>
   						</li>
- 						
+  						<li>
+  							<a href="#forth-block">Отзывы</a>
+  						</li>				
 					</ul>
 				</nav>				
+			</div>
+			<div class="col-lg-3">
+				<div class="main">
+           			<div class="panell">
+                		<a href="#login_form" id="login_pop">Войти</a>
+                		<a href="#join_form" id="join_pop">Регистрация</a>
+           			</div>
+        		</div>
+        		<!-- popup form #1 -->
+        		<a href="#x" class="overlay" id="login_form"></a>
+        		<div class="popup">
+            		<h2>Добро пожаловать!</h2>
+            		<p>Введите имя пользователя и пароль</p>
+            		<div>
+                		<label for="login">Логин</label>
+                		<input type="text" id="login" value="" required/>
+            		</div>
+            		<div>
+                	<label for="password">Пароль</label>
+                	<input type="password" id="password" value="" required/>
+            		</div>
+            		<input type="checkbox" name="remember">Запомнить меня <br>
+            		<input type="button" value="Войти"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#restore_form" id="restore_pop">Забыли пароль?</a>
+            		<a class="close" href="#close"></a>
+        		</div>
+
+        <!-- popup form #2 -->
+        		<a href="#x" class="overlay" id="join_form"></a>
+        		<div class="popup">
+            		<h2>Регистрация</h2>
+            		<p>Введите свои данные</p>
+            		<div>	
+                		<label for="email">Логин (Email)</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<div>
+                		<label for="pass">Пароль</label>
+                		<input type="password" id="pass" value="" required/>
+            		</div>
+            		<div>
+                		<label for="firstname">Имя</label>
+                		<input type="text" id="firstname" value="" required/>
+            		</div>
+            		<div>
+                		<label for="lastname">Фамилия</label>
+                		<input type="text" id="lastname" value="" />
+            		</div>
+            		<input type="button" value="Регистрация" />&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;<a href="#login_form" id="login_pop">Войти</a>
+            		<a class="close" href="#close"></a>
+        		</div>
+        		<!-- popup form #3 -->
+        		<a href="#x" class="overlay" id="restore_form"></a>
+        		<div class="popup">
+            		<h2>Забыли пароль?</h2>
+            		<p>Введите адрес электронной почты</p>
+            		<div>	
+                		<label for="email">Email</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<input type="button" value="Отправить" 
+            		<br>
+            		<p>Временный пароль будет выслан вам на почту</p>
+            		<a class="close" href="#close"></a>
+        		</div>
 			</div>
 		</div>
 	</div>
@@ -58,10 +126,293 @@
 		<div class="container-fluid" id="second-block">
 			<div class="row">
 				<h2 class="text-center">Вашему вниманию представлен проект команды разработчиков, окончивших обучение на сайте <a href="http://geekbrains.ru/" target="_blank">GeekBrains</a></h2>
-				<h3 class="text-center">БыдлоКОдеры - это молодая развивающая компания, готовая к новым вершинам и вызовам</h3>
+				<h3 class="text-center">БыдлоКОдеры - это молодая развивающаяся компания, готовая к новым вершинам и вызовам</h3>
 				<article>
-					<p class="text-center">У нас в штате есть разработчики для реализации практически любых решений. Это верстка сайтов и веб-приложений на Python/Django и PHP, создание мобильный приложений для iOS и Android, создание десктопных приложений на C#.</p>
-				</article>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingOne">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/gb.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          						Руководитель проекта
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/kartavec.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Евгений Картавец</b>, Москва 27 лет</h2>
+        										<p>Выпускник ВМиК МГУ. За 5 лет прошел путь от младшего программиста до руководителя группы разработчиков. Начинал в студенческие годы с разработки на Qt C++. Позже занялся разработкой на C#, с использованием Sql и NoSql баз данных, веб-сервисов и т.д. Его решения сейчас работают по всей России во всех отделениях Центробанка.</p>
+        										<p>В последние годы основная сфера профессиональных интересов - высоконагруженные системы. Текущий проект преподавателя представляет собой специализированную поисковую машину медиа-контента в интернете. Поисковик развернут на нескольких десятках серверов, ежедневно находит сотни миллионов видеозаписей, хранит и обрабатывает терабайты данных.Основная разработка по-прежнему ведётся на C#, с использованием реляционных баз данных, NoSql, систем мониторинга и т.д.</p>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingTwo">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/prog_csharp.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseThree">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Дмитриев</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Андрей Лобов</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Николай Марченко</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Руслан Лихобаба</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Глеб Молчанов</b></h2>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingThree">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/java.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Линг Дам Тхе</b></h2>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingFour">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/swift.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Олег Шамин</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Евгений Дарнопых</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Мичил Ходулов</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Тимур Аюпов</b></h2>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingFive">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/php.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Альберт Чопчиян</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Максим Маврицкий</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Полищук</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Рыбаков</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Николай Чирков</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Даниил Гаврилов</b></h2>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingSix">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/python.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Сергей Ганжела</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Александр Бельских</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Игорь Коробко</b></h2>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingSeven">
+     		 					<h2 class="panel-title">
+     		 					<img src="images/Front+boot.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          						Разработчики
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Анатолий Акиншин</b></h2>        	
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  					</div>
+				</article>	
 			</div>
 		</div>
 		<div class="container-fluid" id="third-block">
@@ -87,6 +438,7 @@
             </div>
 		</div>
 	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="main.js"></script>
 <script type="text/javascript">
 	setTimeout(function(){$('#start-button').fadeIn('fast')},3000);

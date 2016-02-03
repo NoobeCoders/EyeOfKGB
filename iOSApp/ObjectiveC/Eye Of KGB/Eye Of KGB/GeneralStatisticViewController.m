@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) MakeDictionary *data;
 @property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
-@property (strong, nonatomic) NSMutableArray *ratesPrev;
+@property (strong, nonatomic) NSMutableArray *ratesPreviouslyArray;
 @property (strong, nonatomic) NSMutableArray *rates;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
@@ -78,42 +78,20 @@
 
     NSUInteger selectedRow = [self.sitePicker selectedRowInComponent:0];
     
-//    NSMutableArray *test = [[NSMutableArray alloc] initWithObjects:self.data.allRates[1], nil];
-//    NSLog(@"allRates = %@",test);
+    //Get rates here
     
-    self.ratesPrev = [[NSMutableArray alloc] initWithObjects: self.data.allRates[selectedRow], nil];
-//    NSLog(@"rates = %@",self.ratesPrev);
-    NSString *ratesString = [[self.ratesPrev valueForKey:@"description"] componentsJoinedByString:@""];
-//    NSLog(@"ratesString = %@", ratesString);
-//    NSArray *ratesArrayPreviously = [ratesString componentsSeparatedByString:@" "];
-//    NSLog(@"%@",ratesArrayPreviously);
+    NSString *generalRankURL = @"http://crawler.firstexperience.ru/api/v1/personrank/";
+    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@", generalRankURL, self.data.sitesID[selectedRow]];
+    NSArray *data = [[NSArray alloc] init];
+    NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:rankWithIdURL]];
+    NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
+    NSMutableArray *ratesJSON = [NSMutableArray array];
+    data = jsonResult;
+    for (id item in jsonResult)
+        [ratesJSON addObject:[NSString stringWithFormat:@"%@", item[@"rank"]]];
+    self.rates = ratesJSON;
     
-//    NSArray *ratesArrayPreviously = [ratesString componentsSeparatedByCharactersInSet:
-//                                    [NSCharacterSet characterSetWithCharactersInString:@"(,)\n"]];
-    
-    
-    NSString *ratesStringPreviously = [ratesString stringByReplacingOccurrencesOfString:@"[^0-9]" withString:@" " options:NSRegularExpressionSearch range:NSMakeRange(0, [ratesString length])];
-//    NSLog(@"ratesStringPreviously = %@",ratesStringPreviously);
-    NSArray *arrayOfStrings = [ratesStringPreviously componentsSeparatedByString:@" "];
-    //6, 12, 18
-//    NSLog(@"arrayOfStrings[6] = %@", arrayOfStrings[6]);
-    self.rates = [[NSMutableArray alloc] initWithObjects:[NSString stringWithFormat:@"%@",arrayOfStrings[6]],[NSString stringWithFormat:@"%@",arrayOfStrings[12]], [NSString stringWithFormat:@"%@",arrayOfStrings[18]], nil];
-    
-//    NSLog(@"self.rates = %@",self.rates);
-
-
-
-    
-//
-//    NSArray *ratesArrayPreviously = [ratesStringPreviously componentsSeparatedByCharactersInSet:
-//                                        [NSCharacterSet characterSetWithCharactersInString:@","]];
-//    NSLog(@"%@",ratesArrayPreviously);
-
-
-    
-    
-//    self.rates = [[NSMutableArray alloc] initWithObjects: @"100",@"200",@"300",nil];
-//    [self.tableView reloadData];
+    [self.tableView reloadData];
 
 }
 
