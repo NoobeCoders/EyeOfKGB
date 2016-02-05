@@ -30,6 +30,10 @@ namespace Crawler.WebApi.Admin.Controllers
         // POST: api/Keywords
         public void Post(Keyword keyword)
         {
+            using (DataManager dataManager = new DataManager("PrimaryConnection"))
+            {
+                dataManager.Keywords.Add(keyword);
+            }
         }
 
         // PUT: api/Keywords/5
@@ -44,6 +48,10 @@ namespace Crawler.WebApi.Admin.Controllers
         // DELETE: api/Keywords/5
         public void Delete(Keyword keyword)
         {
+            using (DataManager dataManager = new DataManager("PrimaryConnection"))
+            {
+                dataManager.Keywords.Update(keyword);
+            }
         }
     }
 }
