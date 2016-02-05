@@ -44,8 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageParser\PageLinkFinder.cs" />
-    <Compile Include="PageParser\PersonRanker.cs" />
     <Compile Include="Downloader.cs" />
     <Compile Include="Interfaces\IParser.cs" />
     <Compile Include="Models\FoundPage.cs" />

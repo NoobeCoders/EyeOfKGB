@@ -13,5 +13,8 @@ namespace Crawler.Domain.Interfaces
         IEnumerable<Page> GetPagesByLastScanDate(DateTime? date);
         IEnumerable<Page> GetPagesBySiteId(int id);
         Task<IEnumerable<Page>> GetPagesBySiteId(int id, int pageAmount);
+        bool IsNewUrl(string url);
+        Task<bool> IsNewUrlAsync(string url);
+        Task<Page> GetByIdAsync(int pageId);
     }
 }

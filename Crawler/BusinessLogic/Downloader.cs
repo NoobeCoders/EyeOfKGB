@@ -21,7 +21,7 @@ namespace BusinessLogic
         {
 
             CustomWebClient client = new CustomWebClient();
-            client.Timeout = 60 * 1000;
+            client.Timeout = 2 * 1000;
 
             client.Headers.Remove(HttpRequestHeader.Accept);
             client.Headers.Remove(HttpRequestHeader.UserAgent);
@@ -35,7 +35,7 @@ namespace BusinessLogic
             client.Headers.Add(HttpRequestHeader.CacheControl, "no-cache");
             client.Headers.Add(HttpRequestHeader.Pragma, "no-cache");
             client.Headers.Add(HttpRequestHeader.AcceptEncoding, "gzip, deflate, sdch");
-            client.Headers.Add(HttpRequestHeader.AcceptLanguage, "en-US;q=0.6,en;q=0.4");
+            client.Headers.Add(HttpRequestHeader.AcceptLanguage, "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4");
             client.Headers.Add(HttpRequestHeader.Accept, "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
             client.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.111 Safari/537.36");
             string answer;
@@ -85,11 +85,20 @@ namespace BusinessLogic
 
         protected override WebRequest GetWebRequest(Uri uri)
         {
-            WebRequest webRequest = base.GetWebRequest(uri);
-            webRequest.Timeout = Timeout;
-            HttpWebRequest request = (HttpWebRequest)webRequest;
-            request.ReadWriteTimeout = Timeout;
-            request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            WebRequest webRequest = null;
+            try
+            {
+                webRequest = base.GetWebRequest(uri);
+                webRequest.Timeout = Timeout;
+                HttpWebRequest request = (HttpWebRequest)webRequest;
+                request.ReadWriteTimeout = Timeout;
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            }
+            catch (Exception ex)
+            {
+
+            }
+
             return webRequest;
         }
     }

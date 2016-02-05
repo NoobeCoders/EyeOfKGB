@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Models;
-using BusinessLogic.PageParser;
 using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;

@@ -15,9 +15,9 @@ namespace BusinessLogic
 {
     public class Parser : IParser
     {
-        String robotAgent;
+        string robotAgent;
 
-        public Parser(String robotAgent)
+        public Parser(string robotAgent)
         {
             this.robotAgent = robotAgent;
         }
@@ -39,15 +39,15 @@ namespace BusinessLogic
                 Debug.WriteLine(ex.InnerException);
             }
 
-            XmlElement root = sitemap.DocumentElement;
+            //XmlElement root = sitemap.DocumentElement;
 
-            XmlNodeList urls = root.GetElementsByTagName("loc");
-            foreach (XmlNode url in urls)
-            {
-                pages.Add(url.InnerText.Replace(".gz", String.Empty));
-            }
+            //XmlNodeList urls = root.GetElementsByTagName("loc");
+            //foreach (XmlNode url in urls)
+            //{
+            //    pages.Add(url.InnerText.Replace(".gz", String.Empty));
+            //}
 
-            return pages; // Regex.Matches(sitemapXML, @"<loc>(.*?)<\/loc>").Cast<Match>().Select(m => m.Groups[1].Value.Replace(".gz", String.Empty));
+            return Regex.Matches(sitemapXML, @"<loc>(.*?)<\/loc>").Cast<Match>().Select(m => m.Groups[1].Value.Replace(".gz", String.Empty));
         }
 
         public IEnumerable<string> GetDisallowPatterns(string robots)
@@ -57,56 +57,26 @@ namespace BusinessLogic
 
         public IEnumerable<string> GetDisallowPatterns(string robots, string agent)
         {
-            List<string> dissalowPages = new List<string>();
+            List<string> dissalowPatterns = new List<string>();
 
-            List<string> stringsOfRobots = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
+            List<string> robotStrings = (robots.Split("\n".ToCharArray(), StringSplitOptions.RemoveEmptyEntries)).ToList();
 
-            int i = 0;
-            string[] str = new string[2];
-
-            try
+            foreach (string robotString in robotStrings.Where(s => s.Contains("User-agent: " + agent) || s.Contains("User-agent: *")))
             {
-                while (!stringsOfRobots[i].Contains("User-agent: " + agent) && !stringsOfRobots[i].Contains("User-agent: *"))
+                int index = robotStrings.IndexOf(robotString) + 1;
+
+                while (index < robotStrings.Count && !robotStrings[index].Contains("User-agent: " + agent) && !robotStrings[index].Contains("User-agent: *"))
                 {
-                    i++;
-                }
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-
-                Console.WriteLine("Disallowed страницы не найдены!");
-            }
-
-            while (i < stringsOfRobots.Count)
-            {
-                for (int n = i; i < stringsOfRobots.Count; n++)
-                {
-                    if (stringsOfRobots[i] == "User-agent: " + agent || stringsOfRobots[i] == "User-agent: *")
+                    if (robotStrings[index].Contains("Disallow"))
                     {
-                        i++;
-                        while (i < stringsOfRobots.Count() && !stringsOfRobots[i].Contains("User-agent:"))
-                        {
-                            if (stringsOfRobots[i].Contains("Allow"))
-                            {
-                                i++;
-                            }
-                            else {
-                                if (stringsOfRobots[i].Contains("Disallow"))
-                                {
-                                    str = stringsOfRobots[i].Split(':');
-                                    dissalowPages.Add(str[1]);
-                                    i++;
-                                }
-                                else
-                                {
-                                    i++;
-                                }
-                            }
-                        }
+                        dissalowPatterns.Add(robotStrings[index].Split(':')[1].Trim());
                     }
+
+                    index++;
                 }
             }
-            return dissalowPages;
+
+            return dissalowPatterns;
         }
 
 
