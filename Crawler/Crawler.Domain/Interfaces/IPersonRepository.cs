@@ -10,5 +10,6 @@ namespace Crawler.Domain.Interfaces
     public interface IPersonRepository : IRepository<Person>
     {
         Person GetPersonByName(string name);
+        void Delete(int id);
     }
 }

@@ -10,5 +10,7 @@ namespace Crawler.Domain.Interfaces
     public interface IPersonPageRankRepository : IRepository<PersonPageRank>
     {
         PersonPageRank GetById(int personId, int pageId);
+
+        void Delete(int personId, int pageId);
     }
 }

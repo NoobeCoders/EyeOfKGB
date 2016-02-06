@@ -45,9 +45,15 @@ namespace Crawler.DAL.Implementaions
 
         public void Delete(Person item)
         {
-            Person person = GetById(item.Id);
-            if(person != null)
-                dbContext.Persons.Remove(item);
+            Delete(item.Id);
+        }
+
+
+        public void Delete(int id)
+        {
+            Person person = GetById(id);
+            if (person != null)
+                dbContext.Persons.Remove(person);
         }
     }
 }
