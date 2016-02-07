@@ -7,16 +7,27 @@
 //
 
 #import "DailyStatisticViewController.h"
+#import "DailyStatisticTableViewCell.h"
+#import "GetData.h"
 
 @interface DailyStatisticViewController ()
-
+@property (weak, nonatomic) IBOutlet UIButton *siteButton;
 @end
 
 @implementation DailyStatisticViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.isItSelected = false;
+    
     // Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [self configureSiteButton];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -24,14 +35,35 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+//MARK: - Delegates and data sources (table)
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 3;
 }
-*/
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    DailyStatisticTableViewCell *cell = (DailyStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    cell.labelName.text = @"";
+    cell.labelCount.text = @"";
+    
+    return cell;
+    
+}
+
+- (void) configureSiteButton {
+    
+    if (self.isItSelected) {
+        GetData *data = [[GetData alloc] init];
+        [data getSites];
+        NSMutableArray *nameSites = data.sites;
+        [self.siteButton setTitle:[NSString stringWithFormat:@"%@", nameSites[self.selectedRow]] forState:(UIControlStateNormal)];
+    } else {
+        [self.siteButton setTitle:@"<нажмите для выбора>" forState:(UIControlStateNormal)];
+    }
+}
 
 @end

@@ -7,7 +7,6 @@
 //
 
 #import "GetData.h"
-#import "GeneralStatisticViewController.h"
 
 @implementation GetData
 
@@ -35,7 +34,6 @@
 
 //make dictionary with names and rates (from getRates)
 - (void) getNames {
-    
     NSArray *data = [[NSArray alloc] init];
     NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:JSON_PERSONS]];
     NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
@@ -44,7 +42,6 @@
     for (id item in jsonResult)
         [namesJSON addObject:[NSString stringWithFormat:@"%@", item[@"persons"]]];
     self.names = namesJSON;
-    
 }
 
 @end

@@ -20,6 +20,8 @@
 		8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */; };
 		8359B95F1C532F21008EC517 /* userTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B95E1C532F21008EC517 /* userTabBar@2x.png */; };
 		8359B9621C532F5E008EC517 /* adminTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B9611C532F5E008EC517 /* adminTabBar@2x.png */; };
+		83F782FE1C6381420065CD90 /* DailyStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */; };
+		83F783011C64AA940065CD90 /* SitePickerDailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,10 @@
 		8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyStatisticViewController.m; sourceTree = "<group>"; };
 		8359B95E1C532F21008EC517 /* userTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userTabBar@2x.png"; sourceTree = "<group>"; };
 		8359B9611C532F5E008EC517 /* adminTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adminTabBar@2x.png"; sourceTree = "<group>"; };
+		83F782FC1C6381420065CD90 /* DailyStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyStatisticTableViewCell.h; sourceTree = "<group>"; };
+		83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyStatisticTableViewCell.m; sourceTree = "<group>"; };
+		83F782FF1C64AA940065CD90 /* SitePickerDailyStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitePickerDailyStatisticViewController.h; sourceTree = "<group>"; };
+		83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitePickerDailyStatisticViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +112,8 @@
 				8359B95B1C532B8F008EC517 /* GeneralStatistic */,
 				8359B9511C53222A008EC517 /* UserAppViewController.h */,
 				8359B9521C53222A008EC517 /* UserAppViewController.m */,
+				8359B9251C511CB1008EC517 /* GetData.h */,
+				8359B9261C511CB1008EC517 /* GetData.m */,
 			);
 			name = "User App";
 			sourceTree = "<group>";
@@ -117,8 +125,6 @@
 				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
 				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
 				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
-				8359B9251C511CB1008EC517 /* GetData.h */,
-				8359B9261C511CB1008EC517 /* GetData.m */,
 			);
 			name = GeneralStatistic;
 			sourceTree = "<group>";
@@ -128,6 +134,10 @@
 			children = (
 				8359B9571C5326BB008EC517 /* DailyStatisticViewController.h */,
 				8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */,
+				83F782FC1C6381420065CD90 /* DailyStatisticTableViewCell.h */,
+				83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */,
+				83F782FF1C64AA940065CD90 /* SitePickerDailyStatisticViewController.h */,
+				83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */,
 			);
 			name = DailyStatistic;
 			sourceTree = "<group>";
@@ -225,10 +235,12 @@
 				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
 				8359B9271C511CB1008EC517 /* GetData.m in Sources */,
 				8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */,
+				83F782FE1C6381420065CD90 /* DailyStatisticTableViewCell.m in Sources */,
 				8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */,
 				830148211C50E4E500748011 /* main.m in Sources */,
 				8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */,
 				8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */,
+				83F783011C64AA940065CD90 /* SitePickerDailyStatisticViewController.m in Sources */,
 				8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DailyStatisticViewController : UIViewController
-
+@interface DailyStatisticViewController : UIViewController 
+@property (assign, nonatomic) NSInteger selectedRow;
+@property (assign, nonatomic) BOOL isItSelected;
 @end
