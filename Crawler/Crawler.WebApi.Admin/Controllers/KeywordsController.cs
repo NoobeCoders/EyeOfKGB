@@ -11,49 +11,35 @@ namespace Crawler.WebApi.Admin.Controllers
 {
     public class KeywordsController : ApiController
     {
+        DataManager dataManager = new DataManager("PrimaryConnection");
         // GET: api/Keywords
         public IEnumerable<Keyword> Get()
-        {
-            using (DataManager dataManager = new DataManager("PrimaryConnection"))
-            {
-                return dataManager.Keywords.GetAll().ToList();
-            }
+        {            
+            return dataManager.Keywords.GetAll().ToList();            
         }
 
         // GET: api/Keywords/5
         public IEnumerable<Keyword> Get(int id)
         {
-            using (DataManager dataManager = new DataManager("PrimaryConnection"))
-            {
-                return dataManager.Persons.GetById(id).Keywords.ToList();
-            }
+            return dataManager.Persons.GetById(id).Keywords.ToList();
         }
 
         // POST: api/Keywords
         public void Post(Keyword keyword)
         {
-            using (DataManager dataManager = new DataManager("PrimaryConnection"))
-            {
-                dataManager.Keywords.Add(keyword);
-            }
+            dataManager.Keywords.Add(keyword);
         }
 
         // PUT: api/Keywords/5
         public void Put(Keyword keyword)
         {
-            using (DataManager dataManager = new DataManager("PrimaryConnection"))
-            {
-                dataManager.Keywords.Update(keyword);
-            }
+            dataManager.Keywords.Update(keyword);
         }
 
         // DELETE: api/Keywords/5
-        public void Delete(Keyword keyword)
+        public void Delete(int id)
         {
-            using (DataManager dataManager = new DataManager("PrimaryConnection"))
-            {
-                dataManager.Keywords.Update(keyword);
-            }
+            dataManager.Keywords.Update(id);
         }
     }
 }
