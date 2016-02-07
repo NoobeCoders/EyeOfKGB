@@ -10,5 +10,6 @@ namespace Crawler.Domain.Interfaces
     public interface IKeywordRepository : IRepository<Keyword>
     {
         IEnumerable<Keyword> GetKeywordsByName(string name);
+        void Delete(int id);
     }
 }

@@ -45,7 +45,13 @@ namespace Crawler.DAL.Implementaions
 
         public void Delete(PersonPageRank item)
         {
-            PersonPageRank rank = GetById(item.PersonId, item.PageId);
+            Delete(item.PersonId, item.PageId);
+        }
+
+
+        public void Delete(int personId, int pageId)
+        {
+            PersonPageRank rank = GetById(personId, pageId);
             if (rank != null)
                 dbContext.PersonPageRanks.Remove(rank);
         }
