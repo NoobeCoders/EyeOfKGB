@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.WebUI", "Crawler\Crawler.WebUI.csproj", "{9E03C80E-E1CC-4094-9F82-CCB185ED5E8C}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.ConsoleUI", "Crawler.ConsoleUI\Crawler.ConsoleUI.csproj", "{0B874DCB-4248-4E49-8353-D2204472549C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Engine", "Crawler.Engine\Crawler.Engine.csproj", "{A100949B-571E-4224-A7CE-8A4AB1EB1B71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.AdminUI.WPF", "Crawler.AdminUI.WPF\Crawler.AdminUI.WPF.csproj", "{FB908D01-AA76-4B77-8E4E-08C9687EAE74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
