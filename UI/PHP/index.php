@@ -1,5 +1,5 @@
 <?php
-
+//ini_set('display_errors', 'Off');
 
 require "config.php";
 require "core/Controller.php";
@@ -11,7 +11,7 @@ function __autoload($classname)
 
 }
 
-
+require 'models/M_Daily.php';
 require 'models/M_Total.php';
 
 
@@ -28,6 +28,8 @@ if(isset($_GET['c']))
 switch ($c)
 {
     case "total": $controller = new C_Total();
+        break;
+    case "daily": $controller = new C_Daily();
         break;
     default: $controller = new C_Total();
 }
