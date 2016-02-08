@@ -8,6 +8,24 @@
 	Title="PersonsDirectory">
 
     <Grid>
-        
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <Label Content="Справочник 'Личности'"
+                   Margin="5"/>
+            
+            <ListView Name="PersonsListView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>Личности</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <UniformGrid Columns="3">
+                <Button Margin="0,5,5,5">Добавить</Button>
+                <Button Margin="5">Редактировать</Button>
+                <Button Margin="5,5,0,5">Удалить</Button>
+            </UniformGrid>
+        </StackPanel>        
     </Grid>
 </Page>
