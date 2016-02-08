@@ -1,6 +1,6 @@
 <?php
 
-class M_Total
+class M_Daily
 {
     private static $instanse;
     private $Sql;
@@ -20,6 +20,7 @@ class M_Total
 
     public function Get_Site()
     {
+
         $query = "SELECT * FROM sites";
 
         $result = $this->Sql->Select($query);
@@ -27,19 +28,26 @@ class M_Total
         return $result;
     }
 
-
-
-    public function Get_Total($id)
+    public function Get_Daily($id_persons, $id_site, $founddatetime = "0000-00-00", $lastscandate = "2500-01-01")
     {
-        $query = "SELECT  `persons`.`name` , `personpagerank`.`rank`, `personpagerank`.`personid`
-                  FROM   `personpagerank`
-                  INNER JOIN `pages` ON `pages`.`id` = `personpagerank`.`pageid`
+        $query = "SELECT `pages`.`lastscandate`, `personpagerank`.`rank`, `persons`.`name`
+                  FROM `pages`
+                  INNER JOIN `personpagerank` ON `pages`.`id` = `personpagerank`.`pageid`
                   INNER JOIN `persons` ON `persons`.`id` = `personpagerank`.`personid`
                   INNER JOIN `sites` ON `sites`.`id` = `pages`.`siteid`
-                  WHERE `pages`.`siteid` = $id";
+                  WHERE (`personpagerank`.`personid` = $id_persons AND `pages`.`siteid` = $id_site)
+                  OR (`pages`.`lastscandate` BETWEEN  '$founddatetime' AND  '$lastscandate' ) ";
         $result = $this->Sql->Select($query);
         return $result;
+    }
 
+        public function Get_Persons()
+    {
+        $query = "SELECT * FROM `persons`";
+
+        $result = $this->Sql->Select($query);
+
+        return $result;
     }
 
 }
