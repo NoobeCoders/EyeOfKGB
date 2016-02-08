@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SitePickerDailyStatisticViewController.h"
+#import "PersonPickerDailyStatisticViewController.h"
+#import "StartDatePickerViewController.h"
+#import "EndDatePickerViewController.h"
 
-@interface DailyStatisticViewController : UIViewController 
-@property (assign, nonatomic) NSInteger selectedRow;
-@property (assign, nonatomic) BOOL isItSelected;
+@interface DailyStatisticViewController : UIViewController <SitePickerViewControllerDelegate, PersonPickerViewControllerDelegate, StartDatePickerViewControllerDelegate, EndDatePickerViewControllerDelegate>
+
+
 @end

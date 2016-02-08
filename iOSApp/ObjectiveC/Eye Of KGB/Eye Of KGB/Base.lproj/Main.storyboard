@@ -264,23 +264,32 @@
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="GHb-vc-TFf" kind="modal" id="a8D-ZV-xXg"/>
+                                    <action selector="siteButton:" destination="OEF-fI-zef" eventType="touchUpInside" id="5d8-X9-W0g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J6W-hF-V2z">
                                 <rect key="frame" x="113" y="30" width="52" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="personButton:" destination="OEF-fI-zef" eventType="touchUpInside" id="qA6-DV-QnW"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nqD-DA-2fZ">
                                 <rect key="frame" x="113" y="58" width="52" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="startDateButton:" destination="OEF-fI-zef" eventType="touchUpInside" id="fVG-wg-SVi"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1N6-h5-QhM">
                                 <rect key="frame" x="113" y="86" width="52" height="32"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="endDateButton:" destination="OEF-fI-zef" eventType="touchUpInside" id="7T1-oI-asv"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEZ-ec-g92">
                                 <rect key="frame" x="119" y="120" width="89" height="32"/>
@@ -394,7 +403,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="GKS-YM-vyh"/>
                     <connections>
+                        <outlet property="endDateButton" destination="1N6-h5-QhM" id="OBL-YA-0lk"/>
+                        <outlet property="personButton" destination="J6W-hF-V2z" id="JYI-C1-oUT"/>
                         <outlet property="siteButton" destination="A4d-Wt-4Lu" id="bPu-t6-Unq"/>
+                        <outlet property="startDateButton" destination="nqD-DA-2fZ" id="7tY-G9-sX7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dns-ww-ACl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -404,7 +416,7 @@
         <!--Site Picker Daily Statistic View Controller-->
         <scene sceneID="dKl-Xh-QrL">
             <objects>
-                <viewController id="lcU-Zz-fFn" customClass="SitePickerDailyStatisticViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SitePickerDailyStatistic" id="lcU-Zz-fFn" customClass="SitePickerDailyStatisticViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="maP-vl-ftZ"/>
                         <viewControllerLayoutGuide type="bottom" id="JNf-18-Y0o"/>
@@ -416,6 +428,23 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1LI-dr-d7V">
                                 <rect key="frame" x="0.0" y="176" width="320" height="216"/>
                             </pickerView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GgV-pW-hru">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title=" Выберите сайт" id="8KE-uc-J4P">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ltk-O2-DRY">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="lcU-Zz-fFn" id="TyP-dw-kfr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="RX3-SU-bOl">
+                                            <connections>
+                                                <action selector="doneButton:" destination="lcU-Zz-fFn" id="5Jy-9C-oxC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -423,46 +452,170 @@
                             <constraint firstItem="1LI-dr-d7V" firstAttribute="centerX" secondItem="04q-Yx-lEw" secondAttribute="centerX" id="gdG-Dw-m9g"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="gh0-oJ-BEk">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="D6z-yN-1d8">
-                            <connections>
-                                <action selector="cancelButton:" destination="lcU-Zz-fFn" id="V2n-jF-cDW"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="0nI-Lm-uWK">
-                            <connections>
-                                <action selector="doneButton:" destination="lcU-Zz-fFn" id="XUw-6g-HPK"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="gh0-oJ-BEk"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cancelButton" destination="D6z-yN-1d8" id="gB7-wj-lkr"/>
-                        <outlet property="doneButton" destination="0nI-Lm-uWK" id="Z7N-b9-2OW"/>
                         <outlet property="sitePicker" destination="1LI-dr-d7V" id="SWE-Wx-x8A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Bt-uG-APo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1048" y="8"/>
+            <point key="canvasLocation" x="617" y="8"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="hg0-Us-wJe">
+        <!--Person Picker Daily Statistic View Controller-->
+        <scene sceneID="hky-UM-iIa">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a0b-Hd-trk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GHb-vc-TFf" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PersonPickerViewController" id="aww-f6-li7" customClass="PersonPickerDailyStatisticViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NN5-tT-juC"/>
+                        <viewControllerLayoutGuide type="bottom" id="FT1-9e-HmW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Kyb-Qc-U0D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lez-A2-re8">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Выберите личность" id="Znj-md-Y7e">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="6df-Py-oAA">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="aww-f6-li7" id="f2J-8r-GKG"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="MVy-5s-H5Y">
+                                            <connections>
+                                                <action selector="doneButton:" destination="aww-f6-li7" id="0m5-Kj-p06"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9oS-R1-nRc">
+                                <rect key="frame" x="0.0" y="176" width="320" height="216"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="aww-f6-li7" id="Ejg-Mp-6y5"/>
+                                    <outlet property="delegate" destination="aww-f6-li7" id="pf0-oA-zEU"/>
+                                </connections>
+                            </pickerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9oS-R1-nRc" firstAttribute="centerY" secondItem="Kyb-Qc-U0D" secondAttribute="centerY" id="u3e-co-yDc"/>
+                            <constraint firstItem="9oS-R1-nRc" firstAttribute="centerX" secondItem="Kyb-Qc-U0D" secondAttribute="centerX" id="xhh-9h-9X5"/>
+                        </constraints>
+                    </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="Yje-9o-mOR"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4al-CD-y9x">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
+                    <navigationItem key="navigationItem" id="gJX-WW-6oh"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <segue destination="lcU-Zz-fFn" kind="relationship" relationship="rootViewController" id="foq-rj-TpC"/>
+                        <outlet property="sitePicker" destination="9oS-R1-nRc" id="RHo-Su-mU9"/>
                     </connections>
-                </navigationController>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T5c-IS-ZCl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="621" y="8"/>
+            <point key="canvasLocation" x="1021" y="8"/>
+        </scene>
+        <!--Start Date Picker View Controller-->
+        <scene sceneID="Npi-6n-bkb">
+            <objects>
+                <viewController storyboardIdentifier="StartDatePickerViewController" id="lJ4-u6-fL6" customClass="StartDatePickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f5F-Q6-VVn"/>
+                        <viewControllerLayoutGuide type="bottom" id="LK5-HY-C0t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ipD-pX-xe8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="JsJ-TG-EYT">
+                                <rect key="frame" x="0.0" y="176" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="476627878.18379003">
+                                    <!--2016-02-08 12:37:58 +0000-->
+                                </date>
+                            </datePicker>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Glh-QT-VaR">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Период с" id="qy5-vr-w3V">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ZLo-x9-N5S">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="lJ4-u6-fL6" id="HoR-6G-z4C"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="v7s-Ws-DZ1">
+                                            <connections>
+                                                <action selector="doneButton:" destination="lJ4-u6-fL6" id="Noq-dT-5Y4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JsJ-TG-EYT" firstAttribute="centerY" secondItem="ipD-pX-xe8" secondAttribute="centerY" id="T4W-fp-mYj"/>
+                            <constraint firstItem="JsJ-TG-EYT" firstAttribute="centerX" secondItem="ipD-pX-xe8" secondAttribute="centerX" id="cGr-5N-6lm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="startDatePicker" destination="JsJ-TG-EYT" id="9P0-9h-8xC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pL4-MA-2JI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1437" y="8"/>
+        </scene>
+        <!--End Date Picker View Controller-->
+        <scene sceneID="zmZ-ST-LGZ">
+            <objects>
+                <viewController storyboardIdentifier="EndDatePickerViewController" id="Aa8-ID-yQN" customClass="EndDatePickerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="dlh-dg-rov"/>
+                        <viewControllerLayoutGuide type="bottom" id="c2x-SO-sF5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VwF-X0-K2k">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E7N-Dr-nr7">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Период до" id="reQ-4d-d4B">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="N19-WV-X12">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="Aa8-ID-yQN" id="xz0-Fw-Dpv"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fVr-tb-z0b">
+                                            <connections>
+                                                <action selector="doneButton:" destination="Aa8-ID-yQN" id="cM3-9Q-9D9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="17Z-7Q-cH8">
+                                <rect key="frame" x="0.0" y="176" width="320" height="216"/>
+                                <date key="date" timeIntervalSinceReferenceDate="476635136.40900302">
+                                    <!--2016-02-08 14:38:56 +0000-->
+                                </date>
+                            </datePicker>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="17Z-7Q-cH8" firstAttribute="centerY" secondItem="VwF-X0-K2k" secondAttribute="centerY" id="gUE-yK-d0R"/>
+                            <constraint firstItem="17Z-7Q-cH8" firstAttribute="centerX" secondItem="VwF-X0-K2k" secondAttribute="centerX" id="kOq-i7-CTw"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="endDatePicker" destination="17Z-7Q-cH8" id="AC7-Vp-chx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iqW-ag-gC2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1837" y="8"/>
         </scene>
     </scenes>
     <resources>

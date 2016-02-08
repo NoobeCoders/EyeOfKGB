@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SitePickerViewControllerDelegate <NSObject>
+- (void)setSelectedRowSitePicker:(NSInteger)selectedRow andBoolForSiteButtonName:(BOOL)boolForSiteButtonName;
+@end
+
 @interface SitePickerDailyStatisticViewController : UIViewController
 
-
+@property (nonatomic, strong) id <SitePickerViewControllerDelegate> delegate;
 
 @end
