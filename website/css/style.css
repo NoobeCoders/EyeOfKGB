@@ -31,6 +31,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 100;
 }
 
 .logo {
@@ -102,7 +103,7 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	background-color: #0d8800;
 }
 
-.panel-title {
+.panel-chef {
 	padding-top:10px; 
 	font-size: 24px;
 }
@@ -119,14 +120,6 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	margin-bottom: 10px;
 }
 
-#third-block {
-	height: 100%;
-}
-
-
-#forth-block {
-	height: 100%;
-}
 
 #greetings {
 	margin-top: 300px;
@@ -141,6 +134,20 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	margin: 0 auto;
 
 }
+
+#third-block {
+	height: 100%;
+}
+
+.item img {
+	width: 80%;
+	height: auto;
+}
+
+#forth-block {
+	height: 100%;
+}
+
 
 /* Footer */
 
