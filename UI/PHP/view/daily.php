@@ -1,10 +1,21 @@
 <div id="content">
     <h2>Ежедневная статистека</h2>
-    <form action="#">
-        Сайт: <select>
-            <option>aaa</option>
-        </select>
-        <input type="submit" value="показать статистеку">
+    <form action="" method="post">
+        Сайт:
+            <select name="site">
+                <?php foreach($site as $value):?>
+                    <option value="<?=$value['id']?>"><?=$value['name']?></option>
+                <?php endforeach;?>
+
+            </select>
+        <br>
+        Личность:
+            <select name="persons">
+                <?php foreach($persons as $value):?>
+                    <option value="<?=$value['id']?>"><?=$value['name']?></option>
+                <?php endforeach; ?>
+            </select>
+        <input type="submit" name="sub" value="показать статистеку">
         <br>
         <em>Период:</em>
         <br>
@@ -26,11 +37,16 @@
                 </td>
             </tr>
     </form>
-    <table>
+    <table class="table">
         <tr>
             <th>Дата</th>
-            <th>Личность</th>
             <th>Результать</th>
         </tr>
+        <?php foreach($daily as $value):?>
+            <tr>
+                <td><?=$value['lastscandate'];?></td>
+                <td><?=$value['rank'];?></td>
+            </tr>
+        <?php endforeach;?>
     </table>
 </div>

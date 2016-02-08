@@ -9,7 +9,7 @@
             <?php endforeach;?>
         </select>
         <input type="submit" name="sub" value="показать статистеку">
-    <table>
+    <table class="table">
         <tr>
             <th>Личность</th>
             <th>Результать</th>

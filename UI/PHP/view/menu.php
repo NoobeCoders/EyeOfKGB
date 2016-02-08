@@ -2,10 +2,10 @@
     <h2>Меню</h2>
     <ul>
         <li>
-            <a href="">Общая статистика</a>
+            <a href="http://eyeofkgb/UI/PHP/">Общая статистика</a>
         </li>
         <li>
-            <a href="ez.html">Ежедневная  статистика</a>
+            <a href="?c=daily">Ежедневная  статистика</a>
         </li>
     </ul>
 </nav>
