@@ -10,8 +10,9 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="10">
-            <Label Content="Справочник 'Личности'"
-                   Margin="5"/>
+            <Label Margin="5"
+                   FontSize="16"
+                   FontWeight="Bold">Справочник "Личности"</Label>
             
             <ListView Name="PersonsListView">
                 <ListView.View>

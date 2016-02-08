@@ -8,6 +8,36 @@
 	Title="KeysDirectory">
 
     <Grid>
+        <StackPanel Orientation="Vertical">
+            <Label Margin="5"
+                   FontSize="16"
+                   FontWeight="Bold">Справочник "Ключевые слова"</Label>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Персона:"/>
+                <ComboBox HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160">
+                    <TextBlock IsEnabled="True">Путин</TextBlock>
+                </ComboBox>
+            </StackPanel>
+
+            <ListView Name="KeysView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>Ключевые слова</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <UniformGrid Columns="3" Margin="0,10,0,0">
+                <Button Margin="0,0,5,0">Добавить</Button>
+                <Button Margin="5,0,5,0">Редактировать</Button>
+                <Button Margin="5,0,0,0">Удалить</Button>
+            </UniformGrid>
+
+        </StackPanel>
         
     </Grid>
 </Page>
