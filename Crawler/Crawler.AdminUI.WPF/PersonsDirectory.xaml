@@ -12,7 +12,9 @@
                     Margin="10">
             <Label Margin="5"
                    FontSize="16"
-                   FontWeight="Bold">Справочник "Личности"</Label>
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">Справочник "Личности"</Label>
             
             <ListView Name="PersonsListView">
                 <ListView.View>

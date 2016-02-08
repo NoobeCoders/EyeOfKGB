@@ -10,6 +10,8 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     Margin="10">
+            <Label FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Ежедневная статистика</Label>
+            
             <StackPanel Orientation="Horizontal"
                         Margin="5">
                 <Label Content="Сайт:"

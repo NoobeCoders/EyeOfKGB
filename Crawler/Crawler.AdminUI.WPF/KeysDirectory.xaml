@@ -8,10 +8,13 @@
 	Title="KeysDirectory">
 
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
             <Label Margin="5"
                    FontSize="16"
-                   FontWeight="Bold">Справочник "Ключевые слова"</Label>
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">Справочник "Ключевые слова"</Label>
             
             <StackPanel Orientation="Horizontal"
                         Margin="5">
