@@ -21,6 +21,7 @@ class C_Total extends C_Base
         else
             $total = $this->total->Get_Total(1);
 
+
         $this->title = "list";
         $this->menu = $this->template("view/menu.php");
         $this->content = $this->template("view/total.php", ['total' => $total, 'site' => $site]);
