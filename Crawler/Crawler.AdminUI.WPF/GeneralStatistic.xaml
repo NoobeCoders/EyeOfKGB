@@ -4,35 +4,32 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="500" d:DesignWidth="500"
 	Title="GeneralStatistic">
 
     <Grid>
-        <StackPanel Grid.Column="2" Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <Label Grid.Column="2"
-                       Content="Сайт:"               
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Сайт:"               
                        HorizontalAlignment="Left"
                        VerticalAlignment="Center"
-                       Margin="20" />
+                       Width="70"/>
 
-                <ComboBox Grid.Column="2"
-                          HorizontalAlignment="Left"
+                <ComboBox HorizontalAlignment="Left"
                           VerticalAlignment="Center"
-                          Margin="0"
-                          Width="120">
+                          Width="160">
                     <TextBlock IsEnabled="True">lenta.ru</TextBlock>
                 </ComboBox>
 
-                <Button Grid.Column="2"
-                        Content="Применить"
+                <Button Content="Применить"
                         HorizontalAlignment="Left"
-                        Margin="20"
                         VerticalAlignment="Center"
-                        Width="75"/>
+                        Margin="20,0,0,0"/>
             </StackPanel>
 
-            <ListView Name="GeneralStats" >
+            <ListView Name="GeneralListView" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>Имя</GridViewColumn>
