@@ -1,7 +1,9 @@
 ﻿<Window x:Name="Main" x:Class="Crawler.AdminUI.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Crawler.Admin" Height="351" Width="556">
+        Title="Crawler.Admin" Height="351" Width="556"
+        
+        >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.70*" />
@@ -15,48 +17,23 @@
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch" />
 
-        <ListBox Grid.Column="0" FontSize="16" Foreground="Blue">
-            <ListBoxItem IsSelected="True">Общая статистика</ListBoxItem>
-            <ListBoxItem>Ежедневная статистика</ListBoxItem>
+        <ListBox Name="Menu" Grid.Column="0" FontSize="16" Foreground="Blue" SelectionChanged="Menu_SelectionChanged">
+            <ListBoxItem IsSelected="True" Tag="GeneralStatistic.xaml">Общая статистика</ListBoxItem>
+            <ListBoxItem Tag="DailyStats.xaml">Ежедневная статистика</ListBoxItem>
             <ListBoxItem IsEnabled="False" Margin="0,20,0,0">Справочники</ListBoxItem>
-            <ListBoxItem Padding="60,0,0,0">Личности</ListBoxItem>
-            <ListBoxItem Padding="60,0,0,0">Ключевые слова</ListBoxItem>
-            <ListBoxItem Padding="60,0,0,0">Сайты</ListBoxItem>
+            <ListBoxItem Padding="60,0,0,0" Tag="PersonsDirectory.xaml">Личности</ListBoxItem>
+            <ListBoxItem Padding="60,0,0,0" Tag="KeysDirectory.xaml">Ключевые слова</ListBoxItem>
+            <ListBoxItem Padding="60,0,0,0" Tag="SitesDirectory.xaml">Сайты</ListBoxItem>
         </ListBox>
 
-        <StackPanel Grid.Column="2" Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
-                <Label Grid.Column="2"
-                       Content="Сайт:"               
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Center"
-                       Margin="20" />
-
-                <ComboBox Grid.Column="2"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Center"
-                          Margin="0"
-                          Width="120">
-                    <TextBlock IsEnabled="True">lenta.ru</TextBlock>
-                </ComboBox>
-
-                <Button Grid.Column="2"
-                        Content="Применить"
-                        HorizontalAlignment="Left"
-                        Margin="20"
-                        VerticalAlignment="Center"
-                        Width="75"/>
-            </StackPanel>
-
-            <ListView Name="GeneralStatistic" >
-                <ListView.View>
-                    <GridView>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Name}">Имя</GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Path=Count}">Кол-во упоминаний</GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
-        </StackPanel>
+        <Frame Name="Statistic"
+               Grid.Column="2"
+               Source="{Binding ElementName=Menu, Path=SelectedItem.Tag}"
+               BorderBrush="LimeGreen"
+               BorderThickness="2"
+               NavigationUIVisibility="Hidden">
+            
+        </Frame>
 
         
 

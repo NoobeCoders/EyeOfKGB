@@ -24,5 +24,16 @@ namespace Crawler.AdminUI.WPF
         {
             InitializeComponent();
         }
+
+        private void Menu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            //string uri;
+            //string content = ((sender as ListBox).SelectedItem as ListBoxItem).Content.ToString();
+            //switch (content)
+            //{
+            //    case ""
+            //}
+            //Statistic.NavigationService.Navigate(new Uri("GeneralStatistic.xaml", UriKind.Relative));
+        }
     }
 }
