@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <Spinner
+        android:id="@+id/spinner_total_url"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:contextClickable="true"
+        android:drawSelectorOnTop="true" />
+
+    <TableLayout
+        android:id="@+id/table_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/spinner_total_url"
+        android:layout_marginTop="30dp">
+
+        <TableRow
+            android:id="@+id/table_row1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="#dcdcdc"
+                android:gravity="left"
+                android:padding="@dimen/padding_button"
+                android:text="@string/name_total_st"
+                android:textColor="#000000" />
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:background="#d3d3d3"
+                android:gravity="center"
+                android:padding="@dimen/padding_button"
+                android:text="@string/hits_total_st"
+                android:textColor="#000000" />
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+        android:id="@+id/list_static"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/list_item_padding_tip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/table_layout"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="1.0sp"/>
+
+</RelativeLayout>
