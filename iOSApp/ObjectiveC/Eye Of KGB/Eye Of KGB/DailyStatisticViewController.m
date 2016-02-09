@@ -28,6 +28,13 @@
 @property (strong, nonatomic) NSString *endDateFromDatePicker;
 @property (assign, nonatomic) BOOL isItSelectedEndDate;
 
+@property (strong, nonatomic) GetData *data;
+
+@property (strong, nonatomic) NSMutableArray *rates;
+@property (strong, nonatomic) NSMutableArray *days;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation DailyStatisticViewController
@@ -40,6 +47,9 @@
     self.isItSelectedStartDate = false;
     self.isItSelectedEndDate = false;
     
+    self.data = [[GetData alloc] init];
+    [self.data getSites];
+    [self.data getNames];
     
     // Do any additional setup after loading the view.
 }
@@ -60,15 +70,19 @@
 //MARK: - Delegates and data sources (table)
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.days.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     DailyStatisticTableViewCell *cell = (DailyStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-    cell.labelName.text = @"";
-    cell.labelCount.text = @"";
+    cell.labelName.text = self.days[indexPath.row];
+    cell.labelCount.text = self.rates[indexPath.row];
+    
+//    cell.labelName.text = @"";
+//    cell.labelCount.text = @"";
+    
     return cell;
     
 }
@@ -76,9 +90,7 @@
 - (void) configureSiteButton {
     
     if (self.isItSelectedRowSitePicker) {
-        GetData *data = [[GetData alloc] init];
-        [data getSites];
-        NSMutableArray *nameSites = data.sites;
+        NSMutableArray *nameSites = self.data.sites;
         [self.siteButton setTitle:[NSString stringWithFormat:@"%@", nameSites[self.selectedRowFromSitePicker]] forState:(UIControlStateNormal)];
     } else {
         [self.siteButton setTitle:@"<нажмите для выбора>" forState:(UIControlStateNormal)];
@@ -88,9 +100,7 @@
 - (void) configurePersonButton {
     
     if (self.isItSelectedRowPersonPicker) {
-        GetData *data = [[GetData alloc] init];
-        [data getNames];
-        NSMutableArray *nameNames = data.names;
+        NSMutableArray *nameNames = self.data.names;
         [self.personButton setTitle:[NSString stringWithFormat:@"%@", nameNames[self.selectedRowFromPersonPicker]] forState:(UIControlStateNormal)];
     } else {
         [self.personButton setTitle:@"<нажмите для выбора>" forState:(UIControlStateNormal)];
@@ -157,6 +167,61 @@
 - (void) setEndDate:(NSString *)endDate andBoolForEndDateButtonName:(BOOL)boolForEndDateButtonName {
     self.endDateFromDatePicker = endDate;
     self.isItSelectedEndDate = boolForEndDateButtonName;
+}
+
+- (IBAction)applyButton:(id)sender {
+    [self getEveryDayRates];
+}
+
+//Dont know how do it in GetData?
+- (void) getEveryDayRates {
+    NSString *generalRankURL = @"http://crawler.firstexperience.ru/api/v1/rankeveryday/";
+    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@/?dt_range=%@,%@", generalRankURL, self.data.sitesID[self.selectedRowFromSitePicker], self.startDateFromDatePicker, self.endDateFromDatePicker];
+    NSLog(@"url = %@",rankWithIdURL);
+
+    NSArray *data = [[NSArray alloc] init];
+    NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:rankWithIdURL]];
+    NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
+    NSMutableArray *ratesJSON = [NSMutableArray array];
+    NSMutableArray *daysJSON = [NSMutableArray array];
+    data = jsonResult;
+    for (id item in jsonResult) {
+        [ratesJSON addObject:[NSString stringWithFormat:@"%@", item[@"rank_day"]]];
+        [daysJSON addObject:[NSString stringWithFormat:@"%@", item[@"data_scan"]]];
+
+    }
+    
+    NSInteger numberOfDays = daysJSON.count;
+    self.rates = [[NSMutableArray alloc] init];
+    self.days = [[NSMutableArray alloc] init];
+
+    switch (self.selectedRowFromPersonPicker) {
+        case 0:
+            
+            for (int i = 0; i < numberOfDays; i = i+3) {
+                [self.rates addObject:ratesJSON[i]];
+                [self.days addObject:daysJSON[i]];
+            }
+            [self.tableView reloadData];
+            
+            break;
+        case 1:
+            for (int i = 1; i < numberOfDays; i = i+3) {
+                [self.rates addObject:ratesJSON[i]];
+                [self.days addObject:daysJSON[i]];
+            }
+            [self.tableView reloadData];
+            break;
+        case 2:
+            for (int i = 2; i < numberOfDays; i = i+3) {
+                [self.rates addObject:ratesJSON[i]];
+                [self.days addObject:daysJSON[i]];
+            }
+            [self.tableView reloadData];
+            break;
+        default:
+            break;
+    }
 }
 
 @end
