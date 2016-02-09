@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.Interfaces;
+using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
@@ -14,31 +15,29 @@ namespace Crawler.Engine
     class PageHandler
     {
         IDownloader downloader;
-        IDataManager dataManager;
-        HtmlPageContentHandler htmlPageContentHandler;
-        RobotsPageContentHandler robotsPageContentHandler;
-        SitemapPageContentHandler sitemapPageContentHandler;
+        IParser parser;
 
         public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser, Site site)
         {
             this.downloader = downloader;
-            this.dataManager = dataManager;
-
-            htmlPageContentHandler = new HtmlPageContentHandler(dataManager, parser, site);
-            robotsPageContentHandler = new RobotsPageContentHandler(dataManager, parser, site);
-            sitemapPageContentHandler = new SitemapPageContentHandler(dataManager, parser, site);
+            this.parser = parser;
         }
 
         public async Task<int> HandlePage(Page page)
         {
             string content = await DownloadPageContent(page);
 
-            if (IsRobotsPage(page))
-                robotsPageContentHandler.HandleContent(page, content);
-            else if (IsSitemapPage(page))
-                sitemapPageContentHandler.HandleContent(page, content);
-            else
-                htmlPageContentHandler.HandleContent(page, content);
+            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            {
+                if (IsRobotsPage(page))
+                    await new RobotsPageContentHandler(dataManager, parser, page.Site).HandleContent(page.Id, content);
+                else if (IsSitemapPage(page))
+                    await new SitemapPageContentHandler(dataManager, parser, page.Site).HandleContent(page.Id, content);
+                else
+                    await new HtmlPageContentHandler(dataManager, parser, page.Site).HandleContent(page.Id, content);
+
+                await dataManager.Save();
+            }
 
             page.LastScanDate = DateTime.Now;
 

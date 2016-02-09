@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Models;
-using BusinessLogic.PageParser;
 using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
@@ -29,10 +28,13 @@ namespace Crawler.ConsoleUI
 
             using (CrawlerEngine crawler = new CrawlerEngine(dataManager, downloader))
             {
-                crawler.Start().Wait();
+                while (true)
+                {
+                    Console.WriteLine("Start");
+                    crawler.Start().Wait();
+                    Console.WriteLine("Stop");
+                }
             }
-            Console.WriteLine("Сканирование закончено.");
-            Console.ReadKey();
         }
     }
 }

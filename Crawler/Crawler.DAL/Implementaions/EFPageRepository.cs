@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,6 +110,35 @@ namespace Crawler.DAL.Implementaions
             while (!success);
 
             return pages;
+        }
+
+        public bool IsNewUrl(string url)
+        {
+            try
+            {
+                if (dbContext.Pages.FirstOrDefault(p => p.URL == url) == null)
+                    return true;
+                else
+                    return false;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> IsNewUrlAsync(string url)
+        {
+            if (await dbContext.Pages.FirstOrDefaultAsync(p => p.URL == url) == null)
+                return true;
+            else
+                return false;
+        }
+
+        public async Task<Page> GetByIdAsync(int pageId)
+        {
+            return await dbContext.Pages.FindAsync(pageId);
         }
     }
 }

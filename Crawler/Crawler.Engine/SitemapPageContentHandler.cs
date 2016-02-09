@@ -14,35 +14,35 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        List<Page> pages;
-
         public SitemapPageContentHandler(IDataManager dataManager, IParser parser, Site site)
             :base(dataManager, parser)
         {
-            pages = site.Pages.ToList();
+
         }
 
-        public override void HandleContent(Page page, string content)
+        public override async Task HandleContent(int pageId, string content)
         {
+            Page page = await dataManager.Pages.GetByIdAsync(pageId);
             Site site = page.Site;
 
-            AddNewPagesToSiteFromSitemap(site, content);
+            await AddNewPagesToSiteFromSitemap(site, content);
         }
 
-        private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
+        private async Task AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
             IEnumerable<string> urls = parser.GetFoundPages(sitemap);
 
-            AddPagesFromUrls(site, urls);
+            await AddPagesFromUrls(site, urls);
         }
 
-        private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
+        private async Task AddPagesFromUrls(Site site, IEnumerable<string> urls)
         {
             foreach (string url in urls)
             {
-                lock (dataManager)
+
+                if (await dataManager.Pages.IsNewUrlAsync(url))
                 {
-                    if (pages.FirstOrDefault(p => p.URL == url) == null)
+                    lock (dataManager)
                     {
                         Page page = new Page()
                         {
@@ -52,26 +52,28 @@ namespace Crawler.Engine
                         };
 
                         site.Pages.Add(page);
-                        pages.Add(page);
                     }
                 }
+                
             }
 
             if (urls.Count() == 0)
             {
                 string url = "http://" + site.Name;
 
-                if (pages.FirstOrDefault(p => p.URL == url) == null)
+                if (await dataManager.Pages.IsNewUrlAsync(url))
                 {
-                    Page page = new Page()
+                    lock (dataManager)
                     {
-                        URL = url,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    };
+                        Page page = new Page()
+                        {
+                            URL = url,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        };
 
-                    site.Pages.Add(page);
-                    pages.Add(page);
+                        site.Pages.Add(page);
+                    }
                 }
             }
         }

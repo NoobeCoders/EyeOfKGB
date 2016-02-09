@@ -9,6 +9,6 @@ namespace Crawler.Domain.Interfaces
 {
     public interface IPersonPageRankRepository : IRepository<PersonPageRank>
     {
-        PersonPageRank GetById(int personId, int pageId);
+        Task<PersonPageRank> GetById(int personId, int pageId);
     }
 }

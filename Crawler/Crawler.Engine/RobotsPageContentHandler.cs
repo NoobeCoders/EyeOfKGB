@@ -20,8 +20,10 @@ namespace Crawler.Engine
             disallowPatterns = dataManager.DisallowPatterns.GetBySiteId(site.Id).ToList();
         }
 
-        public override void HandleContent(Page page, string content)
+        public override async Task HandleContent(int pageId, string content)
         {
+            Page page = await dataManager.Pages.GetByIdAsync(pageId);
+
             Site site = page.Site;
 
             Page sitemapPage = GetSitemapPageFromRobots(content);
@@ -31,15 +33,16 @@ namespace Crawler.Engine
                 sitemapPage.URL = "http://" + page.Site.Name + "/sitemap.xml";
             }
 
-            lock (dataManager)
+            if (await dataManager.Pages.IsNewUrlAsync(sitemapPage.URL))
             {
-                if (site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
+                lock (dataManager)
                 {
                     site.Pages.Add(sitemapPage);
 
                     dataManager.Sites.Update(site);
                 }
             }
+
 
             UpdateDisallowPatterns(site, content);
         }

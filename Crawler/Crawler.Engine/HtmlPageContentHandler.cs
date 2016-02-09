@@ -16,75 +16,65 @@ namespace Crawler.Engine
     class HtmlPageContentHandler : PageContentHandler
     {
         IEnumerable<Person> persons;
-        IEnumerable<PersonPageRank> personPageRanks;
         IEnumerable<string> disallowPatternStrings;
-        List<Page> pages;
 
         public HtmlPageContentHandler(IDataManager dataManager, IParser parser, Site site)
             :base(dataManager, parser)
         {
             persons = dataManager.Persons.GetAll().ToList();
-            personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
             disallowPatternStrings = dataManager.DisallowPatterns.GetBySiteId(site.Id).Select(d => d.Pattern).ToList();
-            pages = dataManager.Pages.GetPagesBySiteId(site.Id).ToList();
         }
 
-        public override void HandleContent(Page page, string htmlContent)
+        public override async Task HandleContent(int pageId, string htmlContent)
         {
-            GetRank(page, htmlContent);
-            InsertNewPages(page, htmlContent);
+            Page page = await dataManager.Pages.GetByIdAsync(pageId);
+            await GetRank(page, htmlContent);
+            await InsertNewPages(page, htmlContent);
         }
 
-        private void GetRank(Page page, string htmlContent)
+        private async Task GetRank(Page page, string htmlContent)
         {
             IEnumerable<string> pagePhrases = parser.GetPagePhrases(htmlContent);
 
             foreach (Person person in persons)
             {
                 int rank = CountRank(person.Keywords, pagePhrases);
-                if(rank != 0) InsertPersonPageRank(person, page, rank);
+                if(rank != 0) await InsertPersonPageRank(person, page, rank);
             }
         }
 
-        private void InsertNewPages(Page page, string htmlContent)
+        private async Task InsertNewPages(Page page, string htmlContent)
         {
             IEnumerable<string> pageUrls = parser.GetPageUrls(htmlContent);
 
-            pageUrls = pageUrls.Where(u => u.Contains(page.Site.Name));
+            pageUrls = pageUrls.Where(u => u.Contains(page.Site.Name)).ToList();
 
             FilterUrls(pageUrls, disallowPatternStrings);
 
-            foreach (String url in pageUrls)
+            foreach (string url in pageUrls)
             {
-                InsertUrl(page.Site, url);
+                await InsertUrl(page.Site, url);
             }
         }
 
-        private void InsertUrl(Site site, String url)
+        private async Task InsertUrl(Site site, string url)
         {
-            lock (dataManager)
+            if (await dataManager.Pages.IsNewUrlAsync(url))
             {
-                Page page = pages.FirstOrDefault(p => p.URL == url);
-
-                if (page == null)
+                Page page = new Page()
                 {
-                    page = new Page()
-                    {
-                        URL = url,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    };
+                    URL = url,
+                    Site = site,
+                    FoundDateTime = DateTime.Now
+                };
 
-                    dataManager.Pages.Add(page);
-
-                    pages.Add(page);
-                }
+                dataManager.Pages.Add(page);
             }
         }
 
-        private void InsertPersonPageRank(Person person, Page page, int rank)
+        private async Task InsertPersonPageRank(Person person, Page page, int rank)
         {
-            PersonPageRank personPageRank = personPageRanks.FirstOrDefault(p => p.PersonId == person.Id && p.PageId == page.Id);
+            PersonPageRank personPageRank = await dataManager.PersonPageRanks.GetById(person.Id, page.Id);
 
             if (personPageRank != null)
             {
@@ -114,11 +104,11 @@ namespace Crawler.Engine
             }
         }
 
-        private void FilterUrls(IEnumerable<String> urls, IEnumerable<String> disallowPaterns)
+        private void FilterUrls(IEnumerable<string> urls, IEnumerable<string> disallowPaterns)
         {
-            foreach (String disallowPattern in disallowPaterns)
+            foreach (string disallowPattern in disallowPaterns)
             {
-                urls = urls.Where(u => !Regex.IsMatch(u, disallowPattern));
+                urls = urls.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
             }
         }
 
