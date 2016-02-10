@@ -15,20 +15,20 @@ namespace Crawler.AdminUI.WPF.Models
             public int rank;
         }
 
-        public static DependencyProperty SitesProperty;
-        public static DependencyProperty PeopleProperty;
+        public static DependencyProperty SitesDailyProperty;
+        public static DependencyProperty PeopleDailyProperty;
         public static DependencyProperty DateBeginProperty;
         public static DependencyProperty DateEndProperty;
         public static DependencyProperty DailyRanksProperty;
 
         static DailyModel()
         {
-            SitesProperty = DependencyProperty.Register("Sites",
+            SitesDailyProperty = DependencyProperty.Register("SitesDaily",
                                                         typeof(List<string>),
                                                         typeof(GeneralModel),
                                                         new PropertyMetadata(new List<string>(){ "выберите сайт" }));
 
-            PeopleProperty = DependencyProperty.Register("People",
+            PeopleDailyProperty = DependencyProperty.Register("PeopleDaily",
                                                         typeof(List<string>),
                                                         typeof(GeneralModel),
                                                         new PropertyMetadata(new List<string>(){ "выберите личность" }));
@@ -49,15 +49,15 @@ namespace Crawler.AdminUI.WPF.Models
                                                         new PropertyMetadata(new List<DailyRank>()));
         }
 
-        public List<string> Sites
+        public List<string> SitesDaily
         {
-            get { return GetValue(SitesProperty) as List<string>; }
-            set { SetValue(SitesProperty, value); }
+            get { return GetValue(SitesDailyProperty) as List<string>; }
+            set { SetValue(SitesDailyProperty, value); }
         }
-        public List<string> People
+        public List<string> PeopleDaily
         {
-            get { return GetValue(PeopleProperty) as List<string>; }
-            set { SetValue(PeopleProperty, value); }
+            get { return GetValue(PeopleDailyProperty) as List<string>; }
+            set { SetValue(PeopleDailyProperty, value); }
         }
 
         public DateTime DateBegin

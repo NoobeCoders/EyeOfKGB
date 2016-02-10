@@ -31,7 +31,7 @@
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center"
                           Width="160"
-                          ItemsSource="{Binding Source={StaticResource GeneralModel}, Path=Sites}">
+                          ItemsSource="{Binding Source={StaticResource GeneralModel}, Path=SitesGeneral}">
                 </ComboBox>
 
                 <Button Name="ApplyButton"

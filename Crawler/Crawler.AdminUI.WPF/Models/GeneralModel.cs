@@ -15,13 +15,13 @@ namespace Crawler.AdminUI.WPF.Models
             public int rank;
         }
 
-        public static DependencyProperty SitesProperty;
+        public static DependencyProperty SitesGeneralProperty;
         public static DependencyProperty SiteRanksProperty;
         public static DependencyProperty SelectedSiteProperty;
 
         static GeneralModel()
         {
-            SitesProperty = DependencyProperty.Register("Sites",
+            SitesGeneralProperty = DependencyProperty.Register("SitesGeneral",
                                                         typeof(List<string>),
                                                         typeof(GeneralModel),
                                                         new PropertyMetadata(new List<string>(){ "выберите сайт" }));
@@ -37,10 +37,10 @@ namespace Crawler.AdminUI.WPF.Models
                                                         new PropertyMetadata("выберите сайт"));
         }
 
-        public List<string> Sites
+        public List<string> SitesGeneral
         {
-            get { return GetValue(SitesProperty) as List<string>; }
-            set { SetValue(SitesProperty, value); }
+            get { return GetValue(SitesGeneralProperty) as List<string>; }
+            set { SetValue(SitesGeneralProperty, value); }
         }
 
         public List<SiteRank> SiteRanks
