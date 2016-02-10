@@ -2,10 +2,15 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Crawler.AdminUI.WPF.Models"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="500"
 	Title="GeneralStatistic">
+
+    <Page.Resources>
+        <local:GeneralModel x:Key="GeneralModel"></local:GeneralModel>
+    </Page.Resources>
 
     <Grid>
         <StackPanel Orientation="Vertical"
@@ -22,19 +27,22 @@
                        VerticalAlignment="Center"
                        Width="70"/>
 
-                <ComboBox HorizontalAlignment="Left"
+                <ComboBox Name="SitesComboBox"
+                          HorizontalAlignment="Left"
                           VerticalAlignment="Center"
-                          Width="160">
-                    <TextBlock IsEnabled="True">lenta.ru</TextBlock>
+                          Width="160"
+                          ItemsSource="{Binding Source={StaticResource GeneralModel}, Path=Sites}">
                 </ComboBox>
 
-                <Button Content="Применить"
+                <Button Name="ApplyButton"
+                        Content="Применить"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Margin="20,0,0,0"/>
             </StackPanel>
 
-            <ListView Name="GeneralListView" >
+            <ListView Name="GeneralListView"
+                      ItemsSource="{Binding Source={StaticResource GeneralModel}, Path=SiteRanks}">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn>Имя</GridViewColumn>
