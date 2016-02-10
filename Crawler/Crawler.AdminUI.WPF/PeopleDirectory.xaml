@@ -23,12 +23,15 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            
-            <UniformGrid Columns="3">
-                <Button Margin="0,5,5,5">Добавить</Button>
-                <Button Margin="5">Редактировать</Button>
-                <Button Margin="5,5,0,5">Удалить</Button>
-            </UniformGrid>
-        </StackPanel>        
+        </StackPanel>
+        
+        <UniformGrid Columns="3"
+                     Margin="10"
+                     VerticalAlignment="Bottom">
+            <Button Margin="0,0,5,0">Добавить</Button>
+            <Button Margin="5,0,5,0">Редактировать</Button>
+            <Button Margin="5,0,0,0">Удалить</Button>
+        </UniformGrid>
+               
     </Grid>
 </Page>

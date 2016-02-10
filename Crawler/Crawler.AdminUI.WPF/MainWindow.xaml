@@ -33,14 +33,18 @@
             <ListBoxItem Padding="60,0,0,0" Tag="KeysDirectory.xaml">Ключевые слова</ListBoxItem>
             <ListBoxItem Padding="60,0,0,0" Tag="SitesDirectory.xaml">Сайты</ListBoxItem>
         </ListBox>
+        
+        <Button Name="Connection"
+                Content="Подключиться"
+                Margin="10"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right" />
 
         <Frame Name="Statistic"
                Grid.Column="2"
                Source="{Binding ElementName=Menu, Path=SelectedItem.Tag}"
                NavigationUIVisibility="Hidden">            
-        </Frame>
-
-        
+        </Frame>        
 
     </Grid>
 </Window>
