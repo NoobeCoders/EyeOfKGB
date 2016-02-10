@@ -63,7 +63,7 @@
     <Compile Include="Models\DailyModel.cs" />
     <Compile Include="Models\GeneralModel.cs" />
     <Compile Include="Models\KeysModel.cs" />
-    <Compile Include="Models\PersonsModel.cs" />
+    <Compile Include="Models\PeopleModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="SitesDirectory.xaml.cs">
       <DependentUpon>SitesDirectory.xaml</DependentUpon>
@@ -95,7 +95,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PersonsDirectory.xaml">
+    <Page Include="PeopleDirectory.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -105,8 +105,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PersonsDirectory.xaml.cs">
-      <DependentUpon>PersonsDirectory.xaml</DependentUpon>
+    <Compile Include="PeopleDirectory.xaml.cs">
+      <DependentUpon>PeopleDirectory.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

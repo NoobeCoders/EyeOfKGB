@@ -29,7 +29,7 @@
             <ListBoxItem IsSelected="True" Tag="GeneralStatistic.xaml">Общая статистика</ListBoxItem>
             <ListBoxItem Tag="DailyStats.xaml">Ежедневная статистика</ListBoxItem>
             <ListBoxItem IsEnabled="False" Margin="0,20,0,0">Справочники</ListBoxItem>
-            <ListBoxItem Padding="60,0,0,0" Tag="PersonsDirectory.xaml">Личности</ListBoxItem>
+            <ListBoxItem Padding="60,0,0,0" Tag="PeopleDirectory.xaml">Личности</ListBoxItem>
             <ListBoxItem Padding="60,0,0,0" Tag="KeysDirectory.xaml">Ключевые слова</ListBoxItem>
             <ListBoxItem Padding="60,0,0,0" Tag="SitesDirectory.xaml">Сайты</ListBoxItem>
         </ListBox>

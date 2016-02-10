@@ -18,9 +18,9 @@ namespace Crawler.AdminUI.WPF
     /// <summary>
     /// Логика взаимодействия для PersonsDirectory.xaml
     /// </summary>
-    public partial class PersonsDirectory : Page
+    public partial class PeopleDirectory : Page
     {
-        public PersonsDirectory()
+        public PeopleDirectory()
         {
             InitializeComponent();
         }

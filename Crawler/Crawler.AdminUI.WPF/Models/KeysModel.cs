@@ -11,6 +11,7 @@ namespace Crawler.AdminUI.WPF.Models
     {
         public static DependencyProperty PeopleProperty;
         public static DependencyProperty KeysProperty;
+        public static DependencyProperty SelectedKeyProperty;
 
         static KeysModel()
         {
@@ -23,6 +24,11 @@ namespace Crawler.AdminUI.WPF.Models
                 typeof(List<string>),
                 typeof(KeysModel),
                 new PropertyMetadata(new List<string>()));
+
+            SelectedKeyProperty = DependencyProperty.Register("SelectedKey",
+                typeof(string),
+                typeof(KeysModel),
+                new PropertyMetadata(string.Empty));
         }
 
         public List<string> People
@@ -35,6 +41,12 @@ namespace Crawler.AdminUI.WPF.Models
         {
             get { return GetValue(KeysProperty) as List<string>; }
             set { SetValue(KeysProperty, value); }
+        }
+
+        public string SelectedKey
+        {
+            get { return GetValue(SelectedKeyProperty) as string; }
+            set { SetValue(SelectedKeyProperty, value); }
         }
     }
 }
