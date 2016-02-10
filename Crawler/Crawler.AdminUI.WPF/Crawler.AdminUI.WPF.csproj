@@ -53,12 +53,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\ConvertStrInt.cs" />
     <Compile Include="GeneralStatistic.xaml.cs">
       <DependentUpon>GeneralStatistic.xaml</DependentUpon>
     </Compile>
     <Compile Include="KeysDirectory.xaml.cs">
       <DependentUpon>KeysDirectory.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\DailyModel.cs" />
+    <Compile Include="Models\GeneralModel.cs" />
+    <Compile Include="Models\KeysModel.cs" />
+    <Compile Include="Models\PersonsModel.cs" />
+    <Compile Include="Models\SitesModel.cs" />
     <Compile Include="SitesDirectory.xaml.cs">
       <DependentUpon>SitesDirectory.xaml</DependentUpon>
     </Compile>
@@ -128,9 +134,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

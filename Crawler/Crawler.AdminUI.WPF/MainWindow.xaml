@@ -1,9 +1,17 @@
 ﻿<Window x:Name="Main" x:Class="Crawler.AdminUI.WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Crawler.Admin" Height="400" Width="650"
-        
+        xmlns:local="clr-namespace:Crawler.AdminUI.WPF"
+        xmlns:localModels="clr-namespace:Crawler.AdminUI.WPF.Models"
+        xmlns:localConverters="clr-namespace:Crawler.AdminUI.WPF.Converters"
+        Title="Crawler.Admin" Height="400" Width="650"        
         >
+    <Window.Resources>
+        <localModels:GeneralModel x:Key="GeneralModel"></localModels:GeneralModel>
+
+        <localConverters:ConvertStrInt x:Key="ConvertStrInt"></localConverters:ConvertStrInt>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.70*" />
