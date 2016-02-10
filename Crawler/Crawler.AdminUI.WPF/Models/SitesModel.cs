@@ -17,7 +17,7 @@ namespace Crawler.AdminUI.WPF.Models
             SitesProperty = DependencyProperty.Register("Sites",
                                                         typeof(List<string>),
                                                         typeof(SitesModel),
-                                                        new PropertyMetadata(new List<string>() { "выберите сайт " }));
+                                                        new PropertyMetadata(new List<string>()));
 
             SelectedSiteProperty = DependencyProperty.Register("SelectedSite",
                                                         typeof(string),

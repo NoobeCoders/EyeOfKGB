@@ -9,13 +9,13 @@ namespace Crawler.AdminUI.WPF.Models
 {
     public class KeysModel : DependencyObject
     {
-        public static DependencyProperty PeopleProperty;
+        public static DependencyProperty PeopleKeysProperty;
         public static DependencyProperty KeysProperty;
         public static DependencyProperty SelectedKeyProperty;
 
         static KeysModel()
         {
-            PeopleProperty = DependencyProperty.Register("People",
+            PeopleKeysProperty = DependencyProperty.Register("PeopleKeys",
                 typeof(List<string>),
                 typeof(KeysModel),
                 new PropertyMetadata(new List<string>() { "выберите личность " }));
@@ -31,10 +31,10 @@ namespace Crawler.AdminUI.WPF.Models
                 new PropertyMetadata(string.Empty));
         }
 
-        public List<string> People
+        public List<string> PeopleKeys
         {
-            get { return GetValue(PeopleProperty) as List<string>; }
-            set { SetValue(PeopleProperty, value); }
+            get { return GetValue(PeopleKeysProperty) as List<string>; }
+            set { SetValue(PeopleKeysProperty, value); }
         }
 
         public List<string> Keys

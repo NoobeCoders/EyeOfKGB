@@ -28,7 +28,7 @@
                           HorizontalAlignment="Left"
                           VerticalAlignment="Center"
                           Width="160"
-                          ItemsSource="{Binding Source={StaticResource KeysModel}, Path=People}">
+                          ItemsSource="{Binding Source={StaticResource KeysModel}, Path=PeopleKeys}">
                 </ComboBox>
             </StackPanel>
 

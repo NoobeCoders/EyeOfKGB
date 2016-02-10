@@ -17,7 +17,7 @@ namespace Crawler.AdminUI.WPF.Models
             PeopleProperty = DependencyProperty.Register("People",
                                                         typeof(List<string>),
                                                         typeof(KeysModel),
-                                                        new PropertyMetadata(new List<string>() { "выберите личность " }));
+                                                        new PropertyMetadata(new List<string>()));
 
             SelectedPersonProperty = DependencyProperty.Register("SelectedPerson",
                                                         typeof(string),
