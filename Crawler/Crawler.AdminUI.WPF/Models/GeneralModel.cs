@@ -7,14 +7,14 @@ using System.Windows;
 
 namespace Crawler.AdminUI.WPF.Models
 {
-    public struct SiteRank
-    {
-        public string name;
-        public int rank;
-    }
-
     public class GeneralModel : DependencyObject
     {
+        public struct SiteRank
+        {
+            public string name;
+            public int rank;
+        }
+
         public static DependencyProperty SitesProperty;
         public static DependencyProperty SiteRanksProperty;
         public static DependencyProperty SelectedSiteProperty;
@@ -23,17 +23,18 @@ namespace Crawler.AdminUI.WPF.Models
         {
             SitesProperty = DependencyProperty.Register("Sites",
                                                         typeof(List<string>),
-                                                        typeof(GeneralModel));
+                                                        typeof(GeneralModel),
+                                                        new PropertyMetadata(new List<string>(){ "выберите сайт" }));
 
             SiteRanksProperty = DependencyProperty.Register("SiteRanks",
                                                         typeof(List<SiteRank>),
                                                         typeof(GeneralModel),
-                                                        new PropertyMetadata(0));
+                                                        new PropertyMetadata(new List<SiteRank>()));
 
             SelectedSiteProperty = DependencyProperty.Register("SelectedSite",
                                                         typeof(string),
                                                         typeof(GeneralModel),
-                                                        new PropertyMetadata(null));
+                                                        new PropertyMetadata("выберите сайт"));
         }
 
         public List<string> Sites
