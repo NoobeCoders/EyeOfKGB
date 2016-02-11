@@ -8,6 +8,6 @@ namespace Crawler.Domain.Interfaces
 {
     public interface IDownloader : IDisposable
     {
-        string Download(string url);
+        Task<string> Download(string url);
     }
 }

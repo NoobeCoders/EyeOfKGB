@@ -14,57 +14,68 @@ namespace Crawler.Engine
 {
     class SitemapPageContentHandler : PageContentHandler
     {
-        public SitemapPageContentHandler(IDataManager dataManager)
-            :base(dataManager)
+        public SitemapPageContentHandler(IDataManager dataManager, IParser parser, Site site)
+            :base(dataManager, parser)
         {
 
         }
 
-        public override void HandleContent(Page page, string content)
+        public override async Task HandleContent(int pageId, string content)
         {
+            Page page = await dataManager.Pages.GetByIdAsync(pageId);
             Site site = page.Site;
 
-            AddNewPagesToSiteFromSitemap(site, content);
-
-            dataManager.Sites.Update(site);
+            await AddNewPagesToSiteFromSitemap(site, content);
         }
 
-        private void AddNewPagesToSiteFromSitemap(Site site, string sitemap)
+        private async Task AddNewPagesToSiteFromSitemap(Site site, string sitemap)
         {
-            IEnumerable<string> urls = Parser.GetFoundPages(sitemap).Select(p => p.URL).ToList();
+            IEnumerable<string> urls = parser.GetFoundPages(sitemap);
 
-            AddPagesFromUrls(site, urls);
+            await AddPagesFromUrls(site, urls);
         }
 
-        private void AddPagesFromUrls(Site site, IEnumerable<string> urls)
+        private async Task AddPagesFromUrls(Site site, IEnumerable<string> urls)
         {
             foreach (string url in urls)
             {
-                if (site.Pages.FirstOrDefault(p => p.URL == url) == null)
+
+                if (await dataManager.Pages.IsNewUrlAsync(url))
                 {
-                    site.Pages.Add(new Page()
+                    lock (dataManager)
                     {
-                        URL = url,
-                        Site = site,
-                        FoundDateTime = DateTime.Now
-                    });
+                        Page page = new Page()
+                        {
+                            URL = url,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        };
+
+                        site.Pages.Add(page);
+                    }
+                }
+                
+            }
+
+            if (urls.Count() == 0)
+            {
+                string url = "http://" + site.Name;
+
+                if (await dataManager.Pages.IsNewUrlAsync(url))
+                {
+                    lock (dataManager)
+                    {
+                        Page page = new Page()
+                        {
+                            URL = url,
+                            Site = site,
+                            FoundDateTime = DateTime.Now
+                        };
+
+                        site.Pages.Add(page);
+                    }
                 }
             }
-        }
-        private void FindNewPagesInSitemap(Site site, string sitemap, IEnumerable<string> disallowPattens)
-        {
-            IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
-
-            List<string> allowPageURLs = new List<string>();
-
-            allowPageURLs = foundPages.Select(p => p.URL).ToList();
-
-            foreach (string disallowPattern in disallowPattens)
-            {
-                allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
-            }
-
-            AddPagesFromUrls(site, allowPageURLs);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Models;
-using BusinessLogic.PageParser;
 using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
@@ -25,17 +24,20 @@ namespace Crawler.ConsoleUI
             IDataManager dataManager = new DataManager("PrimaryConnection");
             IDownloader downloader = new Downloader();
 
-            // Для теста
-            foreach (Person item in dataManager.Persons.GetAll().ToList())
-            {
-                Console.WriteLine(item.Name);
-            }
+            //foreach (Person item in dataManager.Persons.GetAll())
+            //{
+            //    Console.WriteLine(item.Name);
+            //}
 
             using (CrawlerEngine crawler = new CrawlerEngine(dataManager, downloader))
             {
-                //crawler.Start();
+                while (true)
+                {
+                    Console.WriteLine("Start");
+                    crawler.Start().Wait();
+                    Console.WriteLine("Stop");
+                }
             }
-            Console.ReadKey();
         }
     }
 }

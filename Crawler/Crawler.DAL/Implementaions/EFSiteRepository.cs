@@ -25,7 +25,7 @@ namespace Crawler.DAL.Implementaions
 
         public IEnumerable<Site> GetSitesWithoutPages()
         {
-            return dbContext.Sites.Where(s => s.Pages.Count == 0);
+            return dbContext.Sites.Where(s => s.Pages.Count == 0).ToList();
         }
 
         public IEnumerable<Site> GetAll()

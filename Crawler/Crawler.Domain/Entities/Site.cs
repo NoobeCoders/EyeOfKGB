@@ -11,10 +11,12 @@ namespace Crawler.Domain.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Page> Pages { get; set; }
+        public virtual ICollection<DisallowPattern> DisallowPatterns { get; set; }
 
         public Site()
         {
-            Pages = new List<Page>();
+            Pages = new HashSet<Page>();
+            DisallowPatterns = new HashSet<DisallowPattern>();
         }
     }
 }

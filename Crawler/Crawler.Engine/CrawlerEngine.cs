@@ -1,132 +1,55 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Interfaces;
 using BusinessLogic.Models;
+using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Crawler.Engine
 {
     public class CrawlerEngine : IDisposable
     {
+        private static readonly int SITE_TASK_AMOUNT = 20;
+        private static readonly int PAGE_TASK_AMOUNT = 50;
+        
+        private static readonly int PAGE_AMOUNT = 1000;
+        private static readonly int PAGE_INTERVAL = 100;
+
         IDataManager dataManager;
         IDownloader downloader;
-        PageHandler pageHandler;
+
+        IParser parser;
 
         public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
         {
             this.dataManager = dataManager;
             this.downloader = downloader;
 
-            pageHandler = new PageHandler(dataManager, downloader);
-            
+            parser = new Parser("Googlebot");
         }
 
-        public void Start()
+        public async Task Start()
         {
-            AddRobotsPageForNewSites();
-            ProcessNewPages();
-            ProcessScannedSiteMapPages();
-            ProcessNewPages();
-            ProcessScannedHtmlPages();
+            await AddRobotsPageForNewSites();
+            await ProcessSites(dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList());
         }
 
-        public void OldStart()
-        {
-            IEnumerable<Person> persons = dataManager.Persons.GetAll().ToList();
-            List<PersonPageRank> personPageRanks = dataManager.PersonPageRanks.GetAll().ToList();
-
-            foreach (Site site in dataManager.Sites.GetAll().ToList())
-            {
-                List<string> pageURLs = new List<string>();
-
-                foreach (Page page in dataManager.Pages.GetPagesBySiteId(site.Id))
-                {
-                    pageURLs.Add(page.URL);
-                }
-
-                string mainURL = GetMainURL(pageURLs[0]);
-
-                string robots = downloader.Download("http://" + mainURL + "/robots.txt");
-                string sitemap = downloader.Download("http://" + mainURL + "/sitemap.xml");
-
-                IEnumerable<string> disallows = Parser.GetDisallowPatterns(robots, "Googlebot");
-                IEnumerable<FoundPage> foundPages = Parser.GetFoundPages(sitemap);
-
-                List<string> allowPageURLs = new List<string>();
-
-                allowPageURLs = foundPages.Select(p => p.URL).ToList();
-
-                foreach (string disallowPattern in disallows)
-                {
-                    allowPageURLs = allowPageURLs.Where(u => !Regex.IsMatch(u, disallowPattern)).ToList();
-                }
-
-                foreach (string allowPageURL in allowPageURLs)
-                {
-                    if (pageURLs.FirstOrDefault(u => u == allowPageURL) == null)
-                    {
-                        dataManager.Pages.Add(new Page()
-                        {
-                            URL = allowPageURL,
-                            Site = site,
-                            FoundDateTime = DateTime.Now
-                        });
-                    }
-                }
-
-                dataManager.Save();
-
-                foreach (string allowPageURL in allowPageURLs)
-                {
-                    Page page = dataManager.Pages.GetAll().FirstOrDefault(p => p.URL == allowPageURL);
-
-                    string pageHTML = downloader.Download("http://" + allowPageURL);
-                    page.LastScanDate = DateTime.Now;
-
-                    IEnumerable<string> pagePhrases = Parser.GetPagePhrases(pageHTML);
-
-                    foreach (Person person in persons)
-                    {
-                        int personPageRankCounter = 0;
-
-                        foreach (Keyword keyword in person.Keywords)
-                        {
-                            personPageRankCounter += CountPageKeywordUsage(keyword, pagePhrases);
-                        }
-
-                        PersonPageRank personPageRank = dataManager.PersonPageRanks.GetById(person.Id, page.Id);
-
-                        if (personPageRank != null)
-                        {
-                            personPageRank.Rank = personPageRankCounter;
-                            dataManager.PersonPageRanks.Update(personPageRank);
-                        }
-                        else
-                        {
-                            dataManager.PersonPageRanks.Add(new PersonPageRank()
-                            {
-                                Person = person,
-                                Page = page,
-                                Rank = personPageRankCounter
-                            });
-                        }
-                    }
-                }
-            }
-        }
-
-        private void AddRobotsPageForNewSites()
+        private async Task AddRobotsPageForNewSites()
         {
             foreach (Site site in dataManager.Sites.GetSitesWithoutPages().ToList())
             {
                 site.Pages.Add(new Page()
                                         {
-                                            URL = site.Name + "/robots.txt",
+                                            URL = "http://" + site.Name + "/robots.txt",
                                             FoundDateTime = DateTime.Now,
                                             LastScanDate = null
                                         });
@@ -134,87 +57,52 @@ namespace Crawler.Engine
                 dataManager.Sites.Update(site);
             }
 
-            dataManager.Save();
+            await dataManager.Save();
         }
 
-        private void ProcessNewPages()
+        private async Task ProcessSites(IEnumerable<Site> sites)
         {
-            IEnumerable<Page> pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
+            List<Task> siteTasks = new List<Task>();
 
-            while (pages.Count() != 0)
+            foreach (Site site in sites)
             {
+                siteTasks.Add(ProcessSite(site));
+                
+                if (siteTasks.Count >= SITE_TASK_AMOUNT)
+                {
+                    await Task.WhenAny(siteTasks);
+                }
+            }
+
+            await Task.WhenAll(siteTasks);
+            
+        }
+
+        private async Task ProcessSite(Site site)
+        {
+            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            {
+                PageHandler pageHandler = new PageHandler(dataManager, downloader, parser, site);
+                List<Task<int>> pageTasks = new List<Task<int>>();
+
+                IEnumerable<Page> pages = await dataManager.Pages.GetPagesBySiteId(site.Id, PAGE_AMOUNT);
+
                 foreach (Page page in pages)
                 {
-                    pageHandler.HandlePage(page);
+                    pageTasks.Add(pageHandler.HandlePage(page));
+
+                    Thread.Sleep(PAGE_INTERVAL);
+
+                    if (pageTasks.Count >= PAGE_TASK_AMOUNT)
+                    {
+                        Task<int> finishedTask = await Task.WhenAny(pageTasks);
+                        pageTasks.Remove(finishedTask);
+                    }
                 }
+                await Task.WhenAll(pageTasks);
 
-                dataManager.Save();
-
-                pages = dataManager.Pages.GetPagesByLastScanDate(null).ToList();
+                await dataManager.Save();
             }
-        }
-
-        private void ProcessScannedSiteMapPages()
-        {
-            IEnumerable<Page> pages = dataManager.Pages
-                                                    .GetAll()
-                                                    .Where(p => p.URL.Contains("sitemap.xml"))
-                                                    .Where(p => p.LastScanDate != null)
-                                                    .Where(p => p.LastScanDate.Value.Date != DateTime.Now.Date)
-                                                    .ToList();
-
-            foreach (Page page in pages)
-            {
-                pageHandler.HandlePage(page);
-            }
-
-            dataManager.Save();
-        }
-
-        private void ProcessScannedHtmlPages()
-        {
-            IEnumerable<Page> pages = dataManager.Pages
-                                                    .GetAll()
-                                                    .Where(p => !p.URL.Contains("sitemap.xml") && !p.URL.Contains("robots.text"))
-                                                    .Where(p => p.LastScanDate != null)
-                                                    .Where(p => p.LastScanDate.Value.Date != DateTime.Now.Date)
-                                                    .ToList();
-
-            foreach (Page page in pages)
-            {
-                pageHandler.HandlePage(page);
-            }
-
-            dataManager.Save();
-        }
-
-        private string GetMainURL(string url)
-        {
-            return url.Split('/').First();
-        }
-
-        private int CountRank(IEnumerable<Keyword> keywords, IEnumerable<string> pagePhrases)
-        {
-            int rank = 0;
-
-            foreach (Keyword keyword in keywords)
-            {
-                rank += CountPageKeywordUsage(keyword, pagePhrases);
-            }
-
-            return rank;
-        }
-
-        private int CountPageKeywordUsage(Keyword keyword, IEnumerable<string> pagePhrases)
-        {
-            int keywordUsage = 0;
-
-            foreach (string phrase in pagePhrases)
-            {
-                keywordUsage += phrase.Split(' ', ',', '.', ':', ';').Count(s => s == keyword.Name);
-            }
-
-            return keywordUsage;
         }
 
         private bool disposed = false;

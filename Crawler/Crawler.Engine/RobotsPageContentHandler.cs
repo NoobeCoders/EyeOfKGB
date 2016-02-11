@@ -12,29 +12,64 @@ namespace Crawler.Engine
 {
     class RobotsPageContentHandler : PageContentHandler
     {
-        public RobotsPageContentHandler(IDataManager dataManager)
-            :base(dataManager)
-        {
+        List<DisallowPattern> disallowPatterns;
 
+        public RobotsPageContentHandler(IDataManager dataManager, IParser parser, Site site)
+            :base(dataManager, parser)
+        {
+            disallowPatterns = dataManager.DisallowPatterns.GetBySiteId(site.Id).ToList();
         }
 
-        public override void HandleContent(Page page, string content)
+        public override async Task HandleContent(int pageId, string content)
         {
+            Page page = await dataManager.Pages.GetByIdAsync(pageId);
+
             Site site = page.Site;
 
             Page sitemapPage = GetSitemapPageFromRobots(content);
 
-            if (site.Pages.FirstOrDefault(p => p.URL == sitemapPage.URL) == null)
+            if (sitemapPage.URL == String.Empty)
             {
-                site.Pages.Add(sitemapPage);
+                sitemapPage.URL = "http://" + page.Site.Name + "/sitemap.xml";
+            }
 
-                dataManager.Sites.Update(site);
+            if (await dataManager.Pages.IsNewUrlAsync(sitemapPage.URL))
+            {
+                lock (dataManager)
+                {
+                    site.Pages.Add(sitemapPage);
+
+                    dataManager.Sites.Update(site);
+                }
+            }
+
+
+            UpdateDisallowPatterns(site, content);
+        }
+
+        private void UpdateDisallowPatterns(Site site, string content)
+        {
+            IEnumerable<string> disallowPatternStrings = parser.GetDisallowPatterns(content);
+
+            foreach (string disallowPatternString in disallowPatternStrings)
+            {
+                lock (dataManager)
+                {
+                    DisallowPattern disallowPattern = disallowPatterns.FirstOrDefault(d => d.Pattern == disallowPatternString);
+
+                    if (disallowPattern == null)
+                    {
+                        disallowPattern = new DisallowPattern() { Pattern = disallowPatternString, Site = site };
+                        dataManager.DisallowPatterns.Add(disallowPattern);
+                        disallowPatterns.Add(disallowPattern);
+                    }
+                }
             }
         }
 
         private Page GetSitemapPageFromRobots(string robots)
         {
-            string sitemapUrl = Parser.GetSitemapUrl(robots);
+            string sitemapUrl = parser.GetSitemapUrl(robots);
 
             return new Page()
             {

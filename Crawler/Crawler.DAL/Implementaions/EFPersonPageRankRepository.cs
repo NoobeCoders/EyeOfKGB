@@ -18,9 +18,9 @@ namespace Crawler.DAL.Implementaions
             this.dbContext = dbContext;
         }
 
-        public PersonPageRank GetById(int personId, int pageId)
+        public async Task<PersonPageRank> GetById(int personId, int pageId)
         {
-            return dbContext.PersonPageRanks.FirstOrDefault(r => r.PersonId == personId && r.PageId == pageId);
+            return await dbContext.PersonPageRanks.FirstOrDefaultAsync(r => r.PersonId == personId && r.PageId == pageId);
         }
 
         public IEnumerable<PersonPageRank> GetAll()
@@ -43,15 +43,9 @@ namespace Crawler.DAL.Implementaions
             dbContext.Entry(item).State = EntityState.Modified;
         }
 
-        public void Delete(PersonPageRank item)
+        public async void Delete(PersonPageRank item)
         {
-            Delete(item.PersonId, item.PageId);
-        }
-
-
-        public void Delete(int personId, int pageId)
-        {
-            PersonPageRank rank = GetById(personId, pageId);
+            PersonPageRank rank = await GetById(item.PersonId, item.PageId);
             if (rank != null)
                 dbContext.PersonPageRanks.Remove(rank);
         }

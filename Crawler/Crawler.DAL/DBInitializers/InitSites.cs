@@ -11,34 +11,45 @@ namespace Crawler.DAL.DBInitializers
     {
         override public void Initialization(ApplicationDbContext context)
         {
-            //Site lentaRU = new Site()
-            //{
-            //    Name = "Lenta.ru",
-            //    Pages = new List<Page>()
-            //    {
-            //        new Page() { URL = "lenta.ru", FoundDateTime = DateTime.Now }
-            //    }
-            //};
-
-            //Site vestiRU = new Site()
-            //{
-            //    Name = "vesti.ru",
-            //    Pages = new List<Page>()
-            //    {
-            //        new Page() { URL = "vesti.ru", FoundDateTime = DateTime.Now }
-            //    }
-            //};
-
-            Site localhost = new Site()
+            Site geekbrains = new Site()
             {
-                Name = "localhost",
-                Pages = new List<Page>()
+                Name = "geekbrains.ru"
             };
 
-            //context.Sites.Add(lentaRU);
-            //context.Sites.Add(vestiRU);
+            Site professorweb = new Site()
+            {
+                Name = "professorweb.ru"
+            };
 
-            context.Sites.Add(localhost);
+            Site lentaRu = new Site()
+            {
+                Name = "lenta.ru"
+            };
+
+            Site metanit = new Site()
+            {
+                Name = "metanit.com"
+            };
+
+            Site oper = new Site()
+            {
+                Name = "oper.ru"
+            };
+
+            //Site localhost = new Site()
+            //{
+            //    Name = "localhost",
+            //    Pages = new List<Page>()
+            //};
+
+            //context.Sites.Add(lentaRu);
+            context.Sites.Add(oper);
+            context.Sites.Add(geekbrains);
+            context.Sites.Add(metanit);
+            context.Sites.Add(professorweb);
+            //context.Sites.Add(geekBrains);
+
+            //context.Sites.Add(localhost);
 
             context.SaveChanges();
         }

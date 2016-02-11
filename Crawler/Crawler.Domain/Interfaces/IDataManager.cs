@@ -13,8 +13,9 @@ namespace Crawler.Domain.Interfaces
         ISiteRepository Sites { get; }
         IPersonPageRankRepository PersonPageRanks { get; }
         IPageRepository Pages { get; }
+        IDisallowPatternRepository DisallowPatterns { get; }
 
-        void Save();
+        Task Save();
         void Dispose();
     }
 }

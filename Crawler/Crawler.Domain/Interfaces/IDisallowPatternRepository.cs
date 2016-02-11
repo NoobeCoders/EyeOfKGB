@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Crawler.Domain.Interfaces
 {
-    public interface IPersonPageRankRepository : IRepository<PersonPageRank>
+    public interface IDisallowPatternRepository : IRepository<DisallowPattern>
     {
-        Task<PersonPageRank> GetById(int personId, int pageId);
-        void Delete(int personId, int pageId);
+        void Set(IEnumerable<string> disallowPatterns);
+        IEnumerable<DisallowPattern> GetBySiteId(int siteId);
     }
 }
