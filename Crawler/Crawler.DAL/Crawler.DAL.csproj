@@ -70,7 +70,7 @@
     <Compile Include="EntityConfigurations\PersonMapper.cs" />
     <Compile Include="EntityConfigurations\PersonPageRankMapper.cs" />
     <Compile Include="EntityConfigurations\SiteMapper.cs" />
-    <Compile Include="Implementaions\DisallowPatternRepository.cs" />
+    <Compile Include="Implementaions\EFDisallowPatternRepository.cs" />
     <Compile Include="Implementaions\EFKeywordRepository.cs" />
     <Compile Include="Implementaions\EFPageRepository.cs" />
     <Compile Include="Implementaions\EFPersonPageRankRepository.cs" />

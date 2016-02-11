@@ -1,18 +1,16 @@
-﻿using Crawler.DAL.Implementaions;
-using Crawler.Domain.Interfaces;
+﻿using Crawler.Domain.Interfaces;
+using Crawler.RequestWebService.WSImplementaions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
-namespace Crawler.DAL
+namespace Crawler.RequestWebService
 {
     public class DataManager : IDataManager, IDisposable
     {
-        ApplicationDbContext dbContext;
+        IDownloader downloader;
 
         IKeywordRepository keyword;
         IPageRepository page;
@@ -21,9 +19,9 @@ namespace Crawler.DAL
         ISiteRepository site;
         IDisallowPatternRepository disallowPatterns;
 
-        public DataManager (string connectionString)
+        public DataManager (IDownloader downloader)
         {
-            dbContext = new ApplicationDbContext(connectionString);
+            downloader = new Downloader();
         }
 
         public IKeywordRepository Keywords
@@ -31,7 +29,7 @@ namespace Crawler.DAL
             get
             {
                 if (keyword == null)
-                    keyword = new EFKeywordRepository(dbContext);
+                    keyword = new WSKeywordRepository(downloader);
                 return keyword;
             }
         }
@@ -41,7 +39,7 @@ namespace Crawler.DAL
             get
             {
                 if (page == null)
-                    page = new EFPageRepository(dbContext);
+                    page = new WSPageRepository(downloader);
                 return page;
             }
         }
@@ -51,7 +49,7 @@ namespace Crawler.DAL
             get
             {
                 if (person == null)
-                    person = new EFPersonRepository(dbContext);
+                    person = new WSPersonRepository(downloader);
                 return person;
             }
         }
@@ -61,7 +59,7 @@ namespace Crawler.DAL
             get
             {
                 if (personPageRank == null)
-                    personPageRank = new EFPersonPageRankRepository(dbContext);
+                    personPageRank = new WSPersonPageRankRepository(downloader);
                 return personPageRank;
             }
         }
@@ -71,7 +69,7 @@ namespace Crawler.DAL
             get
             {
                 if (site == null)
-                    site = new EFSiteRepository(dbContext);
+                    site = new WSSiteRepository(downloader);
                 return site;
             }
         }
@@ -81,43 +79,14 @@ namespace Crawler.DAL
             get
             {
                 if (disallowPatterns == null)
-                    disallowPatterns = new EFDisallowPatternRepository(dbContext);
+                    disallowPatterns = new WSDisallowPatternRepository(downloader);
                 return disallowPatterns;
             }
         }
 
-        public async Task Save()
-        {
-            bool success = false;
-
-            do
-            {
-                try
-                {
-                    await dbContext.SaveChangesAsync();
-
-                    success = true;
-                }
-                catch (DbUpdateException ex)
-                {
-                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Modified))
-                    {
-                        entry.CurrentValues.SetValues(entry.OriginalValues);
-                        entry.State = EntityState.Unchanged;
-                    }
-
-                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Added))
-                    {
-                        entry.State = EntityState.Detached;
-                    }
-
-                    foreach (DbEntityEntry entry in ex.Entries.Where(x => x.State == EntityState.Deleted))
-                    {
-                        entry.State = EntityState.Unchanged;
-                    }
-                }
-
-            } while (!success);
+        public Task Save()
+        {            
+            throw new NotImplementedException();
         }
 
         private bool disposed = false;
@@ -128,7 +97,7 @@ namespace Crawler.DAL
             {
                 if (disposing)
                 {
-                    dbContext.Dispose();
+                    downloader.Dispose();
                 }
                 this.disposed = true;
             }

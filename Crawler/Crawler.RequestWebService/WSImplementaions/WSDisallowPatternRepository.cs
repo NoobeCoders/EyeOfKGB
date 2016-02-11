@@ -2,28 +2,27 @@
 using Crawler.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Crawler.DAL.Implementaions
+namespace Crawler.RequestWebService.WSImplementaions
 {
-    class DisallowPatternRepository : IDisallowPatternRepository
+    public class WSDisallowPatternRepository : IDisallowPatternRepository
     {
-        ApplicationDbContext dbContext;
+        IDownloader downloader;
 
-        public DisallowPatternRepository(ApplicationDbContext dbContext)
+        public WSDisallowPatternRepository(IDownloader downloader)
         {
-            this.dbContext = dbContext;
+            this.downloader = downloader;
         }
 
-        public void Add(DisallowPattern item)
+        public void Set(IEnumerable<string> disallowPatterns)
         {
-            dbContext.DisallowPatters.Add(item);
+            throw new NotImplementedException();
         }
 
-        public void Delete(DisallowPattern item)
+        public IEnumerable<DisallowPattern> GetBySiteId(int siteId)
         {
             throw new NotImplementedException();
         }
@@ -33,12 +32,12 @@ namespace Crawler.DAL.Implementaions
             throw new NotImplementedException();
         }
 
-        public string GetById(int id)
+        public DisallowPattern GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Set(IEnumerable<string> disallowPatterns)
+        public void Add(DisallowPattern item)
         {
             throw new NotImplementedException();
         }
@@ -48,14 +47,9 @@ namespace Crawler.DAL.Implementaions
             throw new NotImplementedException();
         }
 
-        DisallowPattern IRepository<DisallowPattern>.GetById(int id)
+        public void Delete(DisallowPattern item)
         {
             throw new NotImplementedException();
-        }
-
-        public IEnumerable<DisallowPattern> GetBySiteId(int siteId)
-        {
-            return dbContext.DisallowPatters.Where(d => d.SiteId == siteId);
         }
     }
 }
