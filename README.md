@@ -1,7 +1,7 @@
 # EyeOfKGB
 ***
 ## Добро пожаловать в проект [EyeOfKGB](http://crawler.firstexperience.ru/)!  
-EyeOfKGB от команды NoobeCoders, это высокоинтеллектуальный сервиса анализа контента сайтов, позволяющая отслеживать интересующие вас данные в режиме 24/7, узнать больше вы можете узнать на сайте http://crawler.firstexperience.ru/ а так же в нашей [wiki](https://github.com/NoobeCoders/EyeOfKGB/wiki)   
+EyeOfKGB от команды NoobeCoders, это высокоинтеллектуальный сервис анализа контента сайтов, позволяющая отслеживать интересующие вас данные в режиме 24/7, узнать больше вы можете узнать на сайте http://crawler.firstexperience.ru/ а так же в нашей [wiki](https://github.com/NoobeCoders/EyeOfKGB/wiki)   
 
 ### Все необходимое, для помощи в участии и развитии проекта представленно ниже. 
 
