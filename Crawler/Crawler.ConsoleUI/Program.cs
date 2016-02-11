@@ -19,9 +19,7 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
-
-            IDataManager dataManager = new DataManager("PrimaryConnection");
+            IDataManager dataManager = new DataManager("MSSQLConnection");
             IDownloader downloader = new Downloader();
 
             //foreach (Person item in dataManager.Persons.GetAll())
