@@ -11,5 +11,6 @@ namespace Crawler.Domain.Interfaces
     {
         Site GetSiteByName(string name);
         IEnumerable<Site> GetSitesWithoutPages();
+        void Delete(int id);
     }
 }

@@ -41,6 +41,11 @@ namespace Crawler.DAL.Implementaions
             return dbContext.Pages.FirstOrDefault(p => p.Id == id);
         }
 
+        public IEnumerable<Page> GetPagesBySiteId(int id)
+        {
+            return dbContext.Pages.Where(p => p.SiteId == id);
+        }
+
         public void Add(Page item)
         {
             dbContext.Pages.Add(item);
@@ -53,14 +58,14 @@ namespace Crawler.DAL.Implementaions
 
         public void Delete(Page item)
         {
-            Page page = GetById(item.Id);
+            Delete(item.Id);
+        }
+
+        public void Delete(int id)
+        {
+            Page page = GetById(id);
             if (page != null)
                 dbContext.Pages.Remove(page);
-        }
-        
-        public IEnumerable<Page> GetPagesBySiteId(int id)
-        {
-            return dbContext.Pages.Where(p => p.SiteId == id);
         }
 
         public async Task<IEnumerable<Page>> GetPagesBySiteId(int id, int pageAmount)

@@ -45,9 +45,15 @@ namespace Crawler.DAL.Implementaions
 
         public void Delete(Keyword item)
         {
-            Keyword keyword = GetById(item.Id);
+            Delete(item.Id);
+        }
+
+
+        public void Delete(int id)
+        {
+            Keyword keyword = GetById(id);
             if (keyword != null)
                 dbContext.Keywords.Remove(keyword);
-        }        
+        }
     }
 }

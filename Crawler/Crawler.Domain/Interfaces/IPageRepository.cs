@@ -16,5 +16,6 @@ namespace Crawler.Domain.Interfaces
         bool IsNewUrl(string url);
         Task<bool> IsNewUrlAsync(string url);
         Task<Page> GetByIdAsync(int pageId);
+        void Delete(int id);
     }
 }

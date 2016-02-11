@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.ConsoleUI", "Crawle
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.Engine", "Crawler.Engine\Crawler.Engine.csproj", "{A100949B-571E-4224-A7CE-8A4AB1EB1B71}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crawler.AdminUI.WPF", "Crawler.AdminUI.WPF\Crawler.AdminUI.WPF.csproj", "{FB908D01-AA76-4B77-8E4E-08C9687EAE74}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A100949B-571E-4224-A7CE-8A4AB1EB1B71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB908D01-AA76-4B77-8E4E-08C9687EAE74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

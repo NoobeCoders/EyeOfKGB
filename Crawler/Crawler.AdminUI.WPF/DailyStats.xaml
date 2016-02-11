@@ -1,0 +1,88 @@
+﻿<Page x:Class="Crawler.AdminUI.WPF.DailyStats"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Crawler.AdminUI.WPF.Models"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="DailyStats">
+
+    <Page.Resources>
+        <local:DailyModel x:Key="DailyModel"></local:DailyModel>
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <Label Content="Ежедневная статистика" FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Сайт:"
+                       Width="70"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+                <ComboBox Name="SitesDailyComboBox"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160"
+                          ItemsSource="{Binding Source={StaticResource DailyModel}, Path=SitesDaily}"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Личность:"
+                       Width="70"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+                <ComboBox Name="PersonDailyComboBox"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160"
+                          ItemsSource="{Binding Source={StaticResource DailyModel}, Path=PeopleDaily}"/>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Период с:"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Width="70"/>
+                
+                <DatePicker Name="DateBegin"
+                            SelectedDate="{Binding Source={StaticResource DailyModel}, Path=DateBegin}"/>
+
+                <Label Content="до:"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+
+                <DatePicker Name="DateEnd"
+                            SelectedDate="{Binding Source={StaticResource DailyModel}, Path=DateEnd}"/>
+
+                <Button Content="Применить"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <ListView Name="DailyListView"
+                      ItemsSource="{Binding Source={StaticResource DailyModel}, Path=DailyRanks}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>Дата</GridViewColumn>
+                        <GridViewColumn>Кол-во упоминаний</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <Label Content="Всего за период:"/>
+        </StackPanel>
+    </Grid>
+</Page>

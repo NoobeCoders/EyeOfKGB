@@ -50,10 +50,15 @@ namespace Crawler.DAL.Implementaions
         
         public void Delete(Site item)
         {
-            Site site = GetById(item.Id);
+            Delete(item.Id);
+        }
 
-            if(site != null)
-                dbContext.Sites.Remove(item);
+
+        public void Delete(int id)
+        {
+            Site site = GetById(id);
+            if (site != null)
+                dbContext.Sites.Remove(site);
         }
     }
 }
