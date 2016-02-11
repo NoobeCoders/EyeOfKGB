@@ -4,7 +4,6 @@ using Crawler.DAL;
 using Crawler.Domain.Entities;
 using Crawler.Domain.Interfaces;
 using Crawler.Engine;
-using MySql.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
