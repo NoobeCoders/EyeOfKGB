@@ -49,5 +49,11 @@ namespace Crawler.DAL.Implementaions
             if (rank != null)
                 dbContext.PersonPageRanks.Remove(rank);
         }
+
+
+        public void Delete(int personId, int pageId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
