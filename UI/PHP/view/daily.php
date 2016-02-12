@@ -25,7 +25,7 @@
                     <em>От:</em>
                 </td>
                 <td>
-                    <input  name="from_date" class="date" value="yy-mm-dd">
+                    <input  name="from_date" class="date" placeholder="yy-mm-dd">
                 </td>
             </tr>
             <tr>
@@ -33,7 +33,7 @@
                     <em>До:</em>
                 </td>
                 <td>
-                    <input  name="to_date" class="date" value="yy-mm-dd">
+                    <input  name="to_date" class="date" placeholder="yy-mm-dd">
                 </td>
             </tr>
     </form>

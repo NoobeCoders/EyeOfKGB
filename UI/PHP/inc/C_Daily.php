@@ -12,7 +12,8 @@ class C_Daily extends C_Base
 
     public function action_index()
     {
-        if(isset($_POST['sub']))
+        print_r($_POST['to_date']);
+        if(isset($_POST['sub']) && isset($_POST['from_date']) && isset($_POST['to_date']))
             $daily = $this->daily->Get_Daily($_POST['persons'], $_POST['site'], $_POST['from_date'], $_POST['to_date']);
         else
             $daily = $this->daily->Get_Daily(1, 1);

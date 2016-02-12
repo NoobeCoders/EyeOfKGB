@@ -36,7 +36,7 @@ class M_Daily
                   INNER JOIN `persons` ON `persons`.`id` = `personpagerank`.`personid`
                   INNER JOIN `sites` ON `sites`.`id` = `pages`.`siteid`
                   WHERE (`personpagerank`.`personid` = $id_persons AND `pages`.`siteid` = $id_site)
-                  OR (`pages`.`lastscandate` BETWEEN  '$founddatetime' AND  '$lastscandate' ) ";
+                  AND (`pages`.`lastscandate` BETWEEN  '$founddatetime' AND  '$lastscandate' ) ";
         $result = $this->Sql->Select($query);
         return $result;
     }
