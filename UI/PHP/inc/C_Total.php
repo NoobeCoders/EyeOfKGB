@@ -15,11 +15,15 @@ class C_Total extends C_Base
     {
         $site = $this->total->Get_Site();
 
-
-        if(isset($_POST['sub']))
+        if ($this->isPost())
+        {
             $total = $this->total->Get_Total($_POST['id']);
+            print_r($total);
+        }
         else
-            $total = $this->total->Get_Total(1);
+        {
+            $total = $this->total->Get_Total();
+        }
 
         $this->title = "list";
         $this->menu = $this->template("view/menu.php");
