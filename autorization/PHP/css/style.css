@@ -1,0 +1,14 @@
+.error {
+    color:red;
+    margin-left: 10px;
+
+}
+
+#registrationform {
+    float: right;
+    margin: 30px;
+}
+#loginpassword {
+    width: auto;
+    margin: 30px;
+}

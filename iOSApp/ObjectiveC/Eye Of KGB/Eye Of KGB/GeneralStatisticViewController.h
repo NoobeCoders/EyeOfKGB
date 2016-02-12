@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface GeneralStatisticViewController : UIViewController
-
+@property (assign, nonatomic) NSInteger selectedRow;
 @end

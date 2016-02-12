@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SitePickerDailyStatisticViewController.h"
+#import "PersonPickerDailyStatisticViewController.h"
+#import "StartDatePickerViewController.h"
+#import "EndDatePickerViewController.h"
 
-@interface DailyStatisticViewController : UIViewController
+@interface DailyStatisticViewController : UIViewController <SitePickerViewControllerDelegate, PersonPickerViewControllerDelegate, StartDatePickerViewControllerDelegate, EndDatePickerViewControllerDelegate>
+
 
 @end
