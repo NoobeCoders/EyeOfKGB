@@ -51,11 +51,11 @@ ul.menu li {
 	padding: 3px;
 }
 
-a#login_pop, a#restore_pop, .menu a, #second-block a {
+a#login_pop, a#restore_pop, .menu a, #second-block a, #third-block a {
 	color: #cfcfcf;
 }
 
-a#login_pop:hover, a#restore_pop:hover, .menu a:hover, #second-block a:hover {
+a#login_pop:hover, a#restore_pop:hover, .menu a:hover, #second-block a:hover, #third-block a:hover  {
 	text-decoration: none;
 	text-shadow: 1px 1px 0 yellowgreen,
                  1px -1px 0 yellowgreen,
@@ -148,6 +148,14 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	height: 100%;
 }
 
+.feeds {
+	margin: 70px 0px;
+}
+
+.feeds  p{
+	font-size: 24px;
+
+}
 
 /* Footer */
 

@@ -26,7 +26,7 @@
 					</figure>
 				</header>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-lg-5">
 				<nav class="nav-menu">
 					<ul class="menu">
   						<li>
@@ -44,9 +44,10 @@
 					</ul>
 				</nav>				
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-4">
 				<div class="main">
            			<div class="panell">
+                		<a href="#question_form" id="question_pop">Задать вопрос</a>
                 		<a href="#login_form" id="login_pop">Войти</a>
                 		<a href="#join_form" id="join_pop">Регистрация</a>
            			</div>
@@ -102,11 +103,29 @@
                 		<label for="email">Email</label>
                 		<input type="text" id="email" value="" required />
             		</div>	
-            		<input type="button" value="Отправить" 
+            		<input type="button" value="Отправить"> 
             		<br>
             		<p>Временный пароль будет выслан вам на почту</p>
             		<a class="close" href="#close"></a>
         		</div>
+        		<a href="#x" class="overlay" id="question_form"></a>
+        		<div class="popup">
+            		<h2>Добро пожаловать!</h2>
+            		<div>
+                		<label for="login">Имя и фамилия</label>
+                		<input type="text" id="login" value="" required/>
+            		</div>
+            		<div>	
+                		<label for="email">Email</label>
+                		<input type="text" id="email" value="" required />
+            		</div>
+            		<div>
+            			<label for="question">Задайте вопрос</label>
+            			<textarea id="question" name="вопрос"></textarea>
+            		</div>	
+            		<input type="button" value="Отправить">
+            		<a class="close" href="#close"></a>
+            	</div>
 			</div>
 		</div>
 	</div>
@@ -140,7 +159,7 @@
         							<div class="container-fluid">
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="images/kartavec.jpg" alt="" class="image-responsive">
+        										<img src="images/team/kartavec.jpg" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Евгений Картавец</b>, Москва 27 лет</h2>
@@ -189,7 +208,7 @@
         								</div>
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/likhobaba.jpg" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Руслан Лихобаба</b></h2>
@@ -243,7 +262,7 @@
         							<div class="container-fluid">
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Shamin.png" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Олег Шамин</b></h2>
@@ -274,7 +293,7 @@
         									</div>
         								</div>
         							</div>
-      							</div>
+      							</div>a
     						</div>
   						</div>
   						<div class="panel panel-default">
@@ -290,7 +309,7 @@
         							<div class="container-fluid">
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Chopchiyan.jpg" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Альберт Чопчиян</b></h2>
@@ -306,7 +325,7 @@
         								</div>
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/polischuk.png" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Дмитрий Полищук</b></h2>
@@ -330,7 +349,7 @@
         								</div>
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Gavrilov.png" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Даниил Гаврилов</b></h2>
@@ -353,7 +372,7 @@
         							<div class="container-fluid">
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Ganzhela.png" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Сергей Ганжела</b></h2>
@@ -361,7 +380,7 @@
         								</div>
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Belskih.jpg" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Александр Бельских</b></h2>
@@ -392,7 +411,7 @@
         							<div class="container-fluid">
         								<div class="row">
         									<div class="col-lg-2">
-        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        										<img src="images/team/Akinshin.jpg" alt="" class="image-responsive">
         									</div>
         									<div class="col-lg-10">
         										<h2><b>Анатолий Акиншин</b></h2>        	
@@ -408,6 +427,7 @@
 		</div>
 		<div class="container-fluid" id="third-block">
 			<div class="row">
+				<h1 class="text-center">Проект <a href="https://github.com/NoobeCoders/EyeOfKGB" target="_blank">"Eye of KGB"</a></h1>
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
  					 <!-- Indicators -->
   					<ol class="carousel-indicators">
@@ -477,8 +497,42 @@
 			</div>
 		</div>
 		<div class="container-fluid" id="forth-block">
+			<div class="row feeds">
+				<div class="col-lg-4 feed">
+					<p class="text-center">"БыдлоКОдеры - это прекрасный проект с перспективным будущим"</p>
+					<p class="text-right"><b>Mark Z.</b></p>
+				</div>
+				<div class="col-lg-4 feed">
+					<p class="text-center">"Отличный сервис, теперь мы узнаем всю правду о 86%"</p>
+					<p class="text-right"><b>Алексей Н.</b></p>
+				</div>
+				<div class="col-lg-4 feed">
+					<p class="text-center">"Здесь мог бы быть ваш отзыв"</p>
+					<p class="text-right"><b>БыдлоКОдеры</b></p>
+				</div>
+			</div>
 			<div class="row">
-				
+				<h2 class="text-center">Добавить отзыв</h2>
+				<br>
+				<form class="form-horizontal">
+  					<div class="form-group">
+    					<label for="inputfio" class="col-sm-2 control-label">Фамилия и имя</label>
+    					<div class="col-sm-10">
+      						<input type="text" class="form-control" id="inputfio" placeholder="Введите свое имя и фамилию">
+    					</div>
+  					</div>
+  					<div class="form-group">
+  						<label for="feedbacktext" class="col-sm-2 control-label">Добавить отзыв</label>
+    					<div class="col-sm-10">
+      						<textarea  id="feedbacktext" class="form-control" rows="5" placeholder="Введите текст"></textarea>
+    					</div>	
+  					</div>
+  					<div class="form-group">
+    					<div class="col-sm-offset-2 col-sm-10">
+      						<button type="submit" class="btn btn-default">Отправить</button>
+    					</div>
+  					</div>
+				</form>
 			</div>
 		</div>
 	</main>	

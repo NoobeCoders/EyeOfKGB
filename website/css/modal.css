@@ -4,7 +4,7 @@
     height: 34px;
     padding: 15px;
 }
-.panell a#login_pop, .panell a#join_pop {
+.panell a#login_pop, .panell a#join_pop, .panell a#question_pop {
     border: 2px solid #aaa;
     color: #fff;
     display: block;
