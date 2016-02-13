@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Domain.Interfaces
 {
-    public interface IDataManager
+    public interface IDataManager : IDisposable
     {
         IPersonRepository Persons { get; }
         IKeywordRepository Keywords { get; }
@@ -16,6 +16,5 @@ namespace Crawler.Domain.Interfaces
         IDisallowPatternRepository DisallowPatterns { get; }
 
         Task Save();
-        void Dispose();
     }
 }
