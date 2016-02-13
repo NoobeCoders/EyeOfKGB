@@ -80,14 +80,17 @@ namespace Crawler.DAL.Implementaions
                 {
                     using (DbContextTransaction transaction = dbContext.Database.BeginTransaction(IsolationLevel.RepeatableRead))
                     {
+                        var minusHours = DateTime.Now.AddHours(-3);
+                        var yesterday = DateTime.Now.AddDays(-1);
+
                         pages = await dbContext.Pages.Where(p => p.SiteId == id)
-                        .Where(p => (p.LastScanDate != null && DbFunctions.DiffDays(p.LastScanDate, DateTime.Now) != 0) || p.LastScanDate == null)
+                        .Where(p => (p.LastScanDate != null && p.LastScanDate < yesterday) || p.LastScanDate == null)
                         .Where(p => p.LastProcessDate == null || (p.LastProcessDate != null
                                                                     && ((p.LastScanDate == null
-                                                                            && DbFunctions.DiffHours(p.LastProcessDate, DateTime.Now) > 3)
+                                                                            && p.LastProcessDate > minusHours)
                                                                         || (p.LastScanDate != null
-                                                                            && (DbFunctions.DiffMicroseconds(p.LastScanDate, p.LastProcessDate) > 0
-                                                                                    || DbFunctions.DiffHours(p.LastProcessDate, DateTime.Now) > 3
+                                                                            && (p.LastScanDate > p.LastProcessDate
+                                                                                    || p.LastProcessDate > minusHours
                                                                                 )
                                                                             )
                                                                         )

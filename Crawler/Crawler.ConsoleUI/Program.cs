@@ -6,7 +6,6 @@ using Crawler.Domain.Interfaces;
 using Crawler.Engine;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -18,7 +17,7 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDataManager dataManager = new DataManager("MSSQLConnection");
+            IDataManager dataManager = new DataManager("MySQLConnection");
             IDownloader downloader = new Downloader();
 
             //foreach (Person item in dataManager.Persons.GetAll())

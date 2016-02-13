@@ -27,7 +27,7 @@ namespace Crawler.Engine
         {
             string content = await DownloadPageContent(page);
 
-            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            using (DataManager dataManager = new DataManager("MySQLConnection"))
             {
                 if (IsRobotsPage(page))
                     await new RobotsPageContentHandler(dataManager, parser, page.Site).HandleContent(page.Id, content);

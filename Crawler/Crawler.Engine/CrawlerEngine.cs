@@ -19,9 +19,9 @@ namespace Crawler.Engine
     public class CrawlerEngine : IDisposable
     {
         private static readonly int SITE_TASK_AMOUNT = 20;
-        private static readonly int PAGE_TASK_AMOUNT = 50;
+        private static readonly int PAGE_TASK_AMOUNT = 20;
         
-        private static readonly int PAGE_AMOUNT = 1000;
+        private static readonly int PAGE_AMOUNT = 100;
         private static readonly int PAGE_INTERVAL = 100;
 
         IDataManager dataManager;
@@ -40,7 +40,7 @@ namespace Crawler.Engine
         public async Task Start()
         {
             await AddRobotsPageForNewSites();
-            await ProcessSites(dataManager.Sites.GetAll().Where(s => s.Pages.Count != 0).ToList());
+            await ProcessSites(dataManager.Sites.GetSitesWithPages());
         }
 
         private async Task AddRobotsPageForNewSites()
@@ -80,7 +80,7 @@ namespace Crawler.Engine
 
         private async Task ProcessSite(Site site)
         {
-            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            using (DataManager dataManager = new DataManager("MySQLConnection"))
             {
                 PageHandler pageHandler = new PageHandler(dataManager, downloader, parser, site);
                 List<Task<int>> pageTasks = new List<Task<int>>();

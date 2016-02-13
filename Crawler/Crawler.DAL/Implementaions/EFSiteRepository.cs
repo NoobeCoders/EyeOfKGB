@@ -28,6 +28,11 @@ namespace Crawler.DAL.Implementaions
             return dbContext.Sites.Where(s => s.Pages.Count == 0).ToList();
         }
 
+        public IEnumerable<Site> GetSitesWithPages()
+        {
+            return dbContext.Sites.Where(s => s.Pages.Count != 0).ToList();
+        }
+
         public IEnumerable<Site> GetAll()
         {
             return dbContext.Sites;

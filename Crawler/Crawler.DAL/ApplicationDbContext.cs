@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.DAL
 {
-    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Keyword> Keywords { get; set; }
@@ -20,11 +20,11 @@ namespace Crawler.DAL
         public DbSet<PersonPageRank> PersonPageRanks { get; set; }
         public DbSet<DisallowPattern> DisallowPatters { get; set; }
 
-        //public ApplicationDbContext()
-        //    : base()
-        //{
+        public ApplicationDbContext()
+            : base()
+        {
 
-        //}
+        }
 
         public ApplicationDbContext(string connectionString)
             : base(connectionString)
