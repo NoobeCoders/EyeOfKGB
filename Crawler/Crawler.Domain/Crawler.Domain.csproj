@@ -47,7 +47,7 @@
     <Compile Include="Entities\PersonPageRank.cs" />
     <Compile Include="Entities\Site.cs" />
     <Compile Include="Interfaces\IDataManager.cs" />
-    <Compile Include="Interfaces\IDataManagerFabric.cs" />
+    <Compile Include="Interfaces\IDataManagerFactory.cs" />
     <Compile Include="Interfaces\IDisallowPatternRepository.cs" />
     <Compile Include="Interfaces\IDownloader.cs" />
     <Compile Include="Interfaces\IKeywordRepository.cs" />

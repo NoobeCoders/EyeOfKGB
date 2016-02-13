@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Crawler.Domain.Interfaces
 {
-    public interface IDataManagerFabric
+    public interface IDataManagerFactory
     {
         IDataManager GetDataManager();
     }

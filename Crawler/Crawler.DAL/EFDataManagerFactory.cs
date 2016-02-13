@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Crawler.DAL
 {
-    public class EFDataManagerFabric : IDataManagerFabric
+    public class EFDataManagerFactory : IDataManagerFactory
     {
         string connectionString;
 
-        public EFDataManagerFabric(string connectionString)
+        public EFDataManagerFactory(string connectionString)
         {
             this.connectionString = connectionString;
         }

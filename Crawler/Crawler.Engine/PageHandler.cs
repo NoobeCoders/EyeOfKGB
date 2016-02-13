@@ -14,11 +14,11 @@ namespace Crawler.Engine
 {
     class PageHandler
     {
-        IDataManagerFabric dataManagerFabric;
+        IDataManagerFactory dataManagerFabric;
         IDownloader downloader;
         IParser parser;
 
-        public PageHandler(IDataManagerFabric dataManagerFabric, IDownloader downloader, IParser parser, Site site)
+        public PageHandler(IDataManagerFactory dataManagerFabric, IDownloader downloader, IParser parser, Site site)
         {
             this.dataManagerFabric = dataManagerFabric;
             this.downloader = downloader;

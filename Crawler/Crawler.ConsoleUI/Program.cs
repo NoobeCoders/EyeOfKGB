@@ -18,7 +18,7 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDataManagerFabric dataManagerFabric = new EFDataManagerFabric("MSSQLConnection");
+            IDataManagerFactory dataManagerFabric = new EFDataManagerFactory("MSSQLConnection");
             IDownloader downloader = new Downloader();
 
             //foreach (Person item in dataManager.Persons.GetAll())

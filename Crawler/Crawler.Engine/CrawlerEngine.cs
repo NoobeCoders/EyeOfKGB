@@ -24,13 +24,13 @@ namespace Crawler.Engine
         private static readonly int PAGE_AMOUNT = 1000;
         private static readonly int PAGE_INTERVAL = 100;
 
-        IDataManagerFabric dataManagerFabric;
+        IDataManagerFactory dataManagerFabric;
         IDataManager dataManager;
         IDownloader downloader;
 
         IParser parser;
 
-        public CrawlerEngine(IDataManagerFabric dataManagerFabric, IDownloader downloader)
+        public CrawlerEngine(IDataManagerFactory dataManagerFabric, IDownloader downloader)
         {
             this.dataManagerFabric = dataManagerFabric;
             this.downloader = downloader;

@@ -64,7 +64,7 @@
     <Compile Include="DBInitializers\InitializationDB.cs" />
     <Compile Include="DBInitializers\InitPersons.cs" />
     <Compile Include="DBInitializers\InitSites.cs" />
-    <Compile Include="EFDataManagerFabric.cs" />
+    <Compile Include="EFDataManagerFactory.cs" />
     <Compile Include="EntityConfigurations\DisallowPatternMapper.cs" />
     <Compile Include="EntityConfigurations\KeywordMapper.cs" />
     <Compile Include="EntityConfigurations\PageMapper.cs" />
