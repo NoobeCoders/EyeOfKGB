@@ -24,15 +24,18 @@ namespace Crawler.Engine
         private static readonly int PAGE_AMOUNT = 1000;
         private static readonly int PAGE_INTERVAL = 100;
 
+        IDataManagerFabric dataManagerFabric;
         IDataManager dataManager;
         IDownloader downloader;
 
         IParser parser;
 
-        public CrawlerEngine(IDataManager dataManager, IDownloader downloader)
+        public CrawlerEngine(IDataManagerFabric dataManagerFabric, IDownloader downloader)
         {
-            this.dataManager = dataManager;
+            this.dataManagerFabric = dataManagerFabric;
             this.downloader = downloader;
+
+            dataManager = dataManagerFabric.GetDataManager();
 
             parser = new Parser("Googlebot");
         }
@@ -80,9 +83,9 @@ namespace Crawler.Engine
 
         private async Task ProcessSite(Site site)
         {
-            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            using (IDataManager dataManager = dataManagerFabric.GetDataManager())
             {
-                PageHandler pageHandler = new PageHandler(dataManager, downloader, parser, site);
+                PageHandler pageHandler = new PageHandler(dataManagerFabric, downloader, parser, site);
                 List<Task<int>> pageTasks = new List<Task<int>>();
 
                 IEnumerable<Page> pages = await dataManager.Pages.GetPagesBySiteId(site.Id, PAGE_AMOUNT);

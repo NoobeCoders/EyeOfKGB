@@ -18,7 +18,7 @@ namespace Crawler.ConsoleUI
     {
         static void Main(string[] args)
         {
-            IDataManager dataManager = new DataManager("MSSQLConnection");
+            IDataManagerFabric dataManagerFabric = new EFDataManagerFabric("MSSQLConnection");
             IDownloader downloader = new Downloader();
 
             //foreach (Person item in dataManager.Persons.GetAll())
@@ -26,7 +26,7 @@ namespace Crawler.ConsoleUI
             //    Console.WriteLine(item.Name);
             //}
 
-            using (CrawlerEngine crawler = new CrawlerEngine(dataManager, downloader))
+            using (CrawlerEngine crawler = new CrawlerEngine(dataManagerFabric, downloader))
             {
                 while (true)
                 {

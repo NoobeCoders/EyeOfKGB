@@ -14,11 +14,13 @@ namespace Crawler.Engine
 {
     class PageHandler
     {
+        IDataManagerFabric dataManagerFabric;
         IDownloader downloader;
         IParser parser;
 
-        public PageHandler(IDataManager dataManager, IDownloader downloader, IParser parser, Site site)
+        public PageHandler(IDataManagerFabric dataManagerFabric, IDownloader downloader, IParser parser, Site site)
         {
+            this.dataManagerFabric = dataManagerFabric;
             this.downloader = downloader;
             this.parser = parser;
         }
@@ -27,7 +29,7 @@ namespace Crawler.Engine
         {
             string content = await DownloadPageContent(page);
 
-            using (DataManager dataManager = new DataManager("MSSQLConnection"))
+            using (IDataManager dataManager = dataManagerFabric.GetDataManager())
             {
                 if (IsRobotsPage(page))
                     await new RobotsPageContentHandler(dataManager, parser, page.Site).HandleContent(page.Id, content);

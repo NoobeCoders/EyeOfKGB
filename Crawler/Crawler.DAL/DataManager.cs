@@ -10,7 +10,7 @@ using System.Data.Entity.Infrastructure;
 
 namespace Crawler.DAL
 {
-    public class DataManager : IDataManager, IDisposable
+    public class DataManager : IDataManager
     {
         ApplicationDbContext dbContext;
 
