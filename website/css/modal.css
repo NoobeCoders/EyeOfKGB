@@ -22,7 +22,7 @@
 }
 
 
-a#login_pop:hover, a#join_pop:hover a#restore_pop:hover {
+a#login_pop:hover, a#join_pop:hover, a#question_pop:hover {
     border-color: #eee;
 }
 .overlay {
