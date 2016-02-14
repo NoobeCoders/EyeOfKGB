@@ -1,0 +1,414 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		830148211C50E4E500748011 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 830148201C50E4E500748011 /* main.m */; };
+		830148241C50E4E500748011 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 830148231C50E4E500748011 /* AppDelegate.m */; };
+		8301482A1C50E4E500748011 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 830148281C50E4E500748011 /* Main.storyboard */; };
+		8301482C1C50E4E500748011 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8301482B1C50E4E500748011 /* Assets.xcassets */; };
+		8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8301482D1C50E4E500748011 /* LaunchScreen.storyboard */; };
+		8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */; };
+		8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */; };
+		833BAE431C68C40200E1A08A /* StartDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833BAE421C68C40200E1A08A /* StartDatePickerViewController.m */; };
+		833BAE461C68DEFF00E1A08A /* EndDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 833BAE451C68DEFF00E1A08A /* EndDatePickerViewController.m */; };
+		8359B9271C511CB1008EC517 /* GetData.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9261C511CB1008EC517 /* GetData.m */; };
+		8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9521C53222A008EC517 /* UserAppViewController.m */; };
+		8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9551C53223B008EC517 /* AdminAppViewController.m */; };
+		8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */; };
+		8359B95F1C532F21008EC517 /* userTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B95E1C532F21008EC517 /* userTabBar@2x.png */; };
+		8359B9621C532F5E008EC517 /* adminTabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8359B9611C532F5E008EC517 /* adminTabBar@2x.png */; };
+		83E638B51C67853F005A4F93 /* PersonPickerDailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83E638B41C67853F005A4F93 /* PersonPickerDailyStatisticViewController.m */; };
+		83F782FE1C6381420065CD90 /* DailyStatisticTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */; };
+		83F783011C64AA940065CD90 /* SitePickerDailyStatisticViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8301481C1C50E4E500748011 /* Eye Of KGB.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eye Of KGB.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		830148201C50E4E500748011 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		830148221C50E4E500748011 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		830148231C50E4E500748011 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		830148291C50E4E500748011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		8301482B1C50E4E500748011 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8301482E1C50E4E500748011 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		830148301C50E4E500748011 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		830148391C50F3CE00748011 /* GeneralStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticViewController.h; sourceTree = "<group>"; };
+		8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticViewController.m; sourceTree = "<group>"; };
+		8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeneralStatisticTableViewCell.h; sourceTree = "<group>"; };
+		8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneralStatisticTableViewCell.m; sourceTree = "<group>"; };
+		833BAE411C68C40200E1A08A /* StartDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartDatePickerViewController.h; sourceTree = "<group>"; };
+		833BAE421C68C40200E1A08A /* StartDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartDatePickerViewController.m; sourceTree = "<group>"; };
+		833BAE441C68DEFF00E1A08A /* EndDatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndDatePickerViewController.h; sourceTree = "<group>"; };
+		833BAE451C68DEFF00E1A08A /* EndDatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndDatePickerViewController.m; sourceTree = "<group>"; };
+		8359B9251C511CB1008EC517 /* GetData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetData.h; sourceTree = "<group>"; };
+		8359B9261C511CB1008EC517 /* GetData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetData.m; sourceTree = "<group>"; };
+		8359B9511C53222A008EC517 /* UserAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAppViewController.h; sourceTree = "<group>"; };
+		8359B9521C53222A008EC517 /* UserAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAppViewController.m; sourceTree = "<group>"; };
+		8359B9541C53223B008EC517 /* AdminAppViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdminAppViewController.h; sourceTree = "<group>"; };
+		8359B9551C53223B008EC517 /* AdminAppViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdminAppViewController.m; sourceTree = "<group>"; };
+		8359B9571C5326BB008EC517 /* DailyStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyStatisticViewController.h; sourceTree = "<group>"; };
+		8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyStatisticViewController.m; sourceTree = "<group>"; };
+		8359B95E1C532F21008EC517 /* userTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "userTabBar@2x.png"; sourceTree = "<group>"; };
+		8359B9611C532F5E008EC517 /* adminTabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "adminTabBar@2x.png"; sourceTree = "<group>"; };
+		83E638B31C67853F005A4F93 /* PersonPickerDailyStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonPickerDailyStatisticViewController.h; sourceTree = "<group>"; };
+		83E638B41C67853F005A4F93 /* PersonPickerDailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonPickerDailyStatisticViewController.m; sourceTree = "<group>"; };
+		83F782FC1C6381420065CD90 /* DailyStatisticTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyStatisticTableViewCell.h; sourceTree = "<group>"; };
+		83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyStatisticTableViewCell.m; sourceTree = "<group>"; };
+		83F782FF1C64AA940065CD90 /* SitePickerDailyStatisticViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SitePickerDailyStatisticViewController.h; sourceTree = "<group>"; };
+		83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SitePickerDailyStatisticViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		830148191C50E4E500748011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		830148131C50E4E500748011 = {
+			isa = PBXGroup;
+			children = (
+				8301481E1C50E4E500748011 /* Eye Of KGB */,
+				8301481D1C50E4E500748011 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8301481D1C50E4E500748011 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8301481C1C50E4E500748011 /* Eye Of KGB.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8301481E1C50E4E500748011 /* Eye Of KGB */ = {
+			isa = PBXGroup;
+			children = (
+				830148221C50E4E500748011 /* AppDelegate.h */,
+				830148231C50E4E500748011 /* AppDelegate.m */,
+				830148281C50E4E500748011 /* Main.storyboard */,
+				8301482B1C50E4E500748011 /* Assets.xcassets */,
+				8301482D1C50E4E500748011 /* LaunchScreen.storyboard */,
+				830148301C50E4E500748011 /* Info.plist */,
+				8301481F1C50E4E500748011 /* Supporting Files */,
+			);
+			path = "Eye Of KGB";
+			sourceTree = "<group>";
+		};
+		8301481F1C50E4E500748011 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8359B9601C532F34008EC517 /* Images */,
+				8359B95D1C532BB0008EC517 /* Admin App */,
+				8359B95A1C532B79008EC517 /* User App */,
+				830148201C50E4E500748011 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8359B95A1C532B79008EC517 /* User App */ = {
+			isa = PBXGroup;
+			children = (
+				8359B95C1C532BA2008EC517 /* DailyStatistic */,
+				8359B95B1C532B8F008EC517 /* GeneralStatistic */,
+				8359B9511C53222A008EC517 /* UserAppViewController.h */,
+				8359B9521C53222A008EC517 /* UserAppViewController.m */,
+				8359B9251C511CB1008EC517 /* GetData.h */,
+				8359B9261C511CB1008EC517 /* GetData.m */,
+			);
+			name = "User App";
+			sourceTree = "<group>";
+		};
+		8359B95B1C532B8F008EC517 /* GeneralStatistic */ = {
+			isa = PBXGroup;
+			children = (
+				830148391C50F3CE00748011 /* GeneralStatisticViewController.h */,
+				8301483A1C50F3CE00748011 /* GeneralStatisticViewController.m */,
+				8301483C1C50F5B500748011 /* GeneralStatisticTableViewCell.h */,
+				8301483D1C50F5B500748011 /* GeneralStatisticTableViewCell.m */,
+			);
+			name = GeneralStatistic;
+			sourceTree = "<group>";
+		};
+		8359B95C1C532BA2008EC517 /* DailyStatistic */ = {
+			isa = PBXGroup;
+			children = (
+				8359B9571C5326BB008EC517 /* DailyStatisticViewController.h */,
+				8359B9581C5326BB008EC517 /* DailyStatisticViewController.m */,
+				83F782FF1C64AA940065CD90 /* SitePickerDailyStatisticViewController.h */,
+				83F783001C64AA940065CD90 /* SitePickerDailyStatisticViewController.m */,
+				83E638B31C67853F005A4F93 /* PersonPickerDailyStatisticViewController.h */,
+				83E638B41C67853F005A4F93 /* PersonPickerDailyStatisticViewController.m */,
+				833BAE411C68C40200E1A08A /* StartDatePickerViewController.h */,
+				833BAE421C68C40200E1A08A /* StartDatePickerViewController.m */,
+				833BAE441C68DEFF00E1A08A /* EndDatePickerViewController.h */,
+				833BAE451C68DEFF00E1A08A /* EndDatePickerViewController.m */,
+				83F782FC1C6381420065CD90 /* DailyStatisticTableViewCell.h */,
+				83F782FD1C6381420065CD90 /* DailyStatisticTableViewCell.m */,
+			);
+			name = DailyStatistic;
+			sourceTree = "<group>";
+		};
+		8359B95D1C532BB0008EC517 /* Admin App */ = {
+			isa = PBXGroup;
+			children = (
+				8359B9541C53223B008EC517 /* AdminAppViewController.h */,
+				8359B9551C53223B008EC517 /* AdminAppViewController.m */,
+			);
+			name = "Admin App";
+			sourceTree = "<group>";
+		};
+		8359B9601C532F34008EC517 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				8359B95E1C532F21008EC517 /* userTabBar@2x.png */,
+				8359B9611C532F5E008EC517 /* adminTabBar@2x.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8301481B1C50E4E500748011 /* Eye Of KGB */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 830148331C50E4E500748011 /* Build configuration list for PBXNativeTarget "Eye Of KGB" */;
+			buildPhases = (
+				830148181C50E4E500748011 /* Sources */,
+				830148191C50E4E500748011 /* Frameworks */,
+				8301481A1C50E4E500748011 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Eye Of KGB";
+			productName = "Eye Of KGB";
+			productReference = 8301481C1C50E4E500748011 /* Eye Of KGB.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		830148141C50E4E500748011 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = "Oleg Shamin";
+				TargetAttributes = {
+					8301481B1C50E4E500748011 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 830148171C50E4E500748011 /* Build configuration list for PBXProject "Eye Of KGB" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 830148131C50E4E500748011;
+			productRefGroup = 8301481D1C50E4E500748011 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8301481B1C50E4E500748011 /* Eye Of KGB */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8301481A1C50E4E500748011 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8301482F1C50E4E500748011 /* LaunchScreen.storyboard in Resources */,
+				8301482C1C50E4E500748011 /* Assets.xcassets in Resources */,
+				8301482A1C50E4E500748011 /* Main.storyboard in Resources */,
+				8359B95F1C532F21008EC517 /* userTabBar@2x.png in Resources */,
+				8359B9621C532F5E008EC517 /* adminTabBar@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		830148181C50E4E500748011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				830148241C50E4E500748011 /* AppDelegate.m in Sources */,
+				8359B9271C511CB1008EC517 /* GetData.m in Sources */,
+				8359B9561C53223B008EC517 /* AdminAppViewController.m in Sources */,
+				83F782FE1C6381420065CD90 /* DailyStatisticTableViewCell.m in Sources */,
+				833BAE461C68DEFF00E1A08A /* EndDatePickerViewController.m in Sources */,
+				8359B9591C5326BB008EC517 /* DailyStatisticViewController.m in Sources */,
+				83E638B51C67853F005A4F93 /* PersonPickerDailyStatisticViewController.m in Sources */,
+				830148211C50E4E500748011 /* main.m in Sources */,
+				8359B9531C53222A008EC517 /* UserAppViewController.m in Sources */,
+				8301483B1C50F3CE00748011 /* GeneralStatisticViewController.m in Sources */,
+				83F783011C64AA940065CD90 /* SitePickerDailyStatisticViewController.m in Sources */,
+				8301483E1C50F5B500748011 /* GeneralStatisticTableViewCell.m in Sources */,
+				833BAE431C68C40200E1A08A /* StartDatePickerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		830148281C50E4E500748011 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				830148291C50E4E500748011 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8301482D1C50E4E500748011 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8301482E1C50E4E500748011 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		830148311C50E4E500748011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		830148321C50E4E500748011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		830148341C50E4E500748011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Eye Of KGB/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "NoobeCoders.Eye-Of-KGB";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		830148351C50E4E500748011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Eye Of KGB/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "NoobeCoders.Eye-Of-KGB";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		830148171C50E4E500748011 /* Build configuration list for PBXProject "Eye Of KGB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				830148311C50E4E500748011 /* Debug */,
+				830148321C50E4E500748011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		830148331C50E4E500748011 /* Build configuration list for PBXNativeTarget "Eye Of KGB" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				830148341C50E4E500748011 /* Debug */,
+				830148351C50E4E500748011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 830148141C50E4E500748011 /* Project object */;
+}
