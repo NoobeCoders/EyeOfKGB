@@ -3,23 +3,22 @@
 from django.conf.urls import include, url, patterns
 from django.contrib import admin
 from rest_framework import routers
-from rest import views
+# from rest import views
 
-router = routers.DefaultRouter()
-router.register(r'users', views.UserViewSet)
-router.register(r'groups', views.GroupViewSet)
-router.register(r'/persons', views.PersonsViewSet)
-router.register(r'/sites', views.SitesViewSet)
-router.register(r'/PersonPageRank', views.PersonPageRankViewSet)
+# router = routers.DefaultRouter()
+# router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
+# router.register(r'/persons', views.PersonsViewSet)
+# router.register(r'/sites', views.SitesViewSet)
+# router.register(r'/PersonPageRank', views.PersonPageRankViewSet)
 
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^$', include('index.urls', namespace='index')),
-    url(r'^api/v1', include(router.urls)),
-    # url(r'^api/v1/PersonPageRank/', include('rest.urls')),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('index.urls', namespace='index')),
+    url(r'^api/v1/', include('rest.urls')),
+    url(r'^auth/', include('loginsys.urls', namespace='login')),
 ]
 
 

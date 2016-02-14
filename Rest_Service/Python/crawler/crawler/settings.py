@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "crawler.settings")
 SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(__file__))
@@ -44,6 +45,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'index',
     'rest',
+    'loginsys',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -93,8 +95,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'berluskuni0_crawler', # название базы
-        'USER': '046368338_100',
-        'PASSWORD': '0911142610',
+        'USER': '',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
@@ -199,7 +201,6 @@ CKEDITOR_IMAGE_BACKEND = "pillow"
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_RENDERER_CLASSES': (
-        'rest.renderers.UTF8CharsetJSONRenderer',
-    ),
+    'DEFAULT_RENDERER_CLASSES': ('rest.renderers.UTF8CharsetJSONRenderer',),
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
