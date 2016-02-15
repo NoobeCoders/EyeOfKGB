@@ -17,16 +17,13 @@
 
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/communicate">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_conctact"
                 android:icon="@android:drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@android:drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/contact" />
+
         </menu>
     </item>
 

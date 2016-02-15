@@ -6,15 +6,15 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="size_txt_medium">20sp</dimen>
-    <dimen name="size_dp">70dp</dimen>
-    <dimen name="size_txt_small">15sp</dimen>
+    <dimen name="size_txt_medium">14sp</dimen>
+    <dimen name="size_dp">60dp</dimen>
+    <dimen name="size_txt_small">13sp</dimen>
     <dimen name="padding_button">10dip</dimen>
-    <dimen name="item_list_padding">20dip</dimen>
+    <dimen name="item_list_padding">15dip</dimen>
     <dimen name="list_item_padding_tip">1dip</dimen>
     <dimen name="margin_left_url_name">5dp</dimen>
     <dimen name="margin_top_daily">10dip</dimen>
     <dimen name="daily_static_height">200dp</dimen>
-    <dimen name="margin_top_total">30dp</dimen>
+    <dimen name="margin_top_total">20dp</dimen>
     <dimen name="tablerow_width">0dip</dimen>
 </resources>

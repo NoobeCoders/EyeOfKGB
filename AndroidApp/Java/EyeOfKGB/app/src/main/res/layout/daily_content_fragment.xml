@@ -15,15 +15,17 @@
         <TextView
             android:layout_width="@dimen/size_dp"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_marginLeft="20dp"
-            android:text="Url"
+           android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
+            android:text="@string/url_text"
+            android:layout_weight="0"
             android:textSize="@dimen/size_txt_medium" />
 
         <Spinner
             android:id="@+id/daily_static_url"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:contextClickable="true" />
 
     </LinearLayout>
@@ -32,20 +34,23 @@
         android:id="@+id/linearLayoutPearson"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_daily"
         android:layout_below="@+id/linearLayoutUrl">
 
         <TextView
             android:layout_width="@dimen/size_dp"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
-            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
+            android:layout_weight="0"
             android:text="@string/name_total_st"
             android:textSize="@dimen/size_txt_medium" />
 
         <Spinner
             android:id="@+id/daily_static_pearson"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
             android:contextClickable="false" />
     </LinearLayout>
 
@@ -53,6 +58,7 @@
         android:id="@+id/linearLayoutDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_daily"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/linearLayoutPearson"
@@ -62,10 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dip"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Period from"
+            android:text="@string/period_from_txt"
             android:textSize="@dimen/size_txt_small" />
 
         <TextView
@@ -73,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
             android:layout_weight="1"
             android:gravity="center"
             android:onClick="setDate"
@@ -84,8 +90,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="to"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
+            android:text="@string/period_to_text"
             android:textSize="@dimen/size_txt_small" />
 
         <TextView
@@ -93,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
             android:layout_weight="1"
             android:gravity="center"
             android:onClick="setDate"
@@ -105,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/commit_btn_txt"
@@ -154,11 +160,11 @@
         android:id="@+id/daily_list_static"
         android:layout_marginTop="@dimen/list_item_padding_tip"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
-        android:layout_above="@+id/linear_layout_total"
+        android:layout_height="@dimen/daily_static_height"
         android:layout_below="@+id/daily_static_table"
         android:divider="@android:color/transparent"
-        android:dividerHeight="1.0sp"/>
+        android:dividerHeight="1.0sp"
+        android:layout_above="@+id/linear_layout_total" />
 
     <LinearLayout
         android:id="@+id/linear_layout_total"
@@ -172,17 +178,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
+            android:layout_margin="@dimen/margin_top_daily"
             android:layout_weight="0.73"
-            android:text="Total :"
+            android:layout_marginLeft="@dimen/margin_left_url_name"
+            android:text="@string/static_total_sum"
             android:textSize="@dimen/size_txt_medium" />
 
         <TextView
+            android:id="@+id/daily_static_summ"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:text="5555"
+            android:layout_margin="@dimen/margin_left_url_name"
+            android:layout_marginRight="@dimen/margin_left_url_name"
+            android:text="0"
             android:textSize="@dimen/size_txt_medium" />
 
     </LinearLayout>

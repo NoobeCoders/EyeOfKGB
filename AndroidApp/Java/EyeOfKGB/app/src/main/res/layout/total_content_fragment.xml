@@ -8,7 +8,7 @@
         android:id="@+id/spinner_total_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="@dimen/margin_top_total"
         android:contextClickable="true"
         android:drawSelectorOnTop="true" />
 
@@ -19,7 +19,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/spinner_total_url"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="@dimen/margin_top_total">
 
         <TableRow
             android:id="@+id/table_row1"
@@ -28,7 +28,7 @@
 
             <TextView
                 android:id="@+id/TextView01"
-                android:layout_width="0dip"
+                android:layout_width="@dimen/tablerow_width"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="#dcdcdc"
@@ -39,7 +39,7 @@
 
             <TextView
                 android:id="@+id/TextView02"
-                android:layout_width="0dip"
+                android:layout_width="@dimen/tablerow_width"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:background="#d3d3d3"
