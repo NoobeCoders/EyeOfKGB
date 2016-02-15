@@ -1,4 +1,4 @@
-package com.example.trunks.eyeofkgb;
+package com.l1ngdtkh3.trunks.eyeofkgb;
 
 import org.junit.Test;
 

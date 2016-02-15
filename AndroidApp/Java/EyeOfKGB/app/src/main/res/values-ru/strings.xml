@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EyeOfKGB</string>
+    <string name="action_settings" translatable="false">Настройки</string>
+    <string name="commit_btn_txt">Найти</string>
+    <string name="comp_name">БыдлоКОдеры</string>
+    <string name="daily_static">Ежедневная Статистика</string>
+    <string name="date_daily_table">Дата</string>
+    <string name="directory">Каталог</string>
+    <string name="eye_of_kgb">EyeOfKGB</string>
+    <string name="hits_total_st">Упоминания</string>
+    <string name="name_total_st">Имя</string>
+    <string name="period_from_txt">Период с:</string>
+    <string name="period_to_text">по</string>
+    <string name="static_total_sum">Всего:</string>
+    <string name="url_text">Сайт</string>
+    <string name="total_static">Общая Статистика</string>
+    <string name="communicate">Связь</string>
+    <string name="contact">Контакты</string>
+</resources>
