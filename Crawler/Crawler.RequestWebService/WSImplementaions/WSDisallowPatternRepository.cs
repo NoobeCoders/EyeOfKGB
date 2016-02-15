@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSDisallowPatternRepository : IDisallowPatternRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSDisallowPatternRepository(IDownloader downloader)
+        public WSDisallowPatternRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public void Set(IEnumerable<string> disallowPatterns)

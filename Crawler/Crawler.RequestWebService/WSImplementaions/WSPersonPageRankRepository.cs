@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSPersonPageRankRepository : IPersonPageRankRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSPersonPageRankRepository(IDownloader downloader)
+        public WSPersonPageRankRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public Task<PersonPageRank> GetById(int personId, int pageId)

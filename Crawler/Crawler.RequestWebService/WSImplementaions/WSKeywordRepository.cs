@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSKeywordRepository : IKeywordRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSKeywordRepository(IDownloader downloader)
+        public WSKeywordRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public IEnumerable<Keyword> GetKeywordsByName(string name)

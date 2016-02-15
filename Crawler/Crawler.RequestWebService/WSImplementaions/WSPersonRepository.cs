@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSPersonRepository : IPersonRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSPersonRepository(IDownloader downloader)
+        public WSPersonRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public Person GetPersonByName(string name)

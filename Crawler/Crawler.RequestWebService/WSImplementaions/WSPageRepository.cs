@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSPageRepository : IPageRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSPageRepository(IDownloader downloader)
+        public WSPageRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public IEnumerable<Page> GetPagesByFounDateTime(DateTime date)

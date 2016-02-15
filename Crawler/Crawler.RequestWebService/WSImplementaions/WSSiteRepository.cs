@@ -10,11 +10,11 @@ namespace Crawler.RequestWebService.WSImplementaions
 {
     public class WSSiteRepository : ISiteRepository
     {
-        IDownloader downloader;
+        ICustomWebClient webClient;
 
-        public WSSiteRepository(IDownloader downloader)
+        public WSSiteRepository(ICustomWebClient webClient)
         {
-            this.downloader = downloader;
+            this.webClient = webClient;
         }
 
         public Site GetSiteByName(string name)

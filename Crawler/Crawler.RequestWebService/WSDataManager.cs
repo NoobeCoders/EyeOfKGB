@@ -1,4 +1,5 @@
-﻿using Crawler.Domain.Interfaces;
+﻿using BusinessLogic;
+using Crawler.Domain.Interfaces;
 using Crawler.RequestWebService.WSImplementaions;
 using System;
 using System.Collections.Generic;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Crawler.RequestWebService
 {
-    public class DataManager : IDataManager, IDisposable
+    public class WSDataManager : IDataManager, IDisposable
     {
-        IDownloader downloader;
+        ICustomWebClient webClien;
 
         IKeywordRepository keyword;
         IPageRepository page;
@@ -19,9 +20,9 @@ namespace Crawler.RequestWebService
         ISiteRepository site;
         IDisallowPatternRepository disallowPatterns;
 
-        public DataManager (IDownloader downloader)
+        public WSDataManager(ICustomWebClient webClient)
         {
-            downloader = new Downloader();
+            this.webClient = webClient;
         }
 
         public IKeywordRepository Keywords
@@ -29,7 +30,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (keyword == null)
-                    keyword = new WSKeywordRepository(downloader);
+                    keyword = new WSKeywordRepository(webClient);
                 return keyword;
             }
         }
@@ -39,7 +40,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (page == null)
-                    page = new WSPageRepository(downloader);
+                    page = new WSPageRepository(webClient);
                 return page;
             }
         }
@@ -49,7 +50,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (person == null)
-                    person = new WSPersonRepository(downloader);
+                    person = new WSPersonRepository(webClient);
                 return person;
             }
         }
@@ -59,7 +60,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (personPageRank == null)
-                    personPageRank = new WSPersonPageRankRepository(downloader);
+                    personPageRank = new WSPersonPageRankRepository(webClient);
                 return personPageRank;
             }
         }
@@ -69,7 +70,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (site == null)
-                    site = new WSSiteRepository(downloader);
+                    site = new WSSiteRepository(webClient);
                 return site;
             }
         }
@@ -79,7 +80,7 @@ namespace Crawler.RequestWebService
             get
             {
                 if (disallowPatterns == null)
-                    disallowPatterns = new WSDisallowPatternRepository(downloader);
+                    disallowPatterns = new WSDisallowPatternRepository(webClient);
                 return disallowPatterns;
             }
         }
@@ -97,7 +98,7 @@ namespace Crawler.RequestWebService
             {
                 if (disposing)
                 {
-                    downloader.Dispose();
+                    
                 }
                 this.disposed = true;
             }
