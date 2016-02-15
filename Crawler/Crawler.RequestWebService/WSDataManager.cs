@@ -11,7 +11,7 @@ namespace Crawler.RequestWebService
 {
     public class WSDataManager : IDataManager, IDisposable
     {
-        ICustomWebClient webClien;
+        ICustomWebClient webClient;
 
         IKeywordRepository keyword;
         IPageRepository page;

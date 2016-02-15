@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Crawler.RequestWebService
 {
-    interface ICustomWebClient
+    public interface ICustomWebClient
     {
         string GetRequest(string url);
         void PostRequest(string url, string value);
