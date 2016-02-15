@@ -1,15 +1,14 @@
 //
-//  GeneralStatisticTableViewCell.h
+//  DailyStatisticTableViewCell.h
 //  Eye Of KGB
 //
-//  Created by bu on 21/01/16.
+//  Created by bu on 04/02/16.
 //  Copyright © 2016 Oleg Shamin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface GeneralStatisticTableViewCell : UITableViewCell
-
+@interface DailyStatisticTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *labelName;
 @property (weak, nonatomic) IBOutlet UILabel *labelCount;
 

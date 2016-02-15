@@ -8,8 +8,15 @@
 
 #import "GeneralStatisticViewController.h"
 #import "GeneralStatisticTableViewCell.h"
+#import "GetData.h"
 
 @interface GeneralStatisticViewController () <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
+
+@property (strong, nonatomic) GetData *data;
+@property (weak, nonatomic) IBOutlet UIPickerView *sitePicker;
+@property (strong, nonatomic) NSMutableArray *rates;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation GeneralStatisticViewController
@@ -20,7 +27,11 @@
     self.sitePicker.delegate = self;
     self.sitePicker.dataSource = self;
     
-    self.sites = [[NSMutableArray alloc] initWithObjects: @"Lenta.ru", @"Gazeta.ru", @"RBC.ru", nil];
+    self.data = [[GetData alloc] init];
+    [self.data getNames];
+    [self.data getSites];
+    [self getRates];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,12 +50,8 @@
     
     GeneralStatisticTableViewCell *cell = (GeneralStatisticTableViewCell *) [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    NSArray *names = [[NSArray alloc] initWithObjects: @"Путин", @"Медведев", @"Навальный", nil];
-    
-    NSArray *counts = [[NSArray alloc] initWithObjects: @"10500", @"5000", @"1000", nil];
-    
-    cell.labelName.text = names[indexPath.row];
-    cell.labelCount.text = counts[indexPath.row];
+    cell.labelName.text = self.data.names[indexPath.row];
+    cell.labelCount.text = self.rates[indexPath.row];
     
     return cell;
     
@@ -59,12 +66,36 @@
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return self.sites.count;
+    return self.data.sites.count;
 }
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return [self.sites objectAtIndex:row];
+    return [self.data.sites objectAtIndex:row];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component __TVOS_PROHIBITED {
+    
+    self.selectedRow = [self.sitePicker selectedRowInComponent:0];
+    
+    [self getRates];
+        
+    [self.tableView reloadData];
+
+}
+
+//Dont know how do it in GetData?
+- (void) getRates {
+    
+    NSString *generalRankURL = @"http://crawler.firstexperience.ru/api/v1/personrank/";
+    NSString *rankWithIdURL = [NSString stringWithFormat:@"%@%@", generalRankURL, self.data.sitesID[self.selectedRow]];
+    NSArray *data = [[NSArray alloc] init];
+    NSData *JSONData = [NSData dataWithContentsOfURL:[NSURL URLWithString:rankWithIdURL]];
+    NSArray *jsonResult = [NSJSONSerialization JSONObjectWithData:JSONData options:kNilOptions error:nil];
+    NSMutableArray *ratesJSON = [NSMutableArray array];
+    data = jsonResult;
+    for (id item in jsonResult)
+        [ratesJSON addObject:[NSString stringWithFormat:@"%@", item[@"rank"]]];
+    self.rates = ratesJSON;
+}
 
 @end

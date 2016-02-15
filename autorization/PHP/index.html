@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title></title>
+</head>
+<body>
+    <div id="autorization">
+        <form id="loginpassword" name="loginpassword">
+            <p>Введите логин: <input id="login" name="login" type="text"> </p>
+            <p>Введите пароль: <input id="password" name="password" type="password"></p>
+            <input id="confirm" name="test" type="submit" value="Подтвердить" >
+            <input id="registrationbutton" type="button" value="Зарегистрироваться" > Нет аккаунта регистрируйся
+        </form>
+    </div>
+    <div id="registration">
+
+        <form id="registrationform" name="registrationform">
+            <p>Введите логин: <input id="registration_login" name="registration_login" type="text"> </p>
+            <p>Введите пароль: <input id="registration_password" name="registration_password" type="password"> </p>
+            <p>Подтвердите пароль: <input id="registration_password_repeat" name="registration_password_repeat" type="password"></p>
+            <p>Введите ваше имя: <input id="registration_name" name="registration_name"  type="text"></p>
+            <p>Введите Фамилию: <input id="registration_firstname" name="registration_firstname"  type="text"></p>
+            <p>Введите e-mail: <input id="registration_email" name="registration_email"  type="email"></p>
+            <input id="button" name="registration" type="submit" value="Зарегистрироваться" >
+            <input id="back" name="back" type="button" value="Вернуться">
+        </form>
+    </div>
+    <div id="result"></div>
+</body>
+<script language="javascript" src="js/jquery-2.1.4.min.js"></script>
+<script language="javascript" src="js/jquery.validate.min.js"></script>
+<script language="javascript" src="js/ajax.js"></script>
+</html>
