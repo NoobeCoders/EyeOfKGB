@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace Crawler.RequestWebService.WSImplementaions
 {
@@ -17,39 +18,42 @@ namespace Crawler.RequestWebService.WSImplementaions
             this.webClient = webClient;
         }
 
-        public IEnumerable<Keyword> GetKeywordsByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Keyword> GetAll()
         {
-            throw new NotImplementedException();
+            string answer = webClient.GetRequest("/api/keywords/GetKeywords/");
+            return Json.Decode<List<Keyword>>(answer);
+        }
+
+        public IEnumerable<Keyword> GetKeywordsByName(string name)
+        {
+            IEnumerable<Keyword> keywords = GetAll();
+            return keywords.Where(k => k.Name == name);
         }
 
         public Keyword GetById(int id)
         {
-            throw new NotImplementedException();
+            IEnumerable<Keyword> keywords = GetAll();
+            return keywords.FirstOrDefault(k => k.Id == id);
         }
 
-        public void Add(Keyword item)
+        public void Add(Keyword keyword)
         {
-            throw new NotImplementedException();
+            webClient.PostRequest("/api/keywords/PostKeyword/", Json.Encode(keyword));
         }
 
-        public void Update(Keyword item)
+        public void Update(Keyword keyword)
         {
-            throw new NotImplementedException();
+            webClient.PutRequest("/api/keywords/PutKeyword/", Json.Encode(keyword));
         }
 
-        public void Delete(Keyword item)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            webClient.DeleteRequest("/api/keywords/DeleteKeyword/", Json.Encode(id));
+        }
+
+        public void Delete(Keyword keyword)
+        {
+            Delete(keyword.Id);
         }
     }
 }

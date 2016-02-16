@@ -8,14 +8,23 @@ using System.Threading.Tasks;
 namespace Crawler.RequestWebService
 {
     class RequestWebClient : ICustomWebClient, IDisposable
-    {        
-        public string GetRequest(string url)
+    {
+        string host;
+
+        public RequestWebClient(string host)
+        {
+            this.host = host;
+        }
+
+        public string Host { get { return host; } }
+
+        public string GetRequest(string api)
         {
             using (WebClient client = new WebClient())
             {
                 try
                 {
-                    Byte[] pageData = client.DownloadData(url);
+                    Byte[] pageData = client.DownloadData(host + api);
 
                     return Encoding.UTF8.GetString(pageData);
                 }
@@ -26,27 +35,27 @@ namespace Crawler.RequestWebService
             }           
         }
 
-        public void PostRequest(string url, string value)
+        public void PostRequest(string api, string value)
         {
             using (WebClient client = new WebClient())
             {
-                client.UploadData(url, "POST", Encoding.UTF8.GetBytes(value));
+                client.UploadData(host + api, "POST", Encoding.UTF8.GetBytes(value));
             }
         }
 
-        public void PutReqest(string url, string value)
+        public void PutRequest(string api, string value)
         {
             using (WebClient client = new WebClient())
             {
-                client.UploadData(url, "PUT", Encoding.UTF8.GetBytes(value));
+                client.UploadData(host + api, "PUT", Encoding.UTF8.GetBytes(value));
             }
         }
 
-        public void DeleteRequest(string url, string value)
+        public void DeleteRequest(string api, string value)
         {
             using (WebClient client = new WebClient())
             {
-                client.UploadData(url, "DELETE", Encoding.UTF8.GetBytes(value));
+                client.UploadData(host + api, "DELETE", Encoding.UTF8.GetBytes(value));
             }
         }
 

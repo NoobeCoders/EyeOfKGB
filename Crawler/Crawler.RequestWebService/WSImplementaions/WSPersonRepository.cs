@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 
 namespace Crawler.RequestWebService.WSImplementaions
 {
@@ -17,39 +18,42 @@ namespace Crawler.RequestWebService.WSImplementaions
             this.webClient = webClient;
         }
 
-        public Person GetPersonByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Person> GetAll()
         {
-            throw new NotImplementedException();
+            string answer = webClient.GetRequest("/api/persons/GetPersons");
+            return Json.Decode<List<Person>>(answer);
+        }
+
+        public Person GetPersonByName(string name)
+        {
+            IEnumerable<Person> persons = GetAll();
+            return persons.FirstOrDefault(p => p.Name == name);
         }
 
         public Person GetById(int id)
         {
-            throw new NotImplementedException();
+            IEnumerable<Person> persons = GetAll();
+            return persons.FirstOrDefault(p => p.Id == id);
         }
 
-        public void Add(Person item)
+        public void Add(Person person)
         {
-            throw new NotImplementedException();
+            webClient.PostRequest("/api/persons/PostPerson/", Json.Encode(person));
         }
 
-        public void Update(Person item)
+        public void Update(Person person)
         {
-            throw new NotImplementedException();
+            webClient.PutRequest("/api/persons/PutPerson/", Json.Encode(person));
         }
 
-        public void Delete(Person item)
+        public void Delete(int id)
         {
-            throw new NotImplementedException();
+            webClient.DeleteRequest("/api/persons/DeletePerson/", Json.Encode(id));
+        }
+
+        public void Delete(Person person)
+        {
+            Delete(person.Id);
         }
     }
 }

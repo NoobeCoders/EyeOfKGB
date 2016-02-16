@@ -9,7 +9,7 @@ namespace Crawler.RequestWebService
     {
         string GetRequest(string url);
         void PostRequest(string url, string value);
-        void PutReqest(string url, string value);
+        void PutRequest(string url, string value);
         void DeleteRequest(string url, string value);
     }
 }
