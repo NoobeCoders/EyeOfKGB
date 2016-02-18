@@ -13,7 +13,7 @@ namespace Crawler.DAL.EntityConfigurations
     {
         public DisallowPatternMapper()
         {
-            this.ToTable("DisallowPatterns");
+            //this.ToTable("DisallowPatterns");
 
             this.Property(d => d.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(d => d.Id).IsRequired();

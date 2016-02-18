@@ -29,31 +29,6 @@
             //    );
             //
 
-            Person poly = new Person()
-            {
-                Name = "Полиморфизм",
-                Keywords = new List<Keyword>()
-                {
-                    new Keyword() { Name = "полиморфизм" },
-                    new Keyword() { Name = "полиморфизму" },
-                    new Keyword() { Name = "полиморфизма" }
-                }
-            };
-
-            Person putin = new Person()
-            {
-                Name = "Путин Владимир Владимирович",
-                Keywords = new List<Keyword>()
-                {
-                    new Keyword() { Name = "Путин" },
-                    new Keyword() { Name = "Путину" },
-                    new Keyword() { Name = "Путина" }
-                }
-            };
-
-            context.Persons.Add(putin);
-            context.Persons.Add(poly);
-
             Site geekbrains = new Site()
             {
                 Name = "geekbrains.ru"
@@ -92,7 +67,46 @@
             context.Sites.Add(professorweb);
             //context.Sites.Add(geekBrains);
 
-            //context.Sites.Add(localhost);
+            Person poly = new Person()
+            {
+                Name = "Полиморфизм",
+                Keywords = new List<Keyword>()
+                {
+                    new Keyword() { Name = "полиморфизм" },
+                    new Keyword() { Name = "полиморфизму" },
+                    new Keyword() { Name = "полиморфизма" }
+                }
+            };
+
+            Person putin = new Person()
+            {
+                Name = "Путин Владимир Владимирович",
+                Keywords = new List<Keyword>()
+                {
+                    new Keyword() { Name = "Путин" },
+                    new Keyword() { Name = "Путину" },
+                    new Keyword() { Name = "Путина" }
+                }
+            };
+
+            context.Persons.Add(putin);
+            context.Persons.Add(poly);
+
+            Role adminRole = new Role() { RoleName = "admin" };
+            Role userRole = new Role() { RoleName = "user" };
+
+            context.Roles.Add(adminRole);
+            context.Roles.Add(userRole);
+
+            context.Users.Add(new User()
+            {
+                Login = "admin",
+                Password = "123456",
+                Name = "Администратор",
+                Firstname = "Администраторович",
+                Email = "admin@123.ru",
+                Role = adminRole
+            });
 
             context.SaveChanges();
         }

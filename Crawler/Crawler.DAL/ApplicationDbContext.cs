@@ -20,6 +20,9 @@ namespace Crawler.DAL
         public DbSet<PersonPageRank> PersonPageRanks { get; set; }
         public DbSet<DisallowPattern> DisallowPatters { get; set; }
 
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+
         public ApplicationDbContext()
             : base()
         {
@@ -39,8 +42,26 @@ namespace Crawler.DAL
             modelBuilder.Configurations.Add(new PersonMapper());
             modelBuilder.Configurations.Add(new PersonPageRankMapper());
             modelBuilder.Configurations.Add(new SiteMapper());
+            modelBuilder.Configurations.Add(new DisallowPatternMapper());
+
+            modelBuilder.Configurations.Add(new RoleMapper());
+            modelBuilder.Configurations.Add(new UserMapper());
 
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Types().Configure(c =>
+            {
+                var name = c.ClrType.Name;
+                var newName = name.ToLower();
+                c.ToTable(newName + "s");
+            });
+
+            modelBuilder.Properties().Configure(c =>
+            {
+                var name = c.ClrPropertyInfo.Name;
+                var newName = name.ToLower();
+                c.HasColumnName(newName);
+            });
         }
 
     }

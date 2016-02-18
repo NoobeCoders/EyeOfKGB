@@ -9,20 +9,19 @@ using System.Threading.Tasks;
 
 namespace Crawler.DAL.EntityConfigurations
 {
-    public class KeywordMapper : EntityTypeConfiguration<Keyword>
+    public class RoleMapper : EntityTypeConfiguration<Role>
     {
-        public KeywordMapper()
+        public RoleMapper()
         {
-            //this.ToTable("Keywords");
-
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();
 
-            this.Property(c => c.Name).HasMaxLength(2048).IsUnicode(true);
+            this.Property(c => c.RoleName).HasColumnType("varchar").HasMaxLength(56);
 
-            this.HasRequired<Person>(c => c.Person)
-                .WithMany(c => c.Keywords)
-                .HasForeignKey(c => c.PersonId);
+            this.HasMany<User>(c => c.Users)
+                .WithRequired(c => c.Role)
+                .HasForeignKey(c => c.RoleId)
+                .WillCascadeOnDelete();
         }
     }
 }

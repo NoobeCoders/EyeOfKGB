@@ -13,7 +13,7 @@ namespace Crawler.DAL.EntityConfigurations
     {
         public PersonPageRankMapper()
         {
-            this.ToTable("PersonPageRanks");
+            //this.ToTable("PersonPageRanks");
 
             this.HasKey(c => new { c.PersonId, c.PageId });
 

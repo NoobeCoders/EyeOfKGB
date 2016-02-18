@@ -69,16 +69,18 @@
     <Compile Include="EntityConfigurations\PageMapper.cs" />
     <Compile Include="EntityConfigurations\PersonMapper.cs" />
     <Compile Include="EntityConfigurations\PersonPageRankMapper.cs" />
+    <Compile Include="EntityConfigurations\RoleMapper.cs" />
     <Compile Include="EntityConfigurations\SiteMapper.cs" />
+    <Compile Include="EntityConfigurations\UserMapper.cs" />
     <Compile Include="Implementaions\DisallowPatternRepository.cs" />
     <Compile Include="Implementaions\EFKeywordRepository.cs" />
     <Compile Include="Implementaions\EFPageRepository.cs" />
     <Compile Include="Implementaions\EFPersonPageRankRepository.cs" />
     <Compile Include="Implementaions\EFPersonRepository.cs" />
     <Compile Include="Implementaions\EFSiteRepository.cs" />
-    <Compile Include="Migrations\201602121703584_Init.cs" />
-    <Compile Include="Migrations\201602121703584_Init.Designer.cs">
-      <DependentUpon>201602121703584_Init.cs</DependentUpon>
+    <Compile Include="Migrations\201602141651253_Init.cs" />
+    <Compile Include="Migrations\201602141651253_Init.Designer.cs">
+      <DependentUpon>201602141651253_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -97,8 +99,8 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201602121703584_Init.resx">
-      <DependentUpon>201602121703584_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201602141651253_Init.resx">
+      <DependentUpon>201602141651253_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

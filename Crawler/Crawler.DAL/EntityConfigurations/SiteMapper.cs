@@ -13,7 +13,7 @@ namespace Crawler.DAL.EntityConfigurations
     {
         public SiteMapper()
         {
-            this.ToTable("Sites");
+            //this.ToTable("Sites");
 
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();

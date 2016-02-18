@@ -45,7 +45,9 @@
     <Compile Include="Entities\Page.cs" />
     <Compile Include="Entities\Person.cs" />
     <Compile Include="Entities\PersonPageRank.cs" />
+    <Compile Include="Entities\Role.cs" />
     <Compile Include="Entities\Site.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IDataManager.cs" />
     <Compile Include="Interfaces\IDisallowPatternRepository.cs" />
     <Compile Include="Interfaces\IDownloader.cs" />

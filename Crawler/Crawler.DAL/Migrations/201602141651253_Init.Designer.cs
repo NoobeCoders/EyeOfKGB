@@ -13,7 +13,7 @@ namespace Crawler.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201602121703584_Init"; }
+            get { return "201602141651253_Init"; }
         }
         
         string IMigrationMetadata.Source

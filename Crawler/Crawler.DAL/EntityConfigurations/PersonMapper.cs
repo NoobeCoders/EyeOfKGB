@@ -13,7 +13,7 @@ namespace Crawler.DAL.EntityConfigurations
     {
         public PersonMapper()
         {
-            this.ToTable("Persons");
+            //this.ToTable("Persons");
 
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();

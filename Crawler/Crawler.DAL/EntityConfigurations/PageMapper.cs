@@ -13,7 +13,7 @@ namespace Crawler.DAL.EntityConfigurations
     {
         public PageMapper()
         {
-            this.ToTable("Pages");
+            //this.ToTable("Pages");
 
             this.Property(c => c.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             this.Property(c => c.Id).IsRequired();
