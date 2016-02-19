@@ -112,7 +112,7 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	text-decoration: none;
 }
 
-.panel-body {
+.panel-body, #second-block article a {
 	color: black;
 }
 
