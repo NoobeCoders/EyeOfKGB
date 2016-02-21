@@ -139,3 +139,11 @@ a#login_pop:hover, a#join_pop:hover, a#question_pop:hover {
 .popup input[type="text"]:hover, .popup input[type="password"]:hover {
     border-color: #555 #888 #888;
 }
+
+
+@media screen and (max-width: 991px) {
+    .panell a#login_pop, .panell a#join_pop {
+        padding: 5px;
+        font-size: 14px;
+    }
+}

@@ -23,6 +23,7 @@ body {
 	background-repeat: no-repeat;
 	background-attachment:  fixed;
 	background-size: cover;
+	scroll-behavior: smooth;
 }
 
 /*main-menu */
@@ -67,6 +68,30 @@ a#login_pop, a#restore_pop, .menu a, #second-block a, #third-block a {
 button, html input[type=button], input[type=reset], input[type=submit] {
 	color: #000000;
 }
+
+@media screen and (max-width: 1199px) {
+	.logo img {
+		width: 250px;
+		height: auto;
+	}
+	.col-md-4, .col-md-5, .col-lg-3 {
+		padding-right: 0px;
+		padding-left: 0px;
+	}
+}
+
+@media screen and (max-width: 991px) {
+	.logo img {
+		width: 220px;
+		height: auto;
+	}
+	ul.menu  {
+	margin: 20px 0px;
+	padding: 4px;
+	font-size: 16px;
+	}
+}
+
 
 /* Content*/
 
