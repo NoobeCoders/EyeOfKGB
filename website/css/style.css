@@ -39,6 +39,14 @@ body {
 	margin-top: 10px;
 }
 
+#menu-icon {
+	display: hidden;	
+}
+.fa-arrow-up {
+	color: #cfcfcf;
+}
+
+
 ul.menu  {
 	margin: 20px 0px;
 	padding: 4px;
@@ -51,6 +59,8 @@ ul.menu li {
 	margin-right: 5px;
 	padding: 3px;
 }
+
+.fa {display: none}
 
 a#login_pop, a#restore_pop, .menu a, #second-block a, #third-block a {
 	color: #cfcfcf;
@@ -92,6 +102,42 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 	}
 }
 
+@media screen and (max-width: 769px) {
+	.not_mobile {display: none;}
+	.fa {display: inline-block;}
+	.logo img {width: 170px;}
+}
+
+@media screen and (max-width: 669px) {
+	.logo {margin-top: 20px;}
+	.top-fixed {position: absolute;}
+	#menu-icon {
+		position: fixed;
+		top: 15px;
+		right: 5px;
+		display: inline-block;}
+	.nav-menu ul, .nav-menu:active ul {
+		display: none;
+		position: absolute;
+		padding: 20px;
+		border: 5px solid #444;
+		right: 20px;
+		bottom: 0px;
+		width: 50%;
+		border-radius: 4px 0 4px 4px;
+	}
+
+	.nav-menu li {
+		text-align: center;
+		width: 100%;
+		padding: 10px 0;
+		margin: 0;
+	}
+
+	.nav-menu:hover ul {
+		display: block;
+	}
+}
 
 /* Content*/
 
@@ -117,6 +163,10 @@ button, html input[type=button], input[type=reset], input[type=submit] {
     }
 }
 
+
+@media screen and (max-width: 669px) {
+	div#start-button {width: 30%;}
+}
 
 #second-block {
 	display: block;
@@ -160,6 +210,13 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 
 }
 
+@media screen and (max-width: 669px) {
+	#greetings {
+		margin-top: 200px;
+		font-size: 24px;
+	}
+}
+
 #third-block {
 	height: 100%;
 }
@@ -182,6 +239,13 @@ button, html input[type=button], input[type=reset], input[type=submit] {
 
 }
 
+@media screen and (max-width: 669px) {
+	h2, .col-lg-10 h2 {font-size: 24px;}
+	h3, .feeds p {font-size: 20px;}
+	.col-lg-10 p, .col-lg-10 ul {font-size: 14px;}
+}
+
+
 /* Footer */
 
 footer {
@@ -196,3 +260,6 @@ footer span {
 	font-size: 20px;
 }
 
+@media screen and (max-width: 669px) {
+	footer span {font-size: 16px;}
+}

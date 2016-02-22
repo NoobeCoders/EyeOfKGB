@@ -147,3 +147,11 @@ a#login_pop:hover, a#join_pop:hover, a#question_pop:hover {
         font-size: 14px;
     }
 }
+
+
+@media screen and (max-width: 669px) {
+    .panell a#login_pop, .panell a#join_pop {
+        margin-right: 25px;
+        padding: 5px 10px;
+    }
+}
