@@ -1,0 +1,77 @@
+﻿<Page x:Class="Crawler.AdminUI.WPF.DailyStats"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+	Title="DailyStats">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <Label FontSize="16" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">Ежедневная статистика</Label>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Сайт:"
+                       Width="70"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+                <ComboBox HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160">
+                    <TextBlock IsEnabled="True">lenta.ru</TextBlock>
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Личность:"
+                       Width="70"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"/>
+
+                <ComboBox HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160">
+                    <TextBlock IsEnabled="True">lenta.ru</TextBlock>
+                </ComboBox>
+            </StackPanel>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Период с:"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Width="70"/>
+                
+                <TextBox Width="60" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+
+                <Label Content="до:"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Center"
+                       Margin="10,0,0,0"/>
+
+                <TextBox Width="60" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBox>
+                
+                <Button Content="Применить"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="20,0,0,0"/>
+            </StackPanel>
+
+            <ListView Name="DailyListView" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>Дата</GridViewColumn>
+                        <GridViewColumn>Кол-во новых страниц</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            
+            <Label Content="Всего за период:"/>
+        </StackPanel>
+    </Grid>
+</Page>

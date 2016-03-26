@@ -1,0 +1,46 @@
+﻿<Page x:Class="Crawler.AdminUI.WPF.KeysDirectory"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+	Title="KeysDirectory">
+
+    <Grid>
+        <StackPanel Orientation="Vertical"
+                    Margin="10">
+            <Label Margin="5"
+                   FontSize="16"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">Справочник "Ключевые слова"</Label>
+            
+            <StackPanel Orientation="Horizontal"
+                        Margin="5">
+                <Label Content="Персона:"/>
+                <ComboBox HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Width="160">
+                    <TextBlock IsEnabled="True">Путин</TextBlock>
+                </ComboBox>
+            </StackPanel>
+
+            <ListView Name="KeysView">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn>Ключевые слова</GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+
+            <UniformGrid Columns="3" Margin="0,10,0,0">
+                <Button Margin="0,0,5,0">Добавить</Button>
+                <Button Margin="5,0,5,0">Редактировать</Button>
+                <Button Margin="5,0,0,0">Удалить</Button>
+            </UniformGrid>
+
+        </StackPanel>
+        
+    </Grid>
+</Page>
