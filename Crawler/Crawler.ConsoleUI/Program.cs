@@ -35,6 +35,10 @@ namespace Crawler.ConsoleUI
                     Console.WriteLine("Stop");
                 }
             }
+
+            //ushort v = -1234;
+            //Console.WriteLine(v);
+            //Console.ReadKey();
         }
     }
 }
