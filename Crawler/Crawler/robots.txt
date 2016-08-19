@@ -1,0 +1,3 @@
+﻿User-agent: *
+Host: localhost:53432
+Sitemap: http://localhost:53432/sitemap.xml
