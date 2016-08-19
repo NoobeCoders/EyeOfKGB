@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">EyeOfKGB</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="directory">Directory</string>
+    <string name="daily_static">Daily Statistics</string>
+    <string name="total_static">Total Statistics</string>
+    <string name="name_total_st">Name</string>
+    <string name="hits_total_st">Hits</string>
+    <string name="eye_of_kgb">EyeOfKGB</string>
+    <string name="comp_name">БыдлоКОдеры</string>
+    <string name="commit_btn_txt">Commit</string>
+    <string name="date_daily_table">Date</string>
+</resources>

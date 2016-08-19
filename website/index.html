@@ -3,29 +3,32 @@
 <head>
 	<title>Главная страница</title>
 	<meta charset="utf-8">
+	<meta name="Keywords" content="быдлокодеры, geekbrains, проект Eye of KGB">
+	<meta name="Description" content="Веб-сайт развивающейся команды разработчиков БыдлоКОдеры">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-	<link 
-		rel="stylesheet"
-		href="css/style.css"
-		type="text/css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<link rel="stylesheet"	href="css/style.css" type="text/css">
+	<link href="css/modal.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<!-- Main menu -->
 	<div class="container-fluid top-fixed">
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-3 col-md-4 col-sm-3 col-xs-2">
 				<header class="logo">
 					<figure>
-						<a href="index.html"><img src="images/logo.png" alt="logo"></a>				
+						<a href="index.html"><img src="images/logo.png" alt="logo"></a>			
 					</figure>
 				</header>
 			</div>
-			<div class="col-lg-8">
-				<nav class="nav-menu">
+            <a href="#first-block" id="menu-icon"><i class="fa fa-arrow-up fa-2x"></i></a> 
+			<div class="col-lg-6 col-md-5 col-sm-6 col-xs-8">
+				<nav class="nav-menu text-right">
 					<ul class="menu">
   						<li>
   							<a href="#first-block">Главная</a>
@@ -37,11 +40,94 @@
   							<a href="#third-block">Проекты</a>
   						</li>
   						<li>
-  							<a href="#forth-block">Компоненты</a>
-  						</li>
- 						
+  							<a href="#forth-block">Отзывы</a>
+  						</li>				
 					</ul>
 				</nav>				
+			</div>
+			<div class="col-lg-3">
+				<div class="main">
+           			<div class="panell">
+                		<!--<a href="#question_form" id="question_pop">Задать вопрос</a> -->
+                		<a href="#login_form" id="login_pop"><i class="fa fa-sign-in fa-2x"></i><span class="not_mobile">Войти</span></a>
+                		<a href="#join_form" id="join_pop"><i class="fa fa-user fa-2x"></i><span class="not_mobile">Регистрация</span></a>
+           			</div>
+        		</div>
+        		<!-- popup form #1 -->
+        		<a href="#x" class="overlay" id="login_form"></a>
+        		<div class="popup">
+            		<h2>Добро пожаловать!</h2>
+            		<p>Введите имя пользователя и пароль</p>
+            		<div>
+                		<label for="login">Логин</label>
+                		<input type="text" id="login" value="" required/>
+            		</div>
+            		<div>
+                	<label for="password">Пароль</label>
+                	<input type="password" id="password" value="" required/>
+            		</div>
+            		<input type="checkbox" name="remember">Запомнить меня <br>
+            		<input type="button" value="Войти"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#restore_form" id="restore_pop">Забыли пароль?</a>
+            		<a class="close" href="#close"></a>
+        		</div>
+
+        <!-- popup form #2 -->
+        		<a href="#x" class="overlay" id="join_form"></a>
+        		<div class="popup">
+            		<h2>Регистрация</h2>
+            		<p>Введите свои данные</p>
+            		<div>	
+                		<label for="email">Логин (Email)</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<div>
+                		<label for="pass">Пароль</label>
+                		<input type="password" id="pass" value="" required/>
+            		</div>
+            		<div>
+                		<label for="firstname">Имя</label>
+                		<input type="text" id="firstname" value="" required/>
+            		</div>
+            		<div>
+                		<label for="lastname">Фамилия</label>
+                		<input type="text" id="lastname" value="" />
+            		</div>
+            		<input type="button" value="Регистрация" />&nbsp;&nbsp;&nbsp;или&nbsp;&nbsp;&nbsp;<a href="#login_form" id="login_pop">Войти</a>
+            		<a class="close" href="#close"></a>
+        		</div>
+        		<!-- popup form #3 -->
+        		<a href="#x" class="overlay" id="restore_form"></a>
+        		<div class="popup">
+            		<h2>Забыли пароль?</h2>
+            		<p>Введите адрес электронной почты</p>
+            		<div>	
+                		<label for="email">Email</label>
+                		<input type="text" id="email" value="" required />
+            		</div>	
+            		<input type="button" value="Отправить"> 
+            		<br>
+            		<p>Временный пароль будет выслан вам на почту</p>
+            		<a class="close" href="#close"></a>
+        		</div>
+        		<a href="#x" class="overlay" id="question_form"></a>
+                <!-- Пока не используемый функционал
+        		<div class="popup">
+            		<h2>Добро пожаловать!</h2>
+            		<div>
+                		<label for="login">Имя и фамилия</label>
+                		<input type="text" id="login" value="" required/>
+            		</div>
+            		<div>	
+                		<label for="email">Email</label>
+                		<input type="text" id="email" value="" required />
+            		</div>
+            		<div>
+            			<label for="question">Задайте вопрос</label>
+            			<textarea id="question" name="вопрос"></textarea>
+            		</div>	
+            		<input type="button" value="Отправить">
+            		<a class="close" href="#close"></a>
+            	</div> -->
 			</div>
 		</div>
 	</div>
@@ -58,19 +144,479 @@
 		<div class="container-fluid" id="second-block">
 			<div class="row">
 				<h2 class="text-center">Вашему вниманию представлен проект команды разработчиков, окончивших обучение на сайте <a href="http://geekbrains.ru/" target="_blank">GeekBrains</a></h2>
-				<h3 class="text-center">БыдлоКОдеры - это молодая развивающая компания, готовая к новым вершинам и вызовам</h3>
+				<h3 class="text-center">БыдлоКОдеры - это молодая развивающаяся компания, готовая к новым вершинам и вызовам</h3>
 				<article>
-					<p class="text-center">У нас в штате есть разработчики для реализации практически любых решений. Это верстка сайтов и веб-приложений на Python/Django и PHP, создание мобильный приложений для iOS и Android, создание десктопных приложений на C#.</p>
-				</article>
+					<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingOne">
+     		 					<h2 class="panel-title panel-chef">
+     		 					<img src="images/gb.png" alt="">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          						Руководитель проекта
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/kartavec.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Евгений Картавец</b> Москва, 27 лет</h2>
+        										<p>Выпускник ВМиК МГУ. За 5 лет прошел путь от младшего программиста до руководителя группы разработчиков. Начинал в студенческие годы с разработки на Qt C++. Позже занялся разработкой на C#, с использованием Sql и NoSql баз данных, веб-сервисов и т.д. Его решения сейчас работают по всей России во всех отделениях Центробанка.</p>
+        										<p>В последние годы основная сфера профессиональных интересов - высоконагруженные системы. Текущий проект преподавателя представляет собой специализированную поисковую машину медиа-контента в интернете. Поисковик развернут на нескольких десятках серверов, ежедневно находит сотни миллионов видеозаписей, хранит и обрабатывает терабайты данных.Основная разработка по-прежнему ведётся на C#, с использованием реляционных баз данных, NoSql, систем мониторинга и т.д.</p>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingTwo">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseThree">
+          						<img src="images/prog_csharp.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<!--
+                                        <div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Дмитриев</b></h2>
+        									</div>
+        								</div>
+                                        -->
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/lobov.jpeg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Андрей Лобов</b> Мурманск, 26 лет</h2>
+                                                <p><a href="http://hh.ru/resume/2dd3c4eaff0194ed1f0039ed1f6366784d466a" target="_blank">Профиль</a> на hh.</p>
+                                                <p>Профессиональные навыки:</p>
+                                                <ul>
+                                                    <li>анализ бизнес процессов, их моделирование и оптимизация (методики IDEF0, DFD, IDEF3), BPWin, частично ARIS, Visio;</li>
+                                                    <li>проектирование и ведение баз данных (знание ERWin);</li>
+                                                    <li> знание СУБД Access, Firebird, есть опыт работы с MS SQL server 2008 R2;</li>
+                                                    <li>знание языков программирования С#, Delphi;</li>
+                                                    <li>знание платформы .NET (начиная с версии 4), технологий WPF, основы WCF, ASP.NET, ASP.NET MVC (начиная с версии 4);</li>
+                                                    <li>имеет небольшой опыт работы с GIt</li>
+                                                    <li>знаком с HTML, CCS3, jQuery, JavaScript, Bootstrap. </li>
+                                                    <li>умеет пользоваться системами трекинга задач JIRA, Trello.</li>
+                                                </ul> 
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Николай Марченко</b> Набережные Челны, 28 лет</h2>
+                                                <p>В проекте "Eye of KGB" разрабатывал серверный компонент - краулер</p>
+                                                <p>Самостоятельные проекты</p>
+                                                <ul>
+                                                    <li><a href="https://github.com/khasang/TrackerMonitor" target="_blank">Сервис</a> мониторинга местоположения GPS трекеров</li>
+                                                </ul>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/likhobaba.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Руслан Лихобаба</b> Москва, 33 года</h2>
+                                                <p><a href="http://hh.ru/resume/d70d2cd0ff02769aaa0039ed1f655931637158" target="_blank">Профиль</a> на hh.</p>
+                                                <p><a href="https://github.com/Rammun" target="_blank">Профиль</a> на Github</p>
+                                                <p>Хорошо ориентируется в Windows Forms, WPF, ASP.net MVC (4-5). Вместе с этими технологиями пользовался LINQ, EntityFramwork, Ninject, проектирование БД для MS SQL. При разработке применял паттерны проектирования (Repository, UoW, Factory, Bilder). Знаком с методологиями Agile, Scrum.</p>
+                                                <p>Дополнительно имел опыт с JS, jQuery, HTML, CSS, Bootstrap, T-SQL, SignalR</p>
+                                                <p>В проекте "Eye Of KGB" отвечал за разработку сервиса ведения статистики упоминания заданных ключевых слов на веб-ресурсах, в частности за разработку десктопного приложения на WPF для администрирования сервиса. Так же реализовывал задачи: парсинг веб-страниц с применением async/await и TPL, реализация репозитория и UoW.</p>
+        									</div>
+        								</div>
+                                        <!--
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Глеб Молчанов</b></h2>
+        									</div>
+        								</div> -->
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingThree">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+          						<img src="images/java.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/ling.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Линг Дам Тхе</b> Москва, 30 лет</h2>
+                                                <p>Выпускник РГТУ им. Циалковского МАТИ. На курсах GeekBrains изучал Java и разработку для Android</p>
+                                                <p><a href="http://hh.ru/applicant/resumes/view?resume=394599dcff027730430039ed1f694c50716f46" target="_blank">Профиль</a> на hh.</p>
+                                                <p>В проекте "Eye of KGB" занимался разработкой <a href="https://play.google.com/store/apps/details?id=net.l1ngdtkh3.eyeofkgb" target="_blank">приложения</a> для Android-устройств. В своей работе руководствовался методологией Scrum, придерживался принципов Kiss и Agile. Портирование данных осуществлялось через библиотеку Gson.</p>
+                                                <p><a href="https://play.google.com/store/apps/details?id=net.l1ngdtkh3.wifiautoonoff" target="_blank">Самостоятельный проект</a></p>
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingFour">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+          						<img src="images/swift.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Shamin.png" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Олег Шамин</b> Санкт-Петербург, 27 лет</h2>
+                                                <p><a href="http://spb.hh.ru/resume/28e67de3ff02904bcb0039ed1f764e4d5a4638" target="_blank">Профиль</a> на hh.</p>
+                                                <p><a href="https://github.com/olegshamin">Профиль</a> на Github.</p>
+                                                <p>Имею хорошие знания iOS SDK, Xcode, Cocoa, iOS Guidelines.</p> 
+                                                <p>Работал с Core Data, Animation, Text и UI Kit, Sprite Kit, есть опыт разработки приложений с JSON/XML запросами.</p>        
+                                                <p>В проекте "Eye of KGB" разрабатывал приложение для пользователей. Перед проектированием приложения, были созданы прототипы визуальных интерфейсов в Evolus Pencil. При проектировании использовались принципы KISS, SOLID и паттерн MVC. Взаимодействия с веб-сервисом выполнено по архитектуре "REST".</p>
+                                                <p>Самостоятельные проекты</p>
+                                                <ul>
+                                                    <li>Игра <a href="https://itunes.apple.com/us/app/space-garbage/id1083080681" target="_blank">Space Garbage</a></li>
+                                                    <li><a href="https://itunes.apple.com/us/app/whats-happening/id1085014532" target="_blank">Whats Happening?</a></li>
+                                                </ul>
+        									</div>
+        								</div>
+        								<!--
+                                        <div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Евгений Дарнопых</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Мичил Ходулов</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Тимур Аюпов</b></h2>
+        									</div>
+        								</div>
+                                        -->
+        							</div>
+      							</div>a
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingFive">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+          						<img src="images/php.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Chopchiyan.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Альберт Чопчиян</b> Москва, 27 лет</h2>
+                                                <p><a href="https://geekbrains.ru/users/19720" target="_blank">Профиль</a> на GeekBrains</p>
+                                                <p><a href="https://freelance.ru/cheponya">Профиль</a> на Freelance.ru</p>
+                                                <p><a href="http://hh.ru/applicant/resumes/view?resume=c231993dff01ed8eb80039ed1f797279724d6c" target="_blank">Профиль</a> на hh</p>
+                                                <p>Навыки
+                                                    <ul>
+                                                        <li>HTML - Уровень: средний;</li>
+                                                        <li>CSS - Уровень: средний;</li>
+                                                        <li>PHP (PDO, основы ООП(понимание принципа, понимание для чего нужно наследование);</li>
+                                                        <li>MySQL (INSERT, SELECT, DELETE, UPDATE, INNER JOIN) - Уровень: средний;</li>
+                                                </p>
+                                                <p>В проекте занимался созданием <a href="http://noobcoder.esy.es" target="=_blank">web сайта</a> на PHP.</p>
+                                                <p>Самостоятельные проекты</p>
+                                                <ul>
+                                                    <li><a href="http://sovetfilm.com" target="_blank">Портал о советстких фильмах</a></li>
+                                                    <li><a href="http://rybnoehozyaystvo.hol.es" target="_blank">Интернет магазин на самописном движке</a></li>
+                                                </ul>
+        									</div>
+        								</div>
+                                        <!--
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Максим Маврицкий</b></h2>
+        									</div>
+        								</div> -->
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/polischuk.png" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Полищук</b></h2>
+                                                <p>В проекте "Eye of KGB" занимался разработкой веб-интерфейсом пользователя</p>
+        									</div>
+        								</div>
+                                        <!--
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Дмитрий Рыбаков</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Николай Чирков</b></h2>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Gavrilov.png" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Даниил Гаврилов</b></h2>
+        									</div>
+        								</div>
+                                        -->
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingSix">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+          						<img src="images/python.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Ganzhela.png" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Сергей Ганжела</b> Днепропетровск, 43 года</h2>
+                                                <p><a href="http://hh.ru/resume/5e79d2bdff02f16df70039ed1f575537464758" target="_blank">Профиль</a> на hh.</p>
+                                                <p><a href="https://github.com/berluskuni" target="_blank">Профиль</a> на Github</p>
+                                                <p>В проекте "Eye of KGB" занимался написанием веб-сервиса.</p>
+                                                <p>Перед проектированием приложения, были созданы прототипы визуальных интерфейсов, в Evolus Pencil. Взаимодействия с приложениями выполнено по архитектуре "RESTful". RESTfull выполнен на DjangoRestFramework</p>
+                                                <p> Также занимался back-end данного сайта, для реализации был испльзован framework Django, framework Bootstrap.</p>
+                                                <p> Также применялся инструментарий: 1. Evolus Pencil; 2. PyCharm; 3. SmartGit.</p>
+                                                <p>Самостоятельные проекты</p>
+                                                <ul>
+                                                    <li><a href="http://firstexperience.ru" target="_blank">Сайт</a> салона красоты</li>
+                                                </ul>
+        									</div>
+        								</div>
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Belskih.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Александр Бельских</b></h2>
+                                                <p><a href="https://github.com/beltik" target="_blank">Профиль</a> на Github</p>
+                                                <p>В проекте "Eye of KGB" занимался разработкой Web-service REST</p>
+        									</div>
+        								</div>
+                                        <!--
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="http://placehold.it/150x150" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Игорь Коробко</b></h2>
+        									</div>
+        								</div>
+                                        -->
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  						<div class="panel panel-default">
+    						<div class="panel-heading" role="tab" id="headingSeven">
+     		 					<h2 class="panel-title">
+        						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
+          						<img src="images/Front+boot.png" alt="">
+        						</a>
+      							<h2>
+    						</div>
+    						<div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+      							<div class="panel-body">
+        							<div class="container-fluid">
+        								<div class="row">
+        									<div class="col-lg-2">
+        										<img src="images/team/Akinshin.jpg" alt="" class="image-responsive">
+        									</div>
+        									<div class="col-lg-10">
+        										<h2><b>Анатолий Акиншин</b> Курск, 29 лет</h2>
+                                                <p><a href="http://hh.ru/applicant/resumes/view?resume=a479aee6ff02f0eb960039ed1f7a6c3965354c" target="_blank">Профиль</a> на hh.</p>
+                                                <p><a href="https://github.com/Kairick" target="_blank">Профиль</a> на Github</p>
+                                                <p>В проекте "Eye of KGB" занимался front-end разработкой данного сайта. В качестве основы был выбран фреймворм Bootstrap</p>
+                                                <p>Самостоятельный проект</p>
+                                                <ul>
+                                                    <li><a href="http://www.belyaev.esy.es/" target="_blank">Юридический сайт</a>. <a href="https://github.com/Kairick/belyaev_site" target="_blank">Исходники сайта</a></li>
+                                                </ul>      	
+        									</div>
+        								</div>
+        							</div>
+      							</div>
+    						</div>
+  						</div>
+  					</div>
+				</article>	
 			</div>
 		</div>
 		<div class="container-fluid" id="third-block">
 			<div class="row">
+				<h1 class="text-center">Проект <a href="https://github.com/NoobeCoders/EyeOfKGB" target="_blank">"Eye of KGB"</a></h1>
+				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+ 					 <!-- Indicators -->
+  					<ol class="carousel-indicators">
+   						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="4"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="5"></li>
+    					<li data-target="#carousel-example-generic" data-slide-to="6"></li>
+  					</ol>
+
+  <!-- Wrapper for slides -->
+  					<div class="carousel-inner" role="listbox">
+    					<div class="item active">
+      						<img class="center-block" src="images/slides/slide1.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+    					</div>
+    					<div class="item">
+      			 				<img class="center-block" src="images/slides/slide2.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+    					</div>
+    					<div class="item">
+      			 			<img class="center-block" src="images/slides/slide3.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+  						</div>
+    					<div class="item">
+      			 				<img class="center-block" src="images/slides/slide4.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+    					</div>
+    					<div  class="item">
+      			 			<img class="center-block" src="images/slides/slide5.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+  						</div>
+    					<div class="item">
+      			 				<img class="center-block" src="images/slides/slide6.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+    					</div>
+    					<div class="item">
+      			 			<img class="center-block" src="images/slides/slide7.png" alt="...">
+      						<div class="carousel-caption">
+        						...
+      						</div>
+  						</div>
+  <!-- Controls -->
+  					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+    				<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    				<span class="sr-only">Previous</span>
+  					</a>
+  					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+    				<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    				<span class="sr-only">Next</span>
+  					</a>
+				</div>	
 			</div>
 		</div>
 		<div class="container-fluid" id="forth-block">
+			<div class="row feeds">
+				<div class="col-lg-4 feed">
+					<p class="text-center">"БыдлоКОдеры - это прекрасный проект с перспективным будущим"</p>
+					<p class="text-right"><b>Mark Z.</b></p>
+				</div>
+				<div class="col-lg-4 feed">
+					<p class="text-center">"Отличный сервис, теперь мы узнаем всю правду о 86%"</p>
+					<p class="text-right"><b>Алексей Н.</b></p>
+				</div>
+				<div class="col-lg-4 feed">
+					<p class="text-center">"Здесь мог бы быть ваш отзыв"</p>
+					<p class="text-right"><b>БыдлоКОдеры</b></p>
+				</div>
+			</div>
 			<div class="row">
-				
+				<h2 class="text-center">Добавить отзыв</h2>
+				<br>
+				<form class="form-horizontal">
+  					<div class="form-group">
+    					<label for="inputfio" class="col-sm-2 control-label">Фамилия и имя</label>
+    					<div class="col-sm-10">
+      						<input type="text" class="form-control" id="inputfio" placeholder="Введите свое имя и фамилию">
+    					</div>
+  					</div>
+  					<div class="form-group">
+  						<label for="feedbacktext" class="col-sm-2 control-label">Добавить отзыв</label>
+    					<div class="col-sm-10">
+      						<textarea  id="feedbacktext" class="form-control" rows="5" placeholder="Введите текст"></textarea>
+    					</div>	
+  					</div>
+  					<div class="form-group">
+    					<div class="col-sm-offset-2 col-sm-10">
+      						<button type="submit" class="btn btn-default">Отправить</button>
+    					</div>
+  					</div>
+				</form>
 			</div>
 		</div>
 	</main>	
@@ -87,6 +633,7 @@
             </div>
 		</div>
 	</footer>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="main.js"></script>
 <script type="text/javascript">
 	setTimeout(function(){$('#start-button').fadeIn('fast')},3000);

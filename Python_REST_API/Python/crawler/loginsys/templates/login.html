@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+ {% block login %}
+ <div class="box">
+  <nav id="tabs" class="tabs">
+    <a id="tabLogin" class="iconLogin active blueBox" title="Войти"></a>
+  </nav>
+        <div class="containerWrapper">
+    <!-- login container -->
+    <div id="containerLogin" class="tabContainer active">
+      <form action="/auth/login/" role="form" method="post">
+          {% csrf_token %}
+      <h2 class="loginTitle">Авторизация</h2>
+      <div class="loginContent">
+        <div class="inputWrapper">
+          <input type="text" name="username" placeholder="Логин" required autofocus />
+        </div>
+        <div class="inputWrapper">
+          <input type="password" name="password" placeholder="Пароль" required/>
+        </div>
+      </div>
+      <button class="blueBox"><span class="iconLogin"></span> ВОЙТИ</button>
+      <div class="clear"></div>
+      {% if login_error %}
+          <label class="errors">{{ login_error }}</label><br>
+      {% endif %}
+    </form>
+    </div>
+</div>
+  </div>
+
+ {%  endblock %}
